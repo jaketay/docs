@@ -29,7 +29,7 @@ The category endpoint accepts JSON objects with the following format:
 ```
 
 #### Example
-```json
+```
 curl -i \
        -H "Content-Type: application/json” \
        -H “Accept: application/json" \
