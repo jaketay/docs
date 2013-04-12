@@ -88,6 +88,8 @@ The product endpoint accepts JSON objects with the following format:
 
 ### The Cart Endpoint
 http://events.jirafe.com/v1/{app-id}/{site-id}/cart [POST]
+
+The cart endpoint accepts JSON objects with the following format:
 ```json
 {
     "id": "",
