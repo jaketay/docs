@@ -127,8 +127,8 @@ The order endpoint accepts JSON objects with the following format:
 {
     "id": "",
     "customer": {
-"id",
-"name": "",
+        "id": "",
+        "name": ""
     },
     "cart_id": "",
     "order_date": "YYYY-MM-DD:H-M-S UTC",
