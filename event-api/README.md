@@ -124,7 +124,7 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/product [POST]
                         },
         "categories"  : {
                             "type" : "array",
-                            "uniqueItems": True,
+                            "uniqueItems": true,
                             "items" : {
                                 "type" : "object",
                                 "required" : ["id", "name"],
@@ -136,7 +136,7 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/product [POST]
                         },
         "attributes"  : {
                             "type" : "array",
-                            "uniqueItems": True,
+                            "uniqueItems": true,
                             "items" : {
                                 "type" : "object",
                                 "required" : ["id", "name", "value"],
