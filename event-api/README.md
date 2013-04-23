@@ -4,7 +4,6 @@ In the documentation, some URIs contain the symbols “{org-id}” and “{site-
 These symbols should be replaced with your *Organization Identifier* and your *Site Identifier*, which are available from Jirafe support.
 
 Notes:
-* Currently all fields are required fields.
 * All dates are given in ISO 8601:2004 format.
 * All dates and times are given in UTC.
 
