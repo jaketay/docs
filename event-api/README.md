@@ -169,8 +169,8 @@ of the field "change_date".
     "inventory": 3,
     "rating": 9,
     "brand": "ACME",
-    "change_date": "2013-04-22T08:57:00"
-    "create_date": "2013-04-15T06:33:00"
+    "change_date": "2013-04-22T08:57:00",
+    "create_date": "2013-04-15T06:33:00",
     "attributes": [
         {
             "id": "1",
