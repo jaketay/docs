@@ -200,6 +200,10 @@ of the field "change_date".
 }
 ```
 
+#### Notes
+* The value of the field "create_date" must be chronologically before the value
+of the field "change_date".
+
 ### The Cart Endpoint
 http://events.jirafe.com/v1/{org-id}/{site-id}/cart [POST]
 
@@ -231,8 +235,10 @@ The cart endpoint accepts JSON objects with the following format:
 }
 ```
 #### Notes
-Where the value of the "items" field is an array of objects conforming to the
+* Where the value of the "items" field is an array of objects conforming to the
 Product Schema.
+* The value of the field "create_date" must be chronologically before the value
+of the field "change_date".
 
 
 ### The Order Endpoint
@@ -293,5 +299,8 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/order [POST]
 ```
 
 #### Notes
-Where the value of the "product" field is an object conforming to the Product
+* Where the value of the "product" field is an object conforming to the Product
 Schema.
+* The value of the field "create_date" must be chronologically before the value
+of the field "change_date".
+
