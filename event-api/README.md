@@ -74,6 +74,75 @@ Should return:
 Because the value of the "change_date" field is chronologically before the
 value of the "create_date" field.
 
+### The Customer Endpoint
+http://events.jirafe.com/v1/{org-id}/{site-id}/customer [POST]
+
+#### Schema
+```json
+{
+    "type" : "object",
+    "required" : [ "id", "change_date", "create_date"],
+    "properties" : {
+        "id" : {"type" : "string"},
+        "first_name" : {"type" : "string"},
+        "last_name" : {"type" : "string"},
+        "name" : {"type" : "string"},
+        "email" : {"type" : "string"},
+        "phone" : {"type" : "string"},
+        "company" : {"type" : "string"},
+        "department" : {"type" : "string"},
+        "position" : {"type" : "string"},
+        "active" : {"type" : "boolean"},
+        "change_date" : {"type" : "string", "format" : "date-time"},
+        "create_date" : {"type" : "string", "format" : "date-time"}
+    }
+}
+```
+
+#### Additional Constraints
+* The value of the field "create_date" must be chronologically before the value
+of the field "change_date".
+
+#### Example
+```json
+{
+    "id" : "3",
+    "first_name" : "John",
+    "name" : "John Doe",
+    "change_date" : "2012-01-07T13:24:09",
+    "create_date" : "2012-01-07T12:24:09"
+}
+```
+
+#### Code Samples
+```
+curl -i \
+       -H "Content-Type: application/json" \
+       -H "Accept: application/json" \
+       -X PUT -d '{'id":"3", 'name":"John Doe", "change_date":"2012-01-07T13:24:09", "create_date":"2012-01-07T12:24:09"}' \
+       http://events.jirafe.api/v1/{site-id}/{grp-id}/customer
+```
+
+Should return:
+```
+200 OK
+```
+
+```
+curl -i \
+       -H "Content-Type: application/json” \
+       -H “Accept: application/json" \
+       -X PUT -d '{'id":"3", 'name":"John Doe", "change_date":"2012-01-07T12:24:09", "create_date":"2012-01-07T13:24:09"}' \
+       http://events.jirafe.api/v1/{site-id}/{grp-id}/customer
+```
+
+Should return:
+```
+422 Unprocessable Entity
+```
+Because the value of the "change_date" field is chronologically before the
+value of the "create_date" field.
+
 ### The Product Endpoint
 http://events.jirafe.com/v1/{org-id}/{site-id}/product [POST]
 
