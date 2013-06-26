@@ -368,10 +368,8 @@ The cart endpoint accepts JSON objects with the following format:
     "required" : [
         "id",
         "order_number",
-        "customer_id",
         "create_date",
         "change_date",
-        "status",
         "subtotal",
         "total",
         "total_tax",
@@ -402,7 +400,6 @@ The cart endpoint accepts JSON objects with the following format:
                 "create_date",
                 "change_date",
                 "order_item_number",
-                "status",
                 "quantity",
                 "amount",
                 "discount_amount",
