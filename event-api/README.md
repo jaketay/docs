@@ -699,24 +699,25 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/employee [POST]
     "title" : "Employee Schema",
     "type" : "object",
     "required" : [
-        "id",
+        "create_date",
         "change_date",
-        "create_date"
+        "id",
+        "email"
     ],
     "properties" : {
+        "create_date" : {"type" : "string", "format" : "date-time"},
+        "change_date" : {"type" : "string", "format" : "date-time"},
         "id" : {"type" : "string"},
+        "email" : {"type" : "string"},
+        "name" : {"type" : "string"},
+        "phone" : {"type" : "string"},
         "first_name" : {"type" : "string"},
         "last_name" : {"type" : "string"},
-        "name" : {"type" : "string"},
-        "email_optin" : {"type" : "boolean", "default" : False},
-        "email" : {"type" : "string"},
-        "phone" : {"type" : "string"},
+        "active_flag" : {"type" : "boolean", "default" : True},
         "company" : {"type" : "string"},
         "department" : {"type" : "string"},
         "position" : {"type" : "string"},
-        "active" : {"type" : "boolean", "default" : True},
-        "change_date" : {"type" : "string", "format" : "date-time"},
-        "create_date" : {"type" : "string", "format" : "date-time"}
+        "marketing_opt_in" : {"type" : "boolean", "default" : False}
     }
 }
 ```
