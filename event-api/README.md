@@ -56,14 +56,10 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
                 "attribution": {
                     "type": "array",
                     "items": {
-                        "type": "object",
-                        "required": ["name", "value"],
-                        "properties": {
-                            "name": {"type": "string"},
-                            "value": {"type": "string"}
-                        }
+                        "type": "string"
                     }
                     "minimum": 1,
+                    "maximum": 5
                 }
             }
         }
@@ -102,7 +98,7 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
         "landing_url": "http://localhost:8000/fakewww/index.html",
         "referrer_url": "http://www.google.com?s=spectre",
         "user_agent": "Mozilla/5.0 ..."
-        "attribution": [{"search": "google"}]
+        "attribution": ["search", "google", "cats"]
     },
     "customer":{
         "id": "007",
