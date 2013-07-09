@@ -57,7 +57,7 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
                     "type": "array",
                     "items": {
                         "type": "string"
-                    }
+                    },
                     "minimum": 1,
                     "maximum": 5
                 }
