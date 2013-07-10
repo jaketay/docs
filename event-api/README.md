@@ -85,7 +85,6 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
     "timestamp":"2013-06-03T16:41:11.600Z",
     "org":1,
     "site":1,
-    "data": // Event specific data.
     "page":{
         "current_type":"homepage",
         "referrer_type": "*none*"
@@ -355,7 +354,7 @@ When a user removes an item from their cart, an edit cart event should be sent t
 ```
 
 #### Order Success Event
-When a user removes an item from their cart, an order_success event should be sent to the Event API.
+When an order is completed and the browser loads the post-order confirmation/success/receipt page, an order_success event should be sent to the Event API.
 
 ##### Schema
 ```json
@@ -392,6 +391,8 @@ When a user removes an item from their cart, an order_success event should be se
 
 
 #### Funnel Event
+When a funnel event occurs, a funnel event should be sent to the Event API. 
+
 ##### Schema
 ```json
 {
