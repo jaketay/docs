@@ -63,7 +63,7 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
                 }
             }
         }
-    }
+    },
     "data": {
         "type": "array",
         "minimum": 1,
@@ -137,8 +137,8 @@ When a user views a page, a pageview event should be sent to the Event API.
             "type": "array",    
             "items": {
                 "id": {"type": "string"},
-                "lastname": {"type": "string"}
-                "firstname": {"type": "string"}
+                "lastname": {"type": "string"},
+                "firstname": {"type": "string"},
                 "email": {"type": "string", "format": "email"}
             }
         },
@@ -221,9 +221,9 @@ This is an example of the data which would be transmitted in the case that a use
             "page_type" : "search",
             "event_type" : "pageview",
             "search": {
-                    term: "blue suede shoes",
-                    page: "1",
-                    total_results: "100"
+                term: "blue suede shoes",
+                page: "1",
+                total_results: "100"
             }
         }
     ]
@@ -255,40 +255,27 @@ When a user places an item in their cart, an add_to_cart event should be sent to
     "$schema": "http://json-schema.org/draft-04/schema#",
     "id": "http://docs.jirafe.com/schema/event/add-to-cart-def",
     "type": "object",
+    "required": ["event_type", "line_item"],
     "properties": {
-        "event_type": {"enum": ["visit"]}
+        "event_type": {"enum": ["add_item_to_cart"]},
         "cart": {
-            "type": "object"
+            "type": "object",
             "properties": {
                 "id": {"type": "string"}
             }
         },
-        "line_items": {
-            "type": "array",
-            "minimum": 1,
-            "items": {
-                "type": "object",
-                "required": ["sku_code", "name", "code", "quantity", "images", "price", "total_price", "currency"],
-                "properties": {
-                    "name": {"type": "string"},
-                    "sku_code": {"type": "string"},
-                    "product_id": {"type": "string"},
-                    "product_code": {"type": "string"},
-
-                    "images": {"type": "array", "items": {"type": "string", "format": "uri"}}
-
-                    "site_categories": {
-                        "type": "array",
-                        "items": {
-                            "id": {"type": "string"},
-                            "name": {"type": "string"}
-                        }
-                    },
-
-                    "price": {"type": "string"},
-                    "total_price": {"type": "string"},
-                    "currency": {"type": "string"}
-                }
+        "line_item": {
+            "type": "object",
+            "required": ["sku_code", "quantity", "total_price", "currency"],
+            "properties": {
+                "name": {"type": "string"},
+                "sku_code": {"type": "string"},
+                "product_code": {"type": "string"},
+                "images": {"type": "array", "items": {"type": "string", "format": "uri"}},
+                "price": {"type": "string"},
+                "quantity": {"type": "string"},
+                "total_price": {"type": "string"},
+                "currency": {"type": "string"}
             }
         }
     }
@@ -304,45 +291,105 @@ When a user removes an item from their cart, a remove_from_cart event should be 
     "$schema": "http://json-schema.org/draft-04/schema#",
     "id": "http://docs.jirafe.com/schema/event/remove-from-cart-def",
     "type": "object",
+    "required": ["event_type", "line_item"],
     "properties": {
+        "event_type": {"enum": ["remove_item_from_cart"]},
         "cart": {
-            "type": "object"
+            "type": "object",
             "properties": {
-                "id": {"type": "string"},
-                "name": {"type": "string"},
+                "id": {"type": "string"}
             }
         },
-        "line_items": {
-            "type": "array",
-            "minimum": 1,
-            "items": {
-                "type": "object",
-                "required": ["sku_code", "name", "code", "quantity", "images", "price", "total_price", "currency"],
-                "properties": {
-                    "name": {"type": "string"},
-                    "sku_code": {"type": "string"},
-                    "product_id": {"type": "string"},
-                    "product_code": {"type": "string"},
-
-                    "images": {"type": "array", "items": {"type": "string", "format": "uri"}}
-
-                    "site_categories": {
-                        "type": "array",
-                        "items": {
-                            "id": {"type": "string"},
-                            "name": {"type": "string"}
-                        }
-                    },
-
-                    "price": {"type": "string"},
-                    "total_price": {"type": "string"},
-                    "currency": {"type": "string"}
-                }
+        "line_item": {
+            "type": "object",
+            "required": ["sku_code", "quantity", "total_price", "currency"],
+            "properties": {
+                "name": {"type": "string"},
+                "sku_code": {"type": "string"},
+                "product_code": {"type": "string"},
+                "images": {"type": "array", "items": {"type": "string", "format": "uri"}},
+                "price": {"type": "string"},
+                "quantity": {"type": "string"},
+                "total_price": {"type": "string"},
+                "currency": {"type": "string"}
             }
         }
     }
 }
 ```
+
+#### Edit Cart Event
+When a user removes an item from their cart, an edit cart event should be sent to the Event API.
+
+##### Schema
+```json
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://docs.jirafe.com/schema/event/edit-cart-def",
+    "type": "object",
+    "required": ["event_type", "line_item"],
+    "properties": {
+        "event_type": {"enum": ["edit_cart"]},
+        "cart": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string"}
+            }
+        },
+        "line_item": {
+            "type": "object",
+            "required": ["sku_code", "quantity", "total_price", "currency"],
+            "properties": {
+                "name": {"type": "string"},
+                "sku_code": {"type": "string"},
+                "product_code": {"type": "string"},
+                "images": {"type": "array", "items": {"type": "string", "format": "uri"}},
+                "price": {"type": "string"},
+                "quantity": {"type": "string"},
+                "total_price": {"type": "string"},
+                "currency": {"type": "string"}
+            }
+        }
+    }
+}
+```
+
+#### Order Success Event
+When a user removes an item from their cart, an order_success event should be sent to the Event API.
+
+##### Schema
+```json
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "http://docs.jirafe.com/schema/event/order-success-def",
+    "type": "object",
+    "required": ["event_type", "order"],
+    "properties": {
+        "event_type": {"enum": ["order_success"]},
+        "order": {
+            "type": "object",
+            "required": ["id"],
+            "properties": {
+                "id": {"type": "string"},
+                "num": {"type": "string"}
+            }
+        }
+    }
+}
+```
+
+##### Example
+```json
+{
+    "data": [
+        {
+            "id": "12345",
+            "num": "0000000010"
+        }
+    ]
+}
+```
+
 
 #### Funnel Event
 ##### Schema
@@ -365,11 +412,15 @@ When a user removes an item from their cart, a remove_from_cart event should be 
 ##### Example
 ```json
 {
-    "event_type": "funnel",
-    "funnel_name": "checkout",
-    "step_name": "confirm",
-    "step_position": 1,
-    "last_step": false
+    "data": [
+        {
+            "event_type": "funnel",
+            "funnel_name": "checkout",
+            "step_name": "confirm",
+            "step_position": 1,
+            "last_step": false
+        }
+    ]
 }
 ```
 
