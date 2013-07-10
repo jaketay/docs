@@ -120,32 +120,27 @@ When a user views a page, a pageview event should be sent to the Event API.
     "$schema": "http://json-schema.org/draft-04/schema#",
     "id": "http://docs.jirafe.com/schema/event/pageview-def",
     "type": "object",
-    "required": ["event_type", "page_type"]
+    "required": ["event_type", "page_type"],
     "properties": {
-        "page_type": {"enum": ["home", "cart", "order_confirm", "order_success", "checkout", "product", "category", "search"]}
+        "page_type": {"enum": ["homepage", "cart", "order_confirm", "order_success", "checkout", "product", "category", "search", "other"]},
         "event_type": {"enum": ["pageview"]},
         "product": {
             "type": "object",
-            "required": ["sku_code", "name", "code", "quantity", "images", "price", "total_price", "currency"],
+            "required": ["product_code"],
             "properties": {
                 "name": {"type": "string"},
                 "sku_code": {"type": "string"},
-                "product_id": {"type": "string"},
-                "product_code": {"type": "string"},
-
-                "images": {"type": "array", "items": {"type": "string", "format": "uri"}}
-
-                "site_categories": {
-                    "type": "array",
-                    "items": {
-                        "id": {"type": "string"},
-                        "name": {"type": "string"}
-                    }
-                },
-
-                "price": {"type": "string", format: "\^\d\.\d$\\"},
-                "currency": {"type": "string", format: "iso4217"}
-           }
+                "product_code": {"type": "string"}
+            }
+        },
+        "customer": {
+            "type": "array",    
+            "items": {
+                "id": {"type": "string"},
+                "lastname": {"type": "string"}
+                "firstname": {"type": "string"}
+                "email": {"type": "string", "format": "email"}
+            }
         },
         "category": {
             "type": "array",
@@ -154,6 +149,25 @@ When a user views a page, a pageview event should be sent to the Event API.
                 "name": {"type": "string"}
             }
         },
+        "search": {
+            "type": "object",
+            "properties": {
+                "term": {"type": "string"},
+                "page": {"type": "integer"},
+                "total_results": {"type": "integer"}
+            }
+        }, 
+        "attribution": {
+            "type": "array",
+            "minimum": 1,
+            "items" : {"type": "string"},
+        },
+        "cart": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string"}
+            }
+        }
     }
 }
 ```
@@ -170,18 +184,7 @@ This is an example of the data which would be transmitted in the case that a use
             "product" : {
                 "name": "Tumbler",
                 "sku_code": "1",
-                "product_id": "1",
-                "product_code": "1",
-                "images": ["http://example.com/example.png"],
-                "description": "Great for shaking up a martini!",
-                "categories": [
-                    {
-                        id: "1",
-                        name: "heavy-drinking"
-                    }
-                ],
-                "price": "100",
-                "currency": "usd"
+                "product_code": "1"
             }
         }
     ]
@@ -202,9 +205,26 @@ This is an example of the data which would be transmitted in the case that a use
                     id: "1",
                     name: "heavy-drinking"
                 }
-            ],
-            "price": "100",
-            "currency": "usd"
+            ]
+        }
+    ]
+}
+```
+
+##### Example 3
+This is an example of the data which would be transmitted in the case that a user viewed a search page.
+
+```json
+{
+    "data": [
+        {
+            "page_type" : "search",
+            "event_type" : "pageview",
+            "search": {
+                    term: "blue suede shoes",
+                    page: "1",
+                    total_results: "100"
+            }
         }
     ]
 }
