@@ -142,7 +142,7 @@ When a user views a page, a pageview event should be sent to the Event API.
             }
         },
         "category": {
-            "type": "array",
+            "type": "object",
             "items": {
                 "id": {"type": "string"},
                 "name": {"type": "string"}
@@ -151,7 +151,7 @@ When a user views a page, a pageview event should be sent to the Event API.
         "search": {
             "type": "object",
             "properties": {
-                "term": {"type": "string"},
+                "keyword": {"type": "string"},
                 "page": {"type": "integer"},
                 "total_results": {"type": "integer"}
             }
@@ -160,12 +160,6 @@ When a user views a page, a pageview event should be sent to the Event API.
             "type": "array",
             "minimum": 1,
             "items" : {"type": "string"},
-        },
-        "cart": {
-            "type": "object",
-            "properties": {
-                "id": {"type": "string"}
-            }
         }
     }
 }
@@ -199,12 +193,10 @@ This is an example of the data which would be transmitted in the case that a use
         {
             "page_type" : "category",
             "event_type" : "pageview",
-            "categories": [
-                {
+            "category": {
                     id: "1",
                     name: "heavy-drinking"
-                }
-            ]
+            }
         }
     ]
 }
@@ -220,9 +212,9 @@ This is an example of the data which would be transmitted in the case that a use
             "page_type" : "search",
             "event_type" : "pageview",
             "search": {
-                term: "blue suede shoes",
-                page: "1",
-                total_results: "100"
+                "keyword": "blue suede shoes",
+                "page": "1",
+                "total_results": "100"
             }
         }
     ]
