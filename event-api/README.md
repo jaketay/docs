@@ -202,8 +202,8 @@ This is an example of the data which would be transmitted in the case that a use
             "page_type" : "category",
             "event_type" : "pageview",
             "category": {
-                    id: "1",
-                    name: "heavy-drinking"
+                    "id": "1",
+                    "name": "adorable puppies"
             }
         }
     ]
