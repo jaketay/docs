@@ -53,7 +53,15 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
                 "landing_url": {"type": "string"},
                 "referrer_url": {"type": "string"},
                 "user_agent": {"type": "string"},
-                "attribution": {
+                "tag_attribution": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "minimum": 1,
+                    "maximum": 5
+                },
+                "rule_attribution": {
                     "type": "array",
                     "items": {
                         "type": "string"
