@@ -87,9 +87,9 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
 ```
 
 ##### Example
-```js
+```json
 {
-    "cookie" : // All cookies for domain
+    "cookie" : "All cookies for domain",
     "timestamp":"2013-06-03T16:41:11.600Z",
     "org":1,
     "site":1,
@@ -482,7 +482,7 @@ The cart endpoint accepts JSON objects with the following format:
                 "quantity" : {"type" : "integer"},
                 "amount" : {"type" : "number"},
                 "discount_amount" : {"type" : "number"},
-                "product" : ...
+                "product" : ["..."]
             }
         }
 
@@ -595,7 +595,7 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/category [POST]
         "create_date" : {"type" : "string", "format" : "date-time"},
         "parent_categories" : {"type" : "array", "items" : {
             "type" : "object",
-            "required" : ['id'],
+            "required" : ["id"],
             "properties" : {
                 "id" : {"type" : "string"},
             }
@@ -680,11 +680,11 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/customer [POST]
         "phone" : {"type" : "string"},
         "first_name" : {"type" : "string"},
         "last_name" : {"type" : "string"},
-        "active_flag" : {"type" : "boolean", "default" : True},
+        "active_flag" : {"type" : "boolean", "default" : true},
         "company" : {"type" : "string"},
         "department" : {"type" : "string"},
         "position" : {"type" : "string"},
-        "marketing_opt_in" : {"type" : "boolean", "default" : False},
+        "marketing_opt_in" : {"type" : "boolean", "default" : false},
     }
 }
 ```
@@ -778,11 +778,11 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/employee [POST]
         "phone" : {"type" : "string"},
         "first_name" : {"type" : "string"},
         "last_name" : {"type" : "string"},
-        "active_flag" : {"type" : "boolean", "default" : True},
+        "active_flag" : {"type" : "boolean", "default" : true},
         "company" : {"type" : "string"},
         "department" : {"type" : "string"},
         "position" : {"type" : "string"},
-        "marketing_opt_in" : {"type" : "boolean", "default" : False}
+        "marketing_opt_in" : {"type" : "boolean", "default" : false}
     }
 }
 ```
@@ -903,7 +903,7 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/order [POST]
                 "quantity" : {"type" : "integer"},
                 "amount" : {"type" : "number"},
                 "discount_amount" : {"type" : "number"},
-                "product" : ...
+                "product" : ["..."]
             }
         }
     }
