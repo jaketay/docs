@@ -367,7 +367,7 @@ When an order is completed and the browser loads the post-order confirmation/suc
         "event_type": {"enum": ["order_success"]},
         "order": {
             "type": "object",
-            "required": ["num"],
+            "required": ["id"],
             "properties": {
                 "id": {"type": "string"},
                 "num": {"type": "string"}
