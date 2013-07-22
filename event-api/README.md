@@ -159,7 +159,7 @@ When a user views a page, a pageview event should be sent to the Event API.
         "search": {
             "type": "object",
             "properties": {
-                "keyword": {"type": "string"},
+                "term": {"type": "string"},
                 "page": {"type": "integer"},
                 "total_results": {"type": "integer"}
             }
@@ -220,7 +220,7 @@ This is an example of the data which would be transmitted in the case that a use
             "page_type" : "search",
             "event_type" : "pageview",
             "search": {
-                "keyword": "blue suede shoes",
+                "term": "blue suede shoes",
                 "page": "1",
                 "total_results": "100"
             }
