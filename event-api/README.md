@@ -456,6 +456,7 @@ The cart endpoint accepts JSON objects with the following format:
         "change_date" : {"type" : "string", "format" : "date-time"},
         "status" : {
             "enum" : [
+                "authorized",
                 "cancelled",
                 "complete",
                 "failed",
@@ -489,6 +490,7 @@ The cart endpoint accepts JSON objects with the following format:
                 "order_item_number" : {"type" : "string"},
                 "status" : {
                     "enum" : [
+                        "authorized",
                         "cancelled",
                         "complete",
                         "failed",
@@ -894,6 +896,7 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/order [POST]
         "change_date" : {"type" : "string", "format" : "date-time"},
         "status" : {
             "enum" : [
+                "authorized",
                 "cancelled",
                 "complete",
                 "failed",
@@ -928,6 +931,7 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/order [POST]
                 "order_item_number" : {"type" : "string"},
                 "status" : {
                     "enum" : [
+                        "authorized",
                         "cancelled",
                         "complete",
                         "failed",
