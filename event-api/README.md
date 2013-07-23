@@ -902,6 +902,7 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/order [POST]
                 "failed",
                 "other",
                 "pending",
+                "placed"
             ],
         },
         "subtotal" : {"type" : "number"},
@@ -937,6 +938,7 @@ http://events.jirafe.com/v1/{org-id}/{site-id}/order [POST]
                         "failed",
                         "other",
                         "pending",
+                        "placed"
                     ],
                 },
                 "quantity" : {"type" : "integer"},
