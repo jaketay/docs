@@ -98,8 +98,9 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
         "page_type":"homepage",
         "current_url": "http://localhost:8000/fakewww/index.html",
         "current_title": "Beacon Test Index",
-        "referrer_url": "http://localhost:8000/fakewww/products/2/index.html"},
+        "referrer_url": "http://localhost:8000/fakewww/products/2/index.html",
         "referrer_type": "*none*"
+    }
     "visit":{
         "id": "9000628336459776",
         "visitor": "12345678890",
