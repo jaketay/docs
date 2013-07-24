@@ -42,8 +42,9 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
                 "page_type": {"type": "string"},
                 "current_url": {"type": "string"},
                 "current_title": {"type": "string"},
+                "referrer_type": {"type": "string"},
                 "referrer_url": {"type": "string"},
-                "referrer_type": {"type": "string"}
+                "referrer_title": {"type": "string"}
             },
         },
         "visit": {
@@ -100,7 +101,7 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
         "current_title": "Beacon Test Index",
         "referrer_url": "http://localhost:8000/fakewww/products/2/index.html",
         "referrer_type": "*none*"
-    }
+    },
     "visit":{
         "id": "9000628336459776",
         "visitor": "12345678890",
