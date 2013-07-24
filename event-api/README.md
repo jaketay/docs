@@ -31,7 +31,7 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
     "$schema": "http://json-schema.org/draft-04/schema#",
     "id": "http://docs.jirafe.com/schema/event/wrapper-def",
     "type": "object",
-    "required" : ["org", "site", "data"],
+    "required" : ["site", "data"],
     "properties": {
         "org": {"type": "string"},
         "site": {"type": "string"},
