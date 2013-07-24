@@ -35,13 +35,15 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
     "properties": {
         "org": {"type": "string"},
         "site": {"type": "string"},
-        "cookie": {"type": "string"},
         "timestamp": {"type": "string", "format": "isodate"},
         "page": {
             "type": "object",
             "properties": {
                 "page_type": {"type": "string"},
-                "event_type": {"type": "string"},
+                "current_url": {"type": "string"},
+                "current_title": {"type": "string"},
+                "referrer_url": {"type": "string"},
+                "referrer_type": {"type": "string"}
             },
         },
         "visit": {
@@ -70,18 +72,18 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
                     "maximum": 5
                 }
             }
+        },
+        "data": {
+            "type": "array",
+            "minimum": 1,
+            "items": {"oneOf": [
+                {"$ref": "http://docs.jirafe.com/schema/event/pageview-def"},
+                {"$ref": "http://docs.jirafe.com/schema/event/edit-cart-def"},
+                {"$ref": "http://docs.jirafe.com/schema/event/add-to-cart-def"},
+                {"$ref": "http://docs.jirafe.com/schema/event/remove-from-cart-def"},
+                {"$ref": "http://docs.jirafe.com/schema/event/order-success-def"}
+            ]}
         }
-    },
-    "data": {
-        "type": "array",
-        "minimum": 1,
-        "items": {"oneOf": [
-            {"$ref": "http://docs.jirafe.com/schema/event/pageview-def"},
-            {"$ref": "http://docs.jirafe.com/schema/event/edit-cart-def"},
-            {"$ref": "http://docs.jirafe.com/schema/event/add-to-cart-def"},
-            {"$ref": "http://docs.jirafe.com/schema/event/remove-from-cart-def"},
-            {"$ref": "http://docs.jirafe.com/schema/event/order-success-def"}
-        ]}
     }
 }
 ```
@@ -89,23 +91,23 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
 ##### Example
 ```json
 {
-    "cookie" : "All cookies for domain",
     "timestamp":"2013-06-03T16:41:11.600Z",
     "org":1,
     "site":1,
     "page":{
-        "current_type":"homepage",
-        "referrer_type": "*none*"
+        "page_type":"homepage",
         "current_url": "http://localhost:8000/fakewww/index.html",
         "current_title": "Beacon Test Index",
         "referrer_url": "http://localhost:8000/fakewww/products/2/index.html"},
+        "referrer_type": "*none*"
     "visit":{
         "id": "9000628336459776",
         "visitor": "12345678890",
         "landing_url": "http://localhost:8000/fakewww/index.html",
         "referrer_url": "http://www.google.com?s=spectre",
         "user_agent": "Mozilla/5.0 ..."
-        "attribution": ["search", "google", "cats"]
+        "rule_attribution": ["search", "google", "cats"],
+        "tag_attribution": []
     },
     "customer":{
         "id": "007",
@@ -138,15 +140,6 @@ When a user views a page, a pageview event should be sent to the Event API.
                 "name": {"type": "string"},
                 "sku_code": {"type": "string"},
                 "product_code": {"type": "string"}
-            }
-        },
-        "customer": {
-            "type": "array",    
-            "items": {
-                "id": {"type": "string"},
-                "lastname": {"type": "string"},
-                "firstname": {"type": "string"},
-                "email": {"type": "string", "format": "email"}
             }
         },
         "category": {
