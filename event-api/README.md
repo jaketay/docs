@@ -9,13 +9,89 @@ Notes:
 
 ## Endpoints
 The Jirafe Events API exposes the following URI endpoints:
-* http://events.jirafe.com/v1/tracker [POST]
-* http://events.jirafe.com/v1/{site-id}/cart [POST]
-* http://events.jirafe.com/v1/{site-id}/category [POST]
-* http://events.jirafe.com/v1/{site-id}/customer [POST]
-* http://events.jirafe.com/v1/{site-id}/employee [POST]
-* http://events.jirafe.com/v1/{site-id}/order [POST]
-* http://events.jirafe.com/v1/{site-id}/product [POST]
+
+<table>
+    <thead>
+        <tr>
+            <th>URI</th>
+            <th>verb</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                http://events.jirafe.com/v1/tracker/pixel.gif
+            </td>
+            <td>
+                GET
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                http://events.jirafe.com/v1/tracker
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                http://events.jirafe.com/v1/{site-id}/cart
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                http://events.jirafe.com/v1/{site-id}/category
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                http://events.jirafe.com/v1/{site-id}/employee
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                http://events.jirafe.com/v1/{site-id}/customer
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                http://events.jirafe.com/v1/{site-id}/order
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                http://events.jirafe.com/v1/{site-id}/product
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+    </tbody>
+</table>
 
 ### The Tracker Endpoint
 http://events.jirafe.com/v1/tracker [POST]
@@ -424,6 +500,181 @@ When a funnel event occurs, a funnel event should be sent to the Event API.
     ]
 }
 ```
+
+### The Pixel Endpoint
+http://events.jirafe.com/v1/tracker/pixel.gif [GET]
+
+Th pixel endpoint is an alternative to the `tracker` endpoint.
+It exists to support browsers which implement the HTTP protocol in bizare and suprising ways.
+
+It allows a browser to send an event by sending a `GET` request which encodes one of the above tracker events
+as a query string.  Unlike the `POST` based endpoint, this endpoint only supports sending one event at a time.
+The api's response to this request will be `200 OK`, the mimetype will be `image/gif`, and the request body will contain a 1x1 transparent gif.
+
+The `GET` request accepts the following query parameters:
+
+<dl>
+    <dt>
+        sid
+    </dt>
+    <dd>
+        {site-id}
+    </dd>
+    
+    <dt>
+        ts
+    </dt>
+    <dd>
+        timestamp
+    </dd>
+
+    <dt>
+        ct
+    </dt>
+    <dd>
+        current title
+    </dd>
+
+    <dt>
+        pt
+    </dt>
+    <dd>
+        page type
+    </dd>
+    
+    <dt>
+        ct
+    </dt>
+    <dd>
+        current url
+    </dd>
+    
+    <dt>
+        rt
+    </dt>
+    <dd>
+        referring page type
+    </dd>
+
+    <dt>
+        ru
+    </dt>
+    <dd>
+        referring url
+    </dd>
+
+    <dt>
+        vid
+    </dt>
+    <dd>
+        visit id
+    </dd>
+
+    <dt>
+        vis
+    </dt>
+    <dd>
+        visitor id
+    </dd>
+
+    <dt>
+        vlnd
+    </dt>
+    <dd>
+        visit landing url
+    </dd>
+
+    <dt>
+        vref
+    </dt>
+    <dd>
+        referrer url
+    </dd>
+
+    <dt>
+        uag
+    </dt>
+    <dd>
+        user agent
+    </dd>
+
+    <dt>
+        tatr[N], where 0 &lt;= N &lt;= 4
+    </dt>
+    <dd>
+        tag based attribution
+
+        <small>
+            For example the attribution array <code>["foo", "bar"]</code> would be encoded as <code>tatr[0]=foo&tatr[1]=bar</code>.
+        </small>
+    </dd>
+
+    <dt>
+        ratr[N], where 0 &lt;= N &lt;= 4
+    </dt>
+    <dd>
+        rule based attribution
+
+        <small>
+            For example the attribution array <code>["foo", "bar"]</code> would be encoded as <code>ratr[0]=foo&ratr[1]=bar</code>.
+        </small>
+    </dd>
+
+    <dt>
+        cid
+    </dt>
+    <dd>
+        customer id
+    </dd>
+
+    <dt>
+        cem
+    </dt>
+    <dd>
+        customer email
+    </dd>
+
+    <dt>
+        cfn
+    </dt>
+    <dd>
+        customer first name
+    </dd>
+
+    <dt>
+        cln
+    </dt>
+    <dd>
+        customer last name
+    </dd>
+
+    <dt>
+        ev[X][Y]=Z
+    </dt>
+    <dd>
+        The data that would be in the <code>datai</code> property of the wrapper object is instead encoded into these
+        special query parameters.
+
+        For example the object
+        <pre>
+        {
+            "data": [
+                {
+                    "foo": 1,
+                    "bar": {
+                        "baz": 2
+                    }
+                }
+            ]
+        }
+        </pre>
+
+        Would be encoded as <code>ev[foo]=1&ev[bar][baz]=2</code>.
+    </dd>
+
+</dl>
+
+
 
 ### The Cart Endpoint
 http://events.jirafe.com/v1/{org-id}/{site-id}/cart [POST]
