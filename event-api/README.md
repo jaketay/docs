@@ -475,7 +475,7 @@ When a funnel event occurs, a funnel event should be sent to the Event API.
     "$schema": "http://json-schema.org/draft-04/schema#",
     "id": "http://docs.jirafe.com/schema/event/funnel-def",
     "type": "object",
-    "required": ["event_type", "funnel_name", "step_name", "step_position", "last_step"],
+    "required": ["event_type", "funnel_name", "step_name", "step_position"],
     "properties": {
         "event_type": {"enum": ["funnel"]},
         "funnel_name": {"type": "string"},
