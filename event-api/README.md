@@ -1,7 +1,7 @@
 # The Jirafe Events API
 
-In the documentation, some URIs contain the symbols “{org-id}” and “{site-id}.”
-These symbols should be replaced with your *Organization Identifier* and your *Site Identifier*, which are available from Jirafe support.
+In the documentation, some URIs contain the symbol "{site-id}.”
+This symbol should be replaced with your *Site Identifier*, which is available from Jirafe support.
 
 Notes:
 * All dates are given in ISO 8601:2004 format.
@@ -680,7 +680,7 @@ The `GET` request accepts the following query parameters:
 
 
 ### The Cart Endpoint
-http://events.jirafe.com/v1/{org-id}/{site-id}/cart [POST]
+http://events.jirafe.com/v1/{site-id}/cart [POST]
 
 The cart endpoint accepts JSON objects with the following format:
 ```json
@@ -853,7 +853,7 @@ Should return:
 
 
 ### The Category Endpoint
-http://events.jirafe.com/v1/{org-id}/{site-id}/category [POST]
+http://events.jirafe.com/v1/{site-id}/category [POST]
 
 #### Schema
 ```json
@@ -932,7 +932,7 @@ value of the "create_date" field.
 
 
 ### The Customer Endpoint
-http://events.jirafe.com/v1/{org-id}/{site-id}/customer [POST]
+http://events.jirafe.com/v1/{site-id}/customer [POST]
 
 #### Schema
 ```json
@@ -1030,7 +1030,7 @@ value of the "create_date" field.
 
 
 ### The Employee Endpoint
-http://events.jirafe.com/v1/{org-id}/{site-id}/employee [POST]
+http://events.jirafe.com/v1/{site-id}/employee [POST]
 
 #### Schema
 ```json
@@ -1116,7 +1116,7 @@ value of the "create_date" field.
 
 
 ### The Order Endpoint
-http://events.jirafe.com/v1/{org-id}/{site-id}/order [POST]
+http://events.jirafe.com/v1/{site-id}/order [POST]
 
 #### Schema
 ```json
@@ -1296,7 +1296,7 @@ Should return:
 
 
 ### The Product Endpoint
-http://events.jirafe.com/v1/{org-id}/{site-id}/product [POST]
+http://events.jirafe.com/v1/{site-id}/product [POST]
 
 #### Schema
 ```json
