@@ -20,7 +20,7 @@ The Jirafe Events API exposes the following URI endpoints:
     <tbody>
         <tr>
             <td>
-                http://events.jirafe.com/v1/tracker/pixel.gif
+                https://events.jirafe.com/v1/tracker/pixel.gif
             </td>
             <td>
                 GET
@@ -29,7 +29,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                http://events.jirafe.com/v1/tracker
+                https://events.jirafe.com/v1/tracker
             </td>
             <td>
                 POST
@@ -38,7 +38,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                http://events.jirafe.com/v1/{site-id}/cart
+                https://events.jirafe.com/v1/{site-id}/cart
             </td>
             <td>
                 POST
@@ -47,7 +47,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                http://events.jirafe.com/v1/{site-id}/category
+                https://events.jirafe.com/v1/{site-id}/category
             </td>
             <td>
                 POST
@@ -56,7 +56,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                http://events.jirafe.com/v1/{site-id}/employee
+                https://events.jirafe.com/v1/{site-id}/employee
             </td>
             <td>
                 POST
@@ -65,7 +65,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                http://events.jirafe.com/v1/{site-id}/customer
+                https://events.jirafe.com/v1/{site-id}/customer
             </td>
             <td>
                 POST
@@ -74,7 +74,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                http://events.jirafe.com/v1/{site-id}/order
+                https://events.jirafe.com/v1/{site-id}/order
             </td>
             <td>
                 POST
@@ -83,7 +83,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                http://events.jirafe.com/v1/{site-id}/product
+                https://events.jirafe.com/v1/{site-id}/product
             </td>
             <td>
                 POST
@@ -504,7 +504,7 @@ When a funnel event occurs, a funnel event should be sent to the Event API.
 ### The Pixel Endpoint
 http://events.jirafe.com/v1/tracker/pixel.gif [GET]
 
-Th pixel endpoint is an alternative to the `tracker` endpoint.
+The pixel endpoint is an alternative to the `tracker` endpoint.
 It exists to support browsers which implement the HTTP protocol in bizare and suprising ways.
 
 It allows a browser to send an event by sending a `GET` request which encodes one of the above tracker events
@@ -561,6 +561,7 @@ The `GET` request accepts the following query parameters:
     </dt>
     <dd>
         referring url
+        <small>This may be truncated to 800 characters.</small>
     </dd>
 
     <dt>
@@ -582,13 +583,15 @@ The `GET` request accepts the following query parameters:
     </dt>
     <dd>
         visit landing url
+        <small>This may be truncated to 800 characters.</small>
     </dd>
 
     <dt>
         vref
     </dt>
     <dd>
-        referrer url
+        visit referrer url
+        <small>This may be truncated to 800 characters.</small>
     </dd>
 
     <dt>
@@ -652,7 +655,7 @@ The `GET` request accepts the following query parameters:
         ev[X][Y]=Z
     </dt>
     <dd>
-        The data that would be in the <code>datai</code> property of the wrapper object is instead encoded into these
+        The data that would be in the <code>data</code> property of the wrapper object is instead encoded into these
         special query parameters.
 
         For example the object
