@@ -1,11 +1,26 @@
 # The Jirafe Events API
-
 In the documentation, some URIs contain the symbol "{site-id}.”
 This symbol should be replaced with your *Site Identifier*, which is available from Jirafe support.
 
 Notes:
 * All dates are given in ISO 8601:2004 format.
 * All dates and times are given in UTC.
+
+## Authentication
+When you are granted access to the Jirafe Event-Api, a representivie will issue you an oauth token.
+In all of the requests described in this document, it is assumed that this token will be sent as a bearer token in the `Authorization` header.
+
+### Example
+For example, if you are given an oauth-token of "45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0", then in all requests you make to the event api you will include this header
+```
+...
+Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0
+...
+```
+
+In some of this document's example code sections, the fake oauth token given above is used.
+Please replace this fake token with your own when running the example code.
+
 
 ## Endpoints
 The Jirafe Events API exposes the following URI endpoints:
@@ -124,7 +139,7 @@ Each tracker event collection is "wrapped" by an object conforming to the follow
             },
         },
         "visit": {
-            "type": "object", 
+            "type": "object",
             "required": ["id", "visitor", "landing_url", "referrer_url", "user_agent"],
             "properties": {
                 "id": {"type": "string"},
@@ -234,7 +249,7 @@ When a user views a page, a pageview event should be sent to the Event API.
                 "page": {"type": "integer"},
                 "total_results": {"type": "integer"}
             }
-        }, 
+        },
         "attribution": {
             "type": "array",
             "minimum": 1,
@@ -462,7 +477,7 @@ When an order is completed and the browser loads the post-order confirmation/suc
 
 
 #### Funnel Event
-When a funnel event occurs, a funnel event should be sent to the Event API. 
+When a funnel event occurs, a funnel event should be sent to the Event API.
 
 ##### Schema
 ```json
@@ -515,7 +530,7 @@ The `GET` request accepts the following query parameters:
     <dd>
         {site-id}
     </dd>
-    
+
     <dt>
         ts
     </dt>
@@ -536,14 +551,14 @@ The `GET` request accepts the following query parameters:
     <dd>
         page type
     </dd>
-    
+
     <dt>
         ct
     </dt>
     <dd>
         current url
     </dd>
-    
+
     <dt>
         rt
     </dt>
@@ -767,67 +782,67 @@ of the field "change_date".
 #### Example
 ```json
 {
-    "change_date": "2013-06-17T15:16:15.000Z", 
-    "create_date": "2013-06-17T15:16:10.000Z", 
-    "currency": "USD", 
-    "customer_id": "john.doe@gmail.com", 
-    "id": "8797436543019", 
+    "change_date": "2013-06-17T15:16:15.000Z",
+    "create_date": "2013-06-17T15:16:10.000Z",
+    "currency": "USD",
+    "customer_id": "john.doe@gmail.com",
+    "id": "8797436543019",
     "items": [
         {
-            "amount": 99.85, 
-            "change_date": "2013-06-17T15:16:11.000Z", 
-            "create_date": "2013-06-17T15:16:11.000Z", 
-            "discount_amount": 0.0, 
-            "id": "8797371007020", 
-            "order_item_number": "0", 
+            "amount": 99.85,
+            "change_date": "2013-06-17T15:16:11.000Z",
+            "create_date": "2013-06-17T15:16:11.000Z",
+            "discount_amount": 0.0,
+            "id": "8797371007020",
+            "order_item_number": "0",
             "product": {
-                "brand": "Canon", 
+                "brand": "Canon",
                 "catalog": {
-                    "id": "electronicsProductCatalog", 
-                    "name": "Electronics Product Catalog", 
+                    "id": "electronicsProductCatalog",
+                    "name": "Electronics Product Catalog",
                     "version_id": "Online"
-                }, 
+                },
                 "categories": [
                     {
-                        "id": "8796098461838", 
+                        "id": "8796098461838",
                         "name": "Digital Compacts"
-                    }, 
+                    },
                     {
-                        "id": "8796099248270", 
+                        "id": "8796099248270",
                         "name": "Canon"
                     }
-                ], 
-                "change_date": "2013-03-28T19:50:58.000Z", 
-                "code": "1934793", 
-                "create_date": "2013-03-28T19:46:39.000Z", 
-                "id": "8796107014145", 
+                ],
+                "change_date": "2013-03-28T19:50:58.000Z",
+                "code": "1934793",
+                "create_date": "2013-03-28T19:46:39.000Z",
+                "id": "8796107014145",
                 "images": [
                     {
                         "url": "http://hybris.jirafe.com/medias/sys_master/images/8796224651294/1934793_1719.jpg"
                     }
-                ], 
-                "is_product": true, 
-                "is_sku": true, 
-                "name": "PowerShot A480", 
-                "rating": 5.0, 
+                ],
+                "is_product": true,
+                "is_sku": true,
+                "name": "PowerShot A480",
+                "rating": 5.0,
                 "vendors": [
                     {
-                        "id": "8796093089750", 
+                        "id": "8796093089750",
                         "name": "Electro"
                     }
                 ]
-            }, 
-            "quantity": 1, 
+            },
+            "quantity": 1,
             "status": "other"
         }
-    ], 
-    "order_number": "00041000", 
-    "status": "other", 
-    "subtotal": 99.85, 
-    "total": 99.85, 
-    "total_discounts": 0.0, 
-    "total_payment_cost": 0.0, 
-    "total_shipping": 0.0, 
+    ],
+    "order_number": "00041000",
+    "status": "other",
+    "subtotal": 99.85,
+    "total": 99.85,
+    "total_discounts": 0.0,
+    "total_payment_cost": 0.0,
+    "total_shipping": 0.0,
     "total_tax": 4.75
 }
 ```
@@ -837,6 +852,7 @@ of the field "change_date".
 curl -i \
        -H "Content-Type: application/json” \
        -H “Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d ‘...’ \
        http://events.jirafe.com/v1/{site-id}/{grp-id}/cart
 ```
@@ -879,9 +895,9 @@ of the field "change_date".
 #### Example
 ```json
 {
-    "change_date": "2013-03-28T19:44:11.000Z", 
-    "create_date": "2013-03-28T19:38:09.000Z", 
-    "id": "8796094234766", 
+    "change_date": "2013-03-28T19:44:11.000Z",
+    "create_date": "2013-03-28T19:38:09.000Z",
+    "id": "8796094234766",
     "name": "Lens system"
 }
 ```
@@ -891,10 +907,11 @@ of the field "change_date".
 curl -i \
        -H "Content-Type: application/json” \
        -H “Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d ‘{
-    "change_date": "2013-03-28T19:44:11.000Z", 
-    "create_date": "2013-03-28T19:38:09.000Z", 
-    "id": "8796094234766", 
+    "change_date": "2013-03-28T19:44:11.000Z",
+    "create_date": "2013-03-28T19:38:09.000Z",
+    "id": "8796094234766",
     "name": "Lens system"
 }’ \
        http://events.jirafe.com/v1/{site-id}/{grp-id}/category
@@ -909,10 +926,11 @@ Should return:
 curl -i \
        -H "Content-Type: application/json” \
        -H “Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d ‘{
-    "change_date": "2012-03-28T19:44:11.000Z", 
-    "create_date": "2013-03-28T19:38:09.000Z", 
-    "id": "8796094234766", 
+    "change_date": "2012-03-28T19:44:11.000Z",
+    "create_date": "2013-03-28T19:38:09.000Z",
+    "id": "8796094234766",
     "name": "Lens system"
 }’ \
        http://events.jirafe.com/v1/{site-id}/{grp-id}/category
@@ -965,13 +983,13 @@ later than the value of the field "change_date".
 #### Example
 ```json
 {
-    "active_flag": true, 
-    "change_date": "2013-06-17T15:15:53.000Z", 
-    "create_date": "2013-06-17T15:15:53.000Z", 
-    "email": "john.doe@gmail.com", 
-    "first_name": "John", 
-    "id": "john.doe@gmail.com", 
-    "last_name": "Doe", 
+    "active_flag": true,
+    "change_date": "2013-06-17T15:15:53.000Z",
+    "create_date": "2013-06-17T15:15:53.000Z",
+    "email": "john.doe@gmail.com",
+    "first_name": "John",
+    "id": "john.doe@gmail.com",
+    "last_name": "Doe",
     "name": "John Doe"
 }
 ```
@@ -981,14 +999,15 @@ later than the value of the field "change_date".
 curl -i \
        -H "Content-Type: application/json" \
        -H "Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d '{
-    "active_flag": true, 
-    "change_date": "2013-06-17T15:15:53.000Z", 
-    "create_date": "2013-06-17T15:15:53.000Z", 
-    "email": "john.doe@gmail.com", 
-    "first_name": "John", 
-    "id": "john.doe@gmail.com", 
-    "last_name": "Doe", 
+    "active_flag": true,
+    "change_date": "2013-06-17T15:15:53.000Z",
+    "create_date": "2013-06-17T15:15:53.000Z",
+    "email": "john.doe@gmail.com",
+    "first_name": "John",
+    "id": "john.doe@gmail.com",
+    "last_name": "Doe",
     "name": "John Doe"
 }' \
        http://events.jirafe.com/v1/{site-id}/{grp-id}/customer
@@ -1003,14 +1022,15 @@ Should return:
 curl -i \
        -H "Content-Type: application/json" \
        -H "Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d '{
-    "active_flag": true, 
-    "change_date": "2012-06-17T15:15:53.000Z", 
-    "create_date": "2013-06-17T15:15:53.000Z", 
-    "email": "john.doe@gmail.com", 
-    "first_name": "John", 
-    "id": "john.doe@gmail.com", 
-    "last_name": "Doe", 
+    "active_flag": true,
+    "change_date": "2012-06-17T15:15:53.000Z",
+    "create_date": "2013-06-17T15:15:53.000Z",
+    "email": "john.doe@gmail.com",
+    "first_name": "John",
+    "id": "john.doe@gmail.com",
+    "last_name": "Doe",
     "name": "John Doe"
 }' \
        http://events.jirafe.com/v1/{site-id}/{grp-id}/customer
@@ -1063,12 +1083,12 @@ of the field "change_date".
 #### Example
 ```json
 {
-    "active_flag": true, 
-    "change_date": "2013-03-28T19:38:03.000Z", 
-    "create_date": "2013-03-28T19:38:03.000Z", 
-    "first_name": "Product", 
-    "id": "productmanager", 
-    "last_name": "Manager", 
+    "active_flag": true,
+    "change_date": "2013-03-28T19:38:03.000Z",
+    "create_date": "2013-03-28T19:38:03.000Z",
+    "first_name": "Product",
+    "id": "productmanager",
+    "last_name": "Manager",
     "name": "Product Manager"
 }
 ```
@@ -1078,13 +1098,14 @@ of the field "change_date".
 curl -i \
        -H "Content-Type: application/json" \
        -H "Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d '{
-    "active_flag": true, 
-    "change_date": "2013-03-28T19:38:03.000Z", 
-    "create_date": "2013-03-28T19:38:03.000Z", 
-    "first_name": "Product", 
-    "id": "productmanager", 
-    "last_name": "Manager", 
+    "active_flag": true,
+    "change_date": "2013-03-28T19:38:03.000Z",
+    "create_date": "2013-03-28T19:38:03.000Z",
+    "first_name": "Product",
+    "id": "productmanager",
+    "last_name": "Manager",
     "name": "Product Manager"
 }' http://events.jirafe.com/v1/{site-id}/{grp-id}/employee
 ```
@@ -1098,6 +1119,7 @@ Should return:
 curl -i \
        -H "Content-Type: application/json” \
        -H “Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d '{'id":"3", 'name":"John Doe", "change_date":"2012-01-07T12:24:09", "create_date":"2012-01-07T13:24:09"}' \
        http://events.jirafe.com/v1/{site-id}/{grp-id}/customer
 ```
@@ -1209,68 +1231,68 @@ of the field "change_date".
 #### Example
 ```json
 {
-    "change_date": "2013-06-17T15:34:13.000Z", 
-    "create_date": "2013-06-17T15:34:03.000Z", 
-    "currency": "USD", 
-    "customer_id": "john.doe@gmail.com", 
-    "id": "8796420735021", 
+    "change_date": "2013-06-17T15:34:13.000Z",
+    "create_date": "2013-06-17T15:34:03.000Z",
+    "currency": "USD",
+    "customer_id": "john.doe@gmail.com",
+    "id": "8796420735021",
     "items": [
         {
-            "amount": 99.85, 
-            "change_date": "2013-06-17T15:34:04.000Z", 
-            "create_date": "2013-06-17T15:33:13.000Z", 
-            "discount_amount": 0.0, 
-            "id": "8796420735022", 
-            "order_item_number": "0", 
+            "amount": 99.85,
+            "change_date": "2013-06-17T15:34:04.000Z",
+            "create_date": "2013-06-17T15:33:13.000Z",
+            "discount_amount": 0.0,
+            "id": "8796420735022",
+            "order_item_number": "0",
             "product": {
-                "brand": "Canon", 
+                "brand": "Canon",
                 "catalog": {
-                    "id": "electronicsProductCatalog", 
-                    "name": "Electronics Product Catalog", 
+                    "id": "electronicsProductCatalog",
+                    "name": "Electronics Product Catalog",
                     "version_id": "Online"
-                }, 
+                },
                 "categories": [
                     {
-                        "id": "8796098461838", 
+                        "id": "8796098461838",
                         "name": "Digital Compacts"
-                    }, 
+                    },
                     {
-                        "id": "8796099248270", 
+                        "id": "8796099248270",
                         "name": "Canon"
                     }
-                ], 
-                "change_date": "2013-03-28T19:50:58.000Z", 
-                "code": "1934793", 
-                "create_date": "2013-03-28T19:46:39.000Z", 
-                "id": "8796107014145", 
+                ],
+                "change_date": "2013-03-28T19:50:58.000Z",
+                "code": "1934793",
+                "create_date": "2013-03-28T19:46:39.000Z",
+                "id": "8796107014145",
                 "images": [
                     {
                         "url": "http://hybris.jirafe.com/medias/sys_master/images/8796224651294/1934793_1719.jpg"
                     }
-                ], 
-                "is_product": true, 
-                "is_sku": true, 
-                "name": "PowerShot A480", 
-                "rating": 5.0, 
+                ],
+                "is_product": true,
+                "is_sku": true,
+                "name": "PowerShot A480",
+                "rating": 5.0,
                 "vendors": [
                     {
-                        "id": "8796093089750", 
+                        "id": "8796093089750",
                         "name": "Electro"
                     }
                 ]
-            }, 
-            "quantity": 1, 
+            },
+            "quantity": 1,
             "status": "pending"
         }
-    ], 
-    "order_date": "2013-06-17T15:34:03.000Z", 
-    "order_number": "00041002", 
-    "status": "pending", 
-    "subtotal": 99.85, 
-    "total": 111.84, 
-    "total_discounts": 0.0, 
-    "total_payment_cost": 0.0, 
-    "total_shipping": 11.99, 
+    ],
+    "order_date": "2013-06-17T15:34:03.000Z",
+    "order_number": "00041002",
+    "status": "pending",
+    "subtotal": 99.85,
+    "total": 111.84,
+    "total_discounts": 0.0,
+    "total_payment_cost": 0.0,
+    "total_shipping": 11.99,
     "total_tax": 5.33
 }
 ```
@@ -1280,6 +1302,7 @@ of the field "change_date".
 curl -i \
        -H "Content-Type: application/json” \
        -H “Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d ‘...’ \
        http://events.jirafe.com/v1/{site-id}/{grp-id}/order
 ```
@@ -1405,38 +1428,38 @@ of the field "change_date".
 #### Example
 ```json
 {
-    "brand": "Canon", 
+    "brand": "Canon",
     "catalog": {
-        "id": "electronicsProductCatalog", 
-        "name": "Electronics Product Catalog", 
+        "id": "electronicsProductCatalog",
+        "name": "Electronics Product Catalog",
         "version_id": "Online"
-    }, 
+    },
     "categories": [
         {
-            "id": "8796098461838", 
+            "id": "8796098461838",
             "name": "Digital Compacts"
-        }, 
+        },
         {
-            "id": "8796099248270", 
+            "id": "8796099248270",
             "name": "Canon"
         }
-    ], 
-    "change_date": "2013-03-28T19:50:58.000Z", 
-    "code": "1934793", 
-    "create_date": "2013-03-28T19:46:39.000Z", 
-    "id": "8796107014145", 
+    ],
+    "change_date": "2013-03-28T19:50:58.000Z",
+    "code": "1934793",
+    "create_date": "2013-03-28T19:46:39.000Z",
+    "id": "8796107014145",
     "images": [
         {
             "url": "http://hybris.jirafe.com/medias/sys_master/images/8796224651294/1934793_1719.jpg"
         }
-    ], 
-    "is_product": true, 
-    "is_sku": true, 
-    "name": "PowerShot A480", 
-    "rating": 5.0, 
+    ],
+    "is_product": true,
+    "is_sku": true,
+    "name": "PowerShot A480",
+    "rating": 5.0,
     "vendors": [
         {
-            "id": "8796093089750", 
+            "id": "8796093089750",
             "name": "Electro"
         }
     ]
@@ -1453,6 +1476,7 @@ of the field "change_date".
 curl -i \
        -H "Content-Type: application/json” \
        -H “Accept: application/json" \
+       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d ‘...’ \
        http://events.jirafe.com/v1/{site-id}/{grp-id}/product
 ```
