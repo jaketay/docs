@@ -11,22 +11,15 @@
         "page": {
             "type": "object",
             "properties": {
-                "page_type": {"type": "string"},
-                "current_url": {"type": "string"},
-                "current_title": {"type": "string"},
-                "referrer_type": {"type": "string"},
-                "referrer_url": {"type": "string"},
-                "referrer_title": {"type": "string"}
+                "page_id": {"type": "string"},
+                "prev_page_id": {"type": "string"}
             }
         },
         "visit": {
             "type": "object",
             "required": [
                 "id",
-                "visitor",
-                "landing_url",
-                "referrer_url",
-                "user_agent"
+                "visitor"
             ],
             "properties": {
                 "id": {"type": "string"},
