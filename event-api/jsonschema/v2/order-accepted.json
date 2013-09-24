@@ -15,6 +15,7 @@
         "total_payment_cost",
         "total_discounts",
         "currency",
+        "items"
     ],
     "properties": {
         "order_number": {"type": "string"},
@@ -37,6 +38,7 @@
         "currency": {"type": "string"},
         "items": {
             "type": "array",
+            "minimum": 1,
             "items": {"$ref": "http://event.jirafe.com/v2/schema/event/order-item.json"}
         },
         "changed_items": {

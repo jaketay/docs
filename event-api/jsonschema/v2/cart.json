@@ -12,7 +12,8 @@
         "total_payment_cost",
         "total_discounts",
         "currency",
-        "customer"
+        "customer",
+        "items"
     ],
     "properties": {
         "id": {"type": "string"},
