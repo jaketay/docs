@@ -22,7 +22,7 @@ In some of this document's example code sections, the fake oauth token given abo
 Please replace this fake token with your own when running the example code.
 
 
-## Endpoints
+## v1 Endpoints
 The Jirafe Events API exposes the following URI endpoints:
 
 <table>
@@ -35,7 +35,7 @@ The Jirafe Events API exposes the following URI endpoints:
     <tbody>
         <tr>
             <td>
-                https://events.jirafe.com/v1/tracker/pixel.gif
+                https://event.jirafe.com/v1/tracker/pixel.gif
             </td>
             <td>
                 GET
@@ -44,7 +44,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                https://events.jirafe.com/v1/tracker
+                https://event.jirafe.com/v1/tracker
             </td>
             <td>
                 POST
@@ -53,7 +53,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                https://events.jirafe.com/v1/{site-id}/cart
+                https://event.jirafe.com/v1/{site-id}/cart
             </td>
             <td>
                 POST
@@ -62,7 +62,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                https://events.jirafe.com/v1/{site-id}/category
+                https://event.jirafe.com/v1/{site-id}/category
             </td>
             <td>
                 POST
@@ -71,7 +71,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                https://events.jirafe.com/v1/{site-id}/employee
+                https://event.jirafe.com/v1/{site-id}/employee
             </td>
             <td>
                 POST
@@ -80,7 +80,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                https://events.jirafe.com/v1/{site-id}/customer
+                https://event.jirafe.com/v1/{site-id}/customer
             </td>
             <td>
                 POST
@@ -89,7 +89,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                https://events.jirafe.com/v1/{site-id}/order
+                https://event.jirafe.com/v1/{site-id}/order
             </td>
             <td>
                 POST
@@ -98,7 +98,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
         <tr>
             <td>
-                https://events.jirafe.com/v1/{site-id}/product
+                https://event.jirafe.com/v1/{site-id}/product
             </td>
             <td>
                 POST
@@ -108,8 +108,139 @@ The Jirafe Events API exposes the following URI endpoints:
     </tbody>
 </table>
 
+## v2 Endpoints
+The Jirafe Events API exposes the following URI endpoints:
+
+<table>
+    <thead>
+        <tr>
+            <th>URI</th>
+            <th>verb</th>
+            <th>Schema</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/tracker/pageview.gif
+            </td>
+            <td>
+                GET
+            </td>
+            <td rowspan="2">
+                https://event.jirafe.com/v2/schema/pageview.json
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/tracker/pageview
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/tracker/visit.gif
+            </td>
+            <td>
+                GET
+            </td>
+            <td rowspan="2">
+                https://event.jirafe.com/v2/schema/visit.json
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/tracker/visit
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/{site-id}/cart
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/cart.json
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/{site-id}/category
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/category.json
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/{site-id}/employee
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/employee.json
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/{site-id}/customer
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/customer.json
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/{site-id}/order
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/order-placed.json<br/>
+                https://event.jirafe.com/v2/schema/order-accepted.json<br/>
+                https://event.jirafe.com/v2/schema/order-cancelled.json
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/{site-id}/product
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/product.json
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
 ### The Tracker Endpoint
-http://events.jirafe.com/v1/tracker [POST]
+http://event.jirafe.com/v1/tracker [POST]
 
 The tracker endpoint receives many kinds of events from the beacons.
 
@@ -512,7 +643,7 @@ When a funnel event occurs, a funnel event should be sent to the Event API.
 ```
 
 ### The Pixel Endpoint
-http://events.jirafe.com/v1/tracker/pixel.gif [GET]
+http://event.jirafe.com/v1/tracker/pixel.gif [GET]
 
 The pixel endpoint is an alternative to the `tracker` endpoint.
 It exists to support browsers which implement the HTTP protocol in bizare and suprising ways.
@@ -690,7 +821,7 @@ The `GET` request accepts the following query parameters:
 
 
 ### The Cart Endpoint
-http://events.jirafe.com/v1/{site-id}/cart [POST]
+http://event.jirafe.com/v1/{site-id}/cart [POST]
 
 The cart endpoint accepts JSON objects with the following format:
 ```json
@@ -854,7 +985,7 @@ curl -i \
        -H “Accept: application/json" \
        -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d ‘...’ \
-       http://events.jirafe.com/v1/{site-id}/{grp-id}/cart
+       http://event.jirafe.com/v1/{site-id}/{grp-id}/cart
 ```
 
 Should return:
@@ -864,7 +995,7 @@ Should return:
 
 
 ### The Category Endpoint
-http://events.jirafe.com/v1/{site-id}/category [POST]
+http://event.jirafe.com/v1/{site-id}/category [POST]
 
 #### Schema
 ```json
@@ -914,7 +1045,7 @@ curl -i \
     "id": "8796094234766",
     "name": "Lens system"
 }’ \
-       http://events.jirafe.com/v1/{site-id}/{grp-id}/category
+       http://event.jirafe.com/v1/{site-id}/{grp-id}/category
 ```
 
 Should return:
@@ -933,7 +1064,7 @@ curl -i \
     "id": "8796094234766",
     "name": "Lens system"
 }’ \
-       http://events.jirafe.com/v1/{site-id}/{grp-id}/category
+       http://event.jirafe.com/v1/{site-id}/{grp-id}/category
 ```
 
 Should return:
@@ -945,7 +1076,7 @@ value of the "create_date" field.
 
 
 ### The Customer Endpoint
-http://events.jirafe.com/v1/{site-id}/customer [POST]
+http://event.jirafe.com/v1/{site-id}/customer [POST]
 
 #### Schema
 ```json
@@ -1010,7 +1141,7 @@ curl -i \
     "last_name": "Doe",
     "name": "John Doe"
 }' \
-       http://events.jirafe.com/v1/{site-id}/{grp-id}/customer
+       http://event.jirafe.com/v1/{site-id}/{grp-id}/customer
 ```
 
 Should return:
@@ -1033,7 +1164,7 @@ curl -i \
     "last_name": "Doe",
     "name": "John Doe"
 }' \
-       http://events.jirafe.com/v1/{site-id}/{grp-id}/customer
+       http://event.jirafe.com/v1/{site-id}/{grp-id}/customer
 ```
 
 Should return:
@@ -1045,7 +1176,7 @@ value of the "create_date" field.
 
 
 ### The Employee Endpoint
-http://events.jirafe.com/v1/{site-id}/employee [POST]
+http://event.jirafe.com/v1/{site-id}/employee [POST]
 
 #### Schema
 ```json
@@ -1107,7 +1238,7 @@ curl -i \
     "id": "productmanager",
     "last_name": "Manager",
     "name": "Product Manager"
-}' http://events.jirafe.com/v1/{site-id}/{grp-id}/employee
+}' http://event.jirafe.com/v1/{site-id}/{grp-id}/employee
 ```
 
 Should return:
@@ -1121,7 +1252,7 @@ curl -i \
        -H “Accept: application/json" \
        -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d '{'id":"3", 'name":"John Doe", "change_date":"2012-01-07T12:24:09", "create_date":"2012-01-07T13:24:09"}' \
-       http://events.jirafe.com/v1/{site-id}/{grp-id}/customer
+       http://event.jirafe.com/v1/{site-id}/{grp-id}/customer
 ```
 
 Should return:
@@ -1133,7 +1264,7 @@ value of the "create_date" field.
 
 
 ### The Order Endpoint
-http://events.jirafe.com/v1/{site-id}/order [POST]
+http://event.jirafe.com/v1/{site-id}/order [POST]
 
 #### Schema
 ```json
@@ -1304,7 +1435,7 @@ curl -i \
        -H “Accept: application/json" \
        -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d ‘...’ \
-       http://events.jirafe.com/v1/{site-id}/{grp-id}/order
+       http://event.jirafe.com/v1/{site-id}/{grp-id}/order
 ```
 
 Should return:
@@ -1314,7 +1445,7 @@ Should return:
 
 
 ### The Product Endpoint
-http://events.jirafe.com/v1/{site-id}/product [POST]
+http://event.jirafe.com/v1/{site-id}/product [POST]
 
 #### Schema
 ```json
@@ -1478,7 +1609,7 @@ curl -i \
        -H “Accept: application/json" \
        -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
        -X PUT -d ‘...’ \
-       http://events.jirafe.com/v1/{site-id}/{grp-id}/product
+       http://event.jirafe.com/v1/{site-id}/{grp-id}/product
 ```
 
 Should return:

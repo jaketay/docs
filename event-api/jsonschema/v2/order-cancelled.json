@@ -1,0 +1,15 @@
+{
+    "title": "Order Cancelled Schema",
+    "type": "object",
+    "required": [
+        "order_number"
+    ],
+    "properties": {
+        "order_number": {"type": "string"},
+        "status": {
+            "enum": [
+                "cancelled"
+            ]
+        }
+    }
+}
