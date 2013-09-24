@@ -17,7 +17,7 @@
         "create_date": {"type": "string", "format": "date-time"},
         "change_date": {"type": "string", "format": "date-time"},
         "order_item_number": {"type": "string"},
-        "quantity": {"type": "integer", "minimum": 9007199254740992, "maximum": 9007199254740992},
+        "quantity": {"type": "integer", "minimum": -9007199254740992, "maximum": 9007199254740992},
         "status": {
             "enum": [
                 "accepted",
