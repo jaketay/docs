@@ -1,8 +1,7 @@
 {
-    "title": "Order Schema",
+    "title": "Order Accepted Schema",
     "type": "object",
     "required": [
-        "id",
         "order_number",
         "customer",
         "order_date",
@@ -18,8 +17,6 @@
         "currency",
     ],
     "properties": {
-        "cookies": {"type": "object"},
-        "id": {"type": "string"},
         "order_number": {"type": "string"},
         "cart_id": {"type": "string"},
         "customer": {"$ref": "http://event.jirafe.com/v2/schema/event/customer.json"},
@@ -28,9 +25,7 @@
         "change_date": {"type": "string", "format": "date-time"},
         "status": {
             "enum": [
-                "placed",
-                "accepted",
-                "cancelled"
+                "accepted"
             ]
         },
         "subtotal": {"type": "number"},

@@ -122,25 +122,43 @@ The Jirafe Events API exposes the following URI endpoints:
     <tbody>
         <tr>
             <td>
-                https://event.jirafe.com/v2/tracker/pixel.gif
+                https://event.jirafe.com/v2/tracker/pageview.gif
             </td>
             <td>
                 GET
             </td>
-            <td>
-                https://event.jirafe.com/v2/schema/tracker.json
+            <td rowspan="2">
+                https://event.jirafe.com/v2/schema/pageview.json
             </td>
         </tr>
 
         <tr>
             <td>
-                https://event.jirafe.com/v2/tracker
+                https://event.jirafe.com/v2/tracker/pageview
             </td>
             <td>
                 POST
             </td>
+        </tr>
+
+        <tr>
             <td>
-                https://event.jirafe.com/v2/schema/tracker.json
+                https://event.jirafe.com/v2/tracker/visit.gif
+            </td>
+            <td>
+                GET
+            </td>
+            <td rowspan="2">
+                https://event.jirafe.com/v2/schema/visit.json
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                https://event.jirafe.com/v2/tracker/visit
+            </td>
+            <td>
+                POST
             </td>
         </tr>
 
@@ -200,7 +218,9 @@ The Jirafe Events API exposes the following URI endpoints:
                 POST
             </td>
             <td>
-                https://event.jirafe.com/v2/schema/order.json
+                https://event.jirafe.com/v2/schema/order-placed.json<br/>
+                https://event.jirafe.com/v2/schema/order-accepted.json<br/>
+                https://event.jirafe.com/v2/schema/order-cancelled.json
             </td>
         </tr>
 
