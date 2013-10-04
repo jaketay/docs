@@ -1,71 +1,502 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Docs by jirafe</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Docs : Documents" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Docs</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Docs</h1>
-        <p>Documents</p>
 
-        <p class="view"><a href="https://github.com/jirafe/docs">View the Project on GitHub <small>jirafe/docs</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jirafe/docs">View on GitHub</a>
 
+          <h1 id="project_title">Docs</h1>
+          <h2 id="project_tagline">Documents</h2>
 
-        <ul>
-          <li><a href="https://github.com/jirafe/docs/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/jirafe/docs/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/jirafe/docs">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jirafe/docs/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jirafe/docs/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="the-jirafe-events-api" class="anchor" href="#the-jirafe-events-api"><span class="octicon octicon-link"></span></a>The Jirafe Events API</h1>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>In the documentation, some URIs contain the symbol "{site-id}.”
+This symbol should be replaced with your <em>Site Identifier</em>, which is available from Jirafe support.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>All dates are given in ISO 8601:2004 format.</li>
+<li>All dates and times are given in UTC.</li>
+</ul><h2>
+<a name="authentication" class="anchor" href="#authentication"><span class="octicon octicon-link"></span></a>Authentication</h2>
+
+<p>When you are granted access to the Jirafe Event-Api, a representative will issue you an oauth token.
+In all of the requests described in this document, it is assumed that this token will be sent as a bearer token in the <code>Authorization</code> header.</p>
+
+<h3>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<p>For example, if you are given an oauth-token of "45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0", then in all requests you make to the event api you will include this header</p>
+
+<pre><code>...
+Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0
+...
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>In some of this document's example code sections, the fake oauth token given above is used.
+Please replace this fake token with your own when running the example code.</p>
+
+<h2>
+<a name="endpoints" class="anchor" href="#endpoints"><span class="octicon octicon-link"></span></a>Endpoints</h2>
+
+<p>The Jirafe Events API exposes the following URI endpoints:</p>
+
+<table>
+<thead><tr>
+<th>URI</th>
+            <th>verb</th>
+            <th>Schema</th>
+        </tr></thead>
+<tbody>
+<tr>
+<td>
+                https://event.jirafe.com/v2/tracker/pageview.gif
+            </td>
+            <td>
+                GET
+            </td>
+            <td rowspan="2">
+                https://event.jirafe.com/v2/schema/pageview.json
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/tracker/pageview
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/tracker/visit.gif
+            </td>
+            <td>
+                GET
+            </td>
+            <td rowspan="2">
+                https://event.jirafe.com/v2/schema/visit.json
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/tracker/visit
+            </td>
+            <td>
+                POST
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/{site-id}/cart
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/cart.json
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/{site-id}/category
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/category.json
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/{site-id}/employee
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/employee.json
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/{site-id}/customer
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/customer.json
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/{site-id}/order
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/order-placed.json<br>
+                https://event.jirafe.com/v2/schema/order-accepted.json<br>
+                https://event.jirafe.com/v2/schema/order-cancelled.json
+            </td>
+        </tr>
+<tr>
+<td>
+                https://event.jirafe.com/v2/{site-id}/product
+            </td>
+            <td>
+                POST
+            </td>
+            <td>
+                https://event.jirafe.com/v2/schema/product.json
+            </td>
+        </tr>
+</tbody>
+</table><h3>
+<a name="the-cart-endpoint" class="anchor" href="#the-cart-endpoint"><span class="octicon octicon-link"></span></a>The Cart Endpoint</h3>
+
+<p><strong>URL:</strong> <a href="https://event.jirafe.com/v2/%7Bsite-id%7D/cart">https://event.jirafe.com/v2/{site-id}/cart</a> [POST]
+<strong>Schema:</strong> <a href="https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/cart.json">https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/cart.json</a></p>
+
+<p>Cart events are sent whenever a user adds, removes or alters their cart. <em>Note:</em> this event is distinct from and order event, which is the event that happens when a cart is purchased.</p>
+
+<h4>
+<a name="example-1" class="anchor" href="#example-1"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8797436543019"</span><span class="p">,</span>
+    <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:10.000Z"</span><span class="p">,</span>
+    <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:15.000Z"</span><span class="p">,</span>
+    <span class="nt">"subtotal"</span><span class="p">:</span> <span class="mf">99.85</span><span class="p">,</span>
+    <span class="nt">"total"</span><span class="p">:</span> <span class="mf">99.85</span><span class="p">,</span>
+    <span class="nt">"total_tax"</span><span class="p">:</span> <span class="mf">4.75</span>
+    <span class="s2">"total_shipping"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="nt">"total_payment_cost"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="nt">"total_discounts"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="nt">"currency"</span><span class="p">:</span> <span class="s2">"USD"</span><span class="p">,</span>
+    <span class="nt">"cookies"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="nt">"items"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8797371007020"</span><span class="p">,</span>
+            <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+            <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+            <span class="nt">"cart_item_number"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+            <span class="nt">"quantity"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">"price"</span><span class="p">:</span> <span class="mf">99.85</span><span class="p">,</span>
+            <span class="nt">"discount_price"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="nt">"product"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796107014145"</span><span class="p">,</span>
+                <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:46:39.000Z"</span><span class="p">,</span>
+                <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:50:58.000Z"</span><span class="p">,</span>
+                <span class="nt">"is_product"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nt">"is_sku"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nt">"catalog"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"electronicsProductCatalog"</span><span class="p">,</span>
+                    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Electronics Product Catalog"</span>
+                <span class="p">},</span>
+                <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"PowerShot A480"</span><span class="p">,</span>
+                <span class="nt">"code"</span><span class="p">:</span> <span class="s2">"1934793"</span><span class="p">,</span>
+                <span class="nt">"brand"</span><span class="p">:</span> <span class="s2">"Canon"</span><span class="p">,</span>
+                <span class="nt">"categories"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796098461838"</span><span class="p">,</span>
+                        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Digital Compacts"</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796099248270"</span><span class="p">,</span>
+                        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Canon"</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="nt">"images"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"http://yourstore.com/images/the_photo.jpg"</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">"previous_items"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">],</span>
+    <span class="nt">"customer"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+        <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+        <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+        <span class="nt">"email"</span><span class="p">:</span> <span class="s2">"foo@example.com"</span><span class="p">,</span>
+        <span class="nt">"first_name"</span><span class="p">:</span> <span class="s2">"Jane"</span><span class="p">,</span>
+        <span class="nt">"last_name"</span><span class="p">:</span> <span class="s2">"Doe"</span>
+    <span class="p">},</span>
+    <span class="nt">"visit"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"visit_id"</span><span class="p">:</span> <span class="s2">"1234"</span><span class="p">,</span>
+        <span class="nt">"visitor_id"</span><span class="p">:</span> <span class="s2">"4321"</span><span class="p">,</span>
+        <span class="nt">"pageview_id"</span><span class="p">:</span> <span class="s2">"5678"</span><span class="p">,</span>
+        <span class="nt">"last_pageview_id"</span><span class="p">:</span> <span class="s2">"8765"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">}</span>
+</pre></div>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="the-category-endpoint" class="anchor" href="#the-category-endpoint"><span class="octicon octicon-link"></span></a>The Category Endpoint</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p><strong>URL:</strong> <a href="https://event.jirafe.com/v2/%7Bsite-id%7D/category">https://event.jirafe.com/v2/{site-id}/category</a> [POST]
+<strong>Schema:</strong> <a href="https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/category.json">https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/category.json</a></p>
+
+<h4>
+<a name="example-2" class="anchor" href="#example-2"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796094234766"</span><span class="p">,</span>
+    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Lens system"</span><span class="p">,</span>
+    <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:44:11.000Z"</span><span class="p">,</span>
+    <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:38:09.000Z"</span>
+<span class="p">}</span>
+</pre></div>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="the-customer-endpoint" class="anchor" href="#the-customer-endpoint"><span class="octicon octicon-link"></span></a>The Customer Endpoint</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p><strong>URL:</strong> <a href="https://event.jirafe.com/v2/%7Bsite-id%7D/customer">https://event.jirafe.com/v2/{site-id}/customer</a> [POST]
+<strong>Schema:</strong> <a href="https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/customer.json">https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/customer.json</a></p>
+
+<h4>
+<a name="example-3" class="anchor" href="#example-3"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"1234abc"</span><span class="p">,</span>
+    <span class="nt">"active_flag"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:15:53.000Z"</span><span class="p">,</span>
+    <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:15:53.000Z"</span><span class="p">,</span>
+    <span class="nt">"email"</span><span class="p">:</span> <span class="s2">"john.doe@gmail.com"</span><span class="p">,</span>
+    <span class="nt">"first_name"</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
+    <span class="nt">"last_name"</span><span class="p">:</span> <span class="s2">"Doe"</span><span class="p">,</span>
+    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"John Doe"</span>
+<span class="p">}</span>
+</pre></div>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="the-employee-endpoint" class="anchor" href="#the-employee-endpoint"><span class="octicon octicon-link"></span></a>The Employee Endpoint</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p><strong>URL:</strong> <a href="https://event.jirafe.com/v2/%7Bsite-id%7D/employee">https://event.jirafe.com/v2/{site-id}/employee</a> [POST]
+<strong>Schema:</strong> <a href="https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/employee.json">https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/employee.json</a></p>
+
+<h4>
+<a name="example-4" class="anchor" href="#example-4"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"532sdfg"</span><span class="p">,</span>
+    <span class="nt">"active_flag"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:38:03.000Z"</span><span class="p">,</span>
+    <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:38:03.000Z"</span><span class="p">,</span>
+    <span class="nt">"first_name"</span><span class="p">:</span> <span class="s2">"Product"</span><span class="p">,</span>
+    <span class="nt">"last_name"</span><span class="p">:</span> <span class="s2">"Manager"</span><span class="p">,</span>
+    <span class="nt">"email"</span><span class="p">:</span> <span class="s2">"product_manager@example.com"</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="the-order-endpoint" class="anchor" href="#the-order-endpoint"><span class="octicon octicon-link"></span></a>The Order Endpoint</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p><strong>URL:</strong> <a href="https://event.jirafe.com/v2/%7Bsite-id%7D/order">https://event.jirafe.com/v2/{site-id}/order</a> [POST]</p>
+
+<p>The order endpoint accepts three different schemas:</p>
+
+<ul>
+<li>The <code>order-placed</code> event is sent first with the information connecting the order number with the visit cookies stored by the tracker javascript</li>
+<li>The <code>order-accepted</code> event is sent next with all of the information about the order after it has been authorized and paid for by the customer. Anytime the order iterms change, this event is sent again with items containing the new order and previous_items showing how things were before the order changed</li>
+<li>The <code>order-cancelled</code> event is sent if the entire order is canceled</li>
+</ul><p><strong>Schema:</strong> <a href="https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-placed.json">https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-placed.json</a></p>
+
+<h4>
+<a name="example-5" class="anchor" href="#example-5"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"order_number"</span><span class="p">:</span> <span class="s2">"123456789"</span><span class="p">,</span>
+    <span class="nt">"cart_id"</span><span class="p">:</span> <span class="s2">"123456789"</span><span class="p">,</span>
+    <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"placed"</span><span class="p">,</span>
+    <span class="nt">"customer"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+        <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+        <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+        <span class="nt">"email"</span><span class="p">:</span> <span class="s2">"foo@example.com"</span><span class="p">,</span>
+        <span class="nt">"first_name"</span><span class="p">:</span> <span class="s2">"Jane"</span><span class="p">,</span>
+        <span class="nt">"last_name"</span><span class="p">:</span> <span class="s2">"Doe"</span>
+    <span class="p">},</span>
+    <span class="nt">"visit"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"visit_id"</span><span class="p">:</span> <span class="s2">"1234"</span><span class="p">,</span>
+        <span class="nt">"visitor_id"</span><span class="p">:</span> <span class="s2">"4321"</span><span class="p">,</span>
+        <span class="nt">"pageview_id"</span><span class="p">:</span> <span class="s2">"5678"</span><span class="p">,</span>
+        <span class="nt">"last_pageview_id"</span><span class="p">:</span> <span class="s2">"8765"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">}</span>
+</pre></div>
+
+<p><strong>Schema:</strong> <a href="https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-accepted.json">https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-accepted.json</a></p>
+
+<h4>
+<a name="example-6" class="anchor" href="#example-6"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"order_number"</span><span class="p">:</span> <span class="s2">"8797436543019"</span><span class="p">,</span>
+    <span class="nt">"cart_id"</span><span class="p">:</span> <span class="s2">"1234asdf"</span><span class="p">,</span>
+    <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"accepted"</span><span class="p">,</span>
+    <span class="nt">"order_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:10.000Z"</span><span class="p">,</span>
+    <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:10.000Z"</span><span class="p">,</span>
+    <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:15.000Z"</span><span class="p">,</span>
+    <span class="nt">"subtotal"</span><span class="p">:</span> <span class="mf">99.85</span><span class="p">,</span>
+    <span class="nt">"total"</span><span class="p">:</span> <span class="mf">99.85</span><span class="p">,</span>
+    <span class="nt">"total_tax"</span><span class="p">:</span> <span class="mf">4.75</span>
+    <span class="s2">"total_shipping"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="nt">"total_payment_cost"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="nt">"total_discounts"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+    <span class="nt">"currency"</span><span class="p">:</span> <span class="s2">"USD"</span><span class="p">,</span>
+    <span class="nt">"items"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8797371007020"</span><span class="p">,</span>
+            <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+            <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+            <span class="nt">"cart_item_number"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+            <span class="nt">"quantity"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">"price"</span><span class="p">:</span> <span class="mf">99.85</span><span class="p">,</span>
+            <span class="nt">"discount_price"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+            <span class="nt">"product"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796107014145"</span><span class="p">,</span>
+                <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:46:39.000Z"</span><span class="p">,</span>
+                <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:50:58.000Z"</span><span class="p">,</span>
+                <span class="nt">"is_product"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nt">"is_sku"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nt">"catalog"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"electronicsProductCatalog"</span><span class="p">,</span>
+                    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Electronics Product Catalog"</span>
+                <span class="p">},</span>
+                <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"PowerShot A480"</span><span class="p">,</span>
+                <span class="nt">"code"</span><span class="p">:</span> <span class="s2">"1934793"</span><span class="p">,</span>
+                <span class="nt">"brand"</span><span class="p">:</span> <span class="s2">"Canon"</span><span class="p">,</span>
+                <span class="nt">"categories"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796098461838"</span><span class="p">,</span>
+                        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Digital Compacts"</span>
+                    <span class="p">},</span>
+                    <span class="p">{</span>
+                        <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796099248270"</span><span class="p">,</span>
+                        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Canon"</span>
+                    <span class="p">}</span>
+                <span class="p">],</span>
+                <span class="nt">"images"</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="p">{</span>
+                        <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"http://yourstore.com/images/the_photo.jpg"</span>
+                    <span class="p">}</span>
+                <span class="p">]</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">"previous_items"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">],</span>
+    <span class="nt">"customer"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"abc123"</span><span class="p">,</span>
+        <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+        <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-06-17T15:16:11.000Z"</span><span class="p">,</span>
+        <span class="nt">"email"</span><span class="p">:</span> <span class="s2">"foo@example.com"</span><span class="p">,</span>
+        <span class="nt">"first_name"</span><span class="p">:</span> <span class="s2">"Jane"</span><span class="p">,</span>
+        <span class="nt">"last_name"</span><span class="p">:</span> <span class="s2">"Doe"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p><strong>Schema:</strong> <a href="https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-cancelled.json">https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-cancelled.json</a></p>
+
+<h4>
+<a name="example-7" class="anchor" href="#example-7"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"order_number"</span><span class="p">:</span> <span class="s2">"123456789"</span><span class="p">,</span>
+    <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"cancelled"</span>
+<span class="p">}</span>
+
+<span class="err">}</span>
+</pre></div>
+
+<h3>
+<a name="the-product-endpoint" class="anchor" href="#the-product-endpoint"><span class="octicon octicon-link"></span></a>The Product Endpoint</h3>
+
+<p><strong>URL:</strong> <a href="https://event.jirafe.com/v2/%7Bsite-id%7D/product">https://event.jirafe.com/v2/{site-id}/product</a> [POST]
+<strong>Schema:</strong> <a href="https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/product.json">https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/product.json</a></p>
+
+<h4>
+<a name="example-8" class="anchor" href="#example-8"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+    <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796107014145"</span><span class="p">,</span>
+    <span class="nt">"create_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:46:39.000Z"</span><span class="p">,</span>
+    <span class="nt">"change_date"</span><span class="p">:</span> <span class="s2">"2013-03-28T19:50:58.000Z"</span><span class="p">,</span>
+    <span class="nt">"is_product"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">"is_sku"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nt">"catalog"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"electronicsProductCatalog"</span><span class="p">,</span>
+        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Electronics Product Catalog"</span>
+    <span class="p">},</span>
+    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"PowerShot A480"</span><span class="p">,</span>
+    <span class="nt">"code"</span><span class="p">:</span> <span class="s2">"1934793"</span><span class="p">,</span>
+    <span class="nt">"brand"</span><span class="p">:</span> <span class="s2">"Canon"</span><span class="p">,</span>
+    <span class="nt">"categories"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796098461838"</span><span class="p">,</span>
+            <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Digital Compacts"</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"8796099248270"</span><span class="p">,</span>
+            <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Canon"</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="nt">"images"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">"url"</span><span class="p">:</span> <span class="s2">"http://yourstore.com/images/the_photo.jpg"</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/jirafe">jirafe</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Docs maintained by <a href="https://github.com/jirafe">jirafe</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
