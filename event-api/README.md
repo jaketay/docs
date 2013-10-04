@@ -7,7 +7,7 @@ Notes:
 * All dates and times are given in UTC.
 
 ## Authentication
-When you are granted access to the Jirafe Event-Api, a representivie will issue you an oauth token.
+When you are granted access to the Jirafe Event-Api, a representative will issue you an oauth token.
 In all of the requests described in this document, it is assumed that this token will be sent as a bearer token in the `Authorization` header.
 
 ### Example
@@ -21,94 +21,7 @@ Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0
 In some of this document's example code sections, the fake oauth token given above is used.
 Please replace this fake token with your own when running the example code.
 
-
-## v1 Endpoints
-The Jirafe Events API exposes the following URI endpoints:
-
-<table>
-    <thead>
-        <tr>
-            <th>URI</th>
-            <th>verb</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                https://event.jirafe.com/v1/tracker/pixel.gif
-            </td>
-            <td>
-                GET
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                https://event.jirafe.com/v1/tracker
-            </td>
-            <td>
-                POST
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                https://event.jirafe.com/v1/{site-id}/cart
-            </td>
-            <td>
-                POST
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                https://event.jirafe.com/v1/{site-id}/category
-            </td>
-            <td>
-                POST
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                https://event.jirafe.com/v1/{site-id}/employee
-            </td>
-            <td>
-                POST
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                https://event.jirafe.com/v1/{site-id}/customer
-            </td>
-            <td>
-                POST
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                https://event.jirafe.com/v1/{site-id}/order
-            </td>
-            <td>
-                POST
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                https://event.jirafe.com/v1/{site-id}/product
-            </td>
-            <td>
-                POST
-            </td>
-        </tr>
-
-    </tbody>
-</table>
-
-## v2 Endpoints
+## Endpoints
 The Jirafe Events API exposes the following URI endpoints:
 
 <table>
@@ -239,1149 +152,48 @@ The Jirafe Events API exposes the following URI endpoints:
     </tbody>
 </table>
 
-### The Tracker Endpoint
-http://event.jirafe.com/v1/tracker [POST]
-
-The tracker endpoint receives many kinds of events from the beacons.
-
-#### Tracker Wrapper
-Each tracker event collection is "wrapped" by an object conforming to the following schema:
-
-##### Schema
-```json
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://docs.jirafe.com/schema/event/wrapper-def",
-    "type": "object",
-    "required" : ["site", "data"],
-    "properties": {
-        "org": {"type": "string"},
-        "site": {"type": "string"},
-        "timestamp": {"type": "string", "format": "isodate"},
-        "page": {
-            "type": "object",
-            "properties": {
-                "page_type": {"type": "string"},
-                "current_url": {"type": "string"},
-                "current_title": {"type": "string"},
-                "referrer_type": {"type": "string"},
-                "referrer_url": {"type": "string"},
-                "referrer_title": {"type": "string"}
-            },
-        },
-        "visit": {
-            "type": "object",
-            "required": ["id", "visitor", "landing_url", "referrer_url", "user_agent"],
-            "properties": {
-                "id": {"type": "string"},
-                "visitor": {"type": "string"},
-                "landing_url": {"type": "string"},
-                "referrer_url": {"type": "string"},
-                "user_agent": {"type": "string"},
-                "tag_attribution": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "minimum": 1,
-                    "maximum": 5
-                },
-                "rule_attribution": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "minimum": 1,
-                    "maximum": 5
-                }
-            }
-        },
-        "data": {
-            "type": "array",
-            "minimum": 1,
-            "items": {"oneOf": [
-                {"$ref": "http://docs.jirafe.com/schema/event/pageview-def"},
-                {"$ref": "http://docs.jirafe.com/schema/event/edit-cart-def"},
-                {"$ref": "http://docs.jirafe.com/schema/event/add-to-cart-def"},
-                {"$ref": "http://docs.jirafe.com/schema/event/remove-from-cart-def"},
-                {"$ref": "http://docs.jirafe.com/schema/event/order-success-def"}
-            ]}
-        }
-    }
-}
-```
-
-##### Example
-```json
-{
-    "timestamp":"2013-06-03T16:41:11.600Z",
-    "org":1,
-    "site":1,
-    "page":{
-        "page_type":"homepage",
-        "current_url": "http://localhost:8000/fakewww/index.html",
-        "current_title": "Beacon Test Index",
-        "referrer_url": "http://localhost:8000/fakewww/products/2/index.html",
-        "referrer_type": "*none*"
-    },
-    "visit":{
-        "id": "9000628336459776",
-        "visitor": "12345678890",
-        "landing_url": "http://localhost:8000/fakewww/index.html",
-        "referrer_url": "http://www.google.com?s=spectre",
-        "user_agent": "Mozilla/5.0 ..."
-        "rule_attribution": ["search", "google", "cats"],
-        "tag_attribution": []
-    },
-    "customer":{
-        "id": "007",
-        "lastname": "Bond",
-        "firstname": "James"
-    },
-    "data": ["..."]
-}
-```
-
-### Tracker Events
-
-#### Pageview Event
-When a user views a page, a pageview event should be sent to the Event API.
-
-##### Schema
-```json
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://docs.jirafe.com/schema/event/pageview-def",
-    "type": "object",
-    "required": ["event_type", "page_type"],
-    "properties": {
-        "page_type": {"enum": ["homepage", "cart", "order_confirm", "order_success", "checkout", "product", "category", "search", "other"]},
-        "event_type": {"enum": ["pageview"]},
-        "product": {
-            "type": "object",
-            "required": ["product_code"],
-            "properties": {
-                "name": {"type": "string"},
-                "sku_code": {"type": "string"},
-                "product_code": {"type": "string"}
-            }
-        },
-        "category": {
-            "type": "object",
-            "items": {
-                "id": {"type": "string"},
-                "name": {"type": "string"}
-            }
-        },
-        "search": {
-            "type": "object",
-            "properties": {
-                "term": {"type": "string"},
-                "page": {"type": "integer"},
-                "total_results": {"type": "integer"}
-            }
-        },
-        "attribution": {
-            "type": "array",
-            "minimum": 1,
-            "items" : {"type": "string"},
-        }
-    }
-}
-```
-
-##### Example 1
-This is an example of the data which would be transmitted in the case that a user viewed a product page.
-
-```json
-{
-    "data": [
-        {
-            "page_type" : "product",
-            "event_type" : "pageview",
-            "product" : {
-                "name": "Tumbler",
-                "sku_code": "1",
-                "product_code": "1"
-            }
-        }
-    ]
-}
-```
-
-##### Example 2
-This is an example of the data which would be transmitted in the case that a user viewed a category page.
-
-```json
-{
-    "data": [
-        {
-            "page_type" : "category",
-            "event_type" : "pageview",
-            "category": {
-                    "id": "1",
-                    "name": "adorable puppies"
-            }
-        }
-    ]
-}
-```
-
-##### Example 3
-This is an example of the data which would be transmitted in the case that a user viewed a search page.
-
-```json
-{
-    "data": [
-        {
-            "page_type" : "search",
-            "event_type" : "pageview",
-            "search": {
-                "term": "blue suede shoes",
-                "page": "1",
-                "total_results": "100"
-            }
-        }
-    ]
-}
-```
-
-#### Visit Event
-When a user navigates to a store URL from a non-store URL, a visit event should be sent to the Event API.
-
-##### Schema
-```json
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://docs.jirafe.com/schema/event/visit-def",
-    "type": "object",
-    "required": ["event_type"],
-    "properties": {
-        "event_type": {"enum": ["visit"]}
-    }
-}
-```
-
-#### Add To Cart Event
-When a user places an item in their cart, an add_to_cart event should be sent to the Event API.
-
-##### Schema
-```json
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://docs.jirafe.com/schema/event/add-to-cart-def",
-    "type": "object",
-    "required": ["event_type", "line_item"],
-    "properties": {
-        "event_type": {"enum": ["add_item_to_cart"]},
-        "cart": {
-            "type": "object",
-            "properties": {
-                "id": {"type": "string"}
-            }
-        },
-        "line_item": {
-            "type": "object",
-            "required": ["sku_code", "quantity", "total_price", "currency"],
-            "properties": {
-                "name": {"type": "string"},
-                "sku_code": {"type": "string"},
-                "product_code": {"type": "string"},
-                "images": {"type": "array", "items": {"type": "string", "format": "uri"}},
-                "price": {"type": "string"},
-                "quantity": {"type": "string"},
-                "total_price": {"type": "string"},
-                "currency": {"type": "string"}
-            }
-        }
-    }
-}
-```
-
-#### Remove From Cart Event
-When a user removes an item from their cart, a remove_from_cart event should be sent to the Event API.
-
-##### Schema
-```json
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://docs.jirafe.com/schema/event/remove-from-cart-def",
-    "type": "object",
-    "required": ["event_type", "line_item"],
-    "properties": {
-        "event_type": {"enum": ["remove_item_from_cart"]},
-        "cart": {
-            "type": "object",
-            "properties": {
-                "id": {"type": "string"}
-            }
-        },
-        "line_item": {
-            "type": "object",
-            "required": ["sku_code", "quantity", "total_price", "currency"],
-            "properties": {
-                "name": {"type": "string"},
-                "sku_code": {"type": "string"},
-                "product_code": {"type": "string"},
-                "images": {"type": "array", "items": {"type": "string", "format": "uri"}},
-                "price": {"type": "string"},
-                "quantity": {"type": "string"},
-                "total_price": {"type": "string"},
-                "currency": {"type": "string"}
-            }
-        }
-    }
-}
-```
-
-#### Edit Cart Event
-When a user removes an item from their cart, an edit cart event should be sent to the Event API.
-
-##### Schema
-```json
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://docs.jirafe.com/schema/event/edit-cart-def",
-    "type": "object",
-    "required": ["event_type", "line_item"],
-    "properties": {
-        "event_type": {"enum": ["edit_cart"]},
-        "cart": {
-            "type": "object",
-            "properties": {
-                "id": {"type": "string"}
-            }
-        },
-        "line_item": {
-            "type": "object",
-            "required": ["sku_code", "quantity", "total_price", "currency"],
-            "properties": {
-                "name": {"type": "string"},
-                "sku_code": {"type": "string"},
-                "product_code": {"type": "string"},
-                "images": {"type": "array", "items": {"type": "string", "format": "uri"}},
-                "price": {"type": "string"},
-                "quantity": {"type": "string"},
-                "total_price": {"type": "string"},
-                "currency": {"type": "string"}
-            }
-        }
-    }
-}
-```
-
-#### Order Success Event
-When an order is completed and the browser loads the post-order confirmation/success/receipt page, an order_success event should be sent to the Event API.
-
-##### Schema
-```json
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://docs.jirafe.com/schema/event/order-success-def",
-    "type": "object",
-    "required": ["event_type", "order"],
-    "properties": {
-        "event_type": {"enum": ["order_success"]},
-        "order": {
-            "type": "object",
-            "required": ["num"],
-            "properties": {
-                "id": {"type": "string"},
-                "num": {"type": "string"}
-            }
-        }
-    }
-}
-```
-
-##### Example
-```json
-{
-    "data": [
-        {
-            "id": "12345",
-            "num": "0000000010"
-        }
-    ]
-}
-```
-
-
-#### Funnel Event
-When a funnel event occurs, a funnel event should be sent to the Event API.
-
-##### Schema
-```json
-{
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "id": "http://docs.jirafe.com/schema/event/funnel-def",
-    "type": "object",
-    "required": ["event_type", "funnel_name", "step_name", "step_position"],
-    "properties": {
-        "event_type": {"enum": ["funnel"]},
-        "funnel_name": {"type": "string"},
-        "step_name": {"type": "string"},
-        "step_position": {"type": "integer"},
-        "last_step": {"type": "boolean"}
-    }
-}
-```
-
-##### Example
-```json
-{
-    "data": [
-        {
-            "event_type": "funnel",
-            "funnel_name": "checkout",
-            "step_name": "confirm",
-            "step_position": 1,
-            "last_step": false
-        }
-    ]
-}
-```
-
-### The Pixel Endpoint
-http://event.jirafe.com/v1/tracker/pixel.gif [GET]
-
-The pixel endpoint is an alternative to the `tracker` endpoint.
-It exists to support browsers which implement the HTTP protocol in bizare and suprising ways.
-
-It allows a browser to send an event by sending a `GET` request which encodes one of the above tracker events
-as a query string.  Unlike the `POST` based endpoint, this endpoint only supports sending one event at a time.
-The api's response to this request will be `200 OK`, the mimetype will be `image/gif`, and the request body will contain a 1x1 transparent gif.
-
-The `GET` request accepts the following query parameters:
-
-<dl>
-    <dt>
-        sid
-    </dt>
-    <dd>
-        {site-id}
-    </dd>
-
-    <dt>
-        ts
-    </dt>
-    <dd>
-        timestamp
-    </dd>
-
-    <dt>
-        ct
-    </dt>
-    <dd>
-        current title
-    </dd>
-
-    <dt>
-        pt
-    </dt>
-    <dd>
-        page type
-    </dd>
-
-    <dt>
-        ct
-    </dt>
-    <dd>
-        current url
-    </dd>
-
-    <dt>
-        rt
-    </dt>
-    <dd>
-        referring page type
-    </dd>
-
-    <dt>
-        ru
-    </dt>
-    <dd>
-        referring url
-        <small>This may be truncated to 800 characters.</small>
-    </dd>
-
-    <dt>
-        vid
-    </dt>
-    <dd>
-        visit id
-    </dd>
-
-    <dt>
-        vis
-    </dt>
-    <dd>
-        visitor id
-    </dd>
-
-    <dt>
-        vlnd
-    </dt>
-    <dd>
-        visit landing url
-        <small>This may be truncated to 800 characters.</small>
-    </dd>
-
-    <dt>
-        vref
-    </dt>
-    <dd>
-        visit referrer url
-        <small>This may be truncated to 800 characters.</small>
-    </dd>
-
-    <dt>
-        uag
-    </dt>
-    <dd>
-        user agent
-    </dd>
-
-    <dt>
-        tatr[N], where 0 &lt;= N &lt;= 4
-    </dt>
-    <dd>
-        tag based attribution
-
-        <small>
-            For example the attribution array <code>["foo", "bar"]</code> would be encoded as <code>tatr[0]=foo&tatr[1]=bar</code>.
-        </small>
-    </dd>
-
-    <dt>
-        ratr[N], where 0 &lt;= N &lt;= 4
-    </dt>
-    <dd>
-        rule based attribution
-
-        <small>
-            For example the attribution array <code>["foo", "bar"]</code> would be encoded as <code>ratr[0]=foo&ratr[1]=bar</code>.
-        </small>
-    </dd>
-
-    <dt>
-        cid
-    </dt>
-    <dd>
-        customer id
-    </dd>
-
-    <dt>
-        cem
-    </dt>
-    <dd>
-        customer email
-    </dd>
-
-    <dt>
-        cfn
-    </dt>
-    <dd>
-        customer first name
-    </dd>
-
-    <dt>
-        cln
-    </dt>
-    <dd>
-        customer last name
-    </dd>
-
-    <dt>
-        ev[X][Y]=Z
-    </dt>
-    <dd>
-        The data that would be in the <code>data</code> property of the wrapper object is instead encoded into these
-        special query parameters.
-
-        For example the object
-        <pre>
-        {
-            "data": [
-                {
-                    "foo": 1,
-                    "bar": {
-                        "baz": 2
-                    }
-                }
-            ]
-        }
-        </pre>
-
-        Would be encoded as <code>ev[foo]=1&ev[bar][baz]=2</code>.
-    </dd>
-
-</dl>
-
-
-
 ### The Cart Endpoint
-http://event.jirafe.com/v1/{site-id}/cart [POST]
+**URL:** https://event.jirafe.com/v2/{site-id}/cart [POST]
+**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/cart.json
 
-The cart endpoint accepts JSON objects with the following format:
-```json
-{
-    "title" : "Cart Schema",
-    "type" : "object",
-    "required" : [
-        "id",
-        "order_number",
-        "create_date",
-        "change_date",
-        "subtotal",
-        "total",
-        "total_tax",
-        "total_shipping",
-        "total_payment_cost",
-        "total_discounts",
-        "currency",
-    ],
-    "properties" : {
-        "cookies" : {"type" : "object"},
-        "id" : {"type" : "string"},
-        "order_number" : {"type" : "string"},
-        "cart_id" : {"type" : "string"},
-        "customer_id" : {"type" : "string"},
-        "create_date" : {"type" : "string", "format" : "date-time"},
-        "change_date" : {"type" : "string", "format" : "date-time"},
-        "status" : {
-            "enum" : [
-                "authorized",
-                "cancelled",
-                "complete",
-                "failed",
-                "other",
-                "pending",
-            ],
-        },
-        "subtotal" : {"type" : "number"},
-        "total" : {"type" : "number"},
-        "total_tax" : {"type" : "number"},
-        "total_shipping" : {"type" : "number"},
-        "total_payment_cost" : {"type" : "number"},
-        "total_discounts" : {"type" : "number"},
-        "currency" : {"type" : "string"},
-        "items" : {"type" : "array", "items" : {
-            "type" : "object",
-            "required" : [
-                "id",
-                "create_date",
-                "change_date",
-                "order_item_number",
-                "quantity",
-                "amount",
-                "discount_amount",
-                "product"
-            ],
-            "properties" : {
-                "id" : {"type" : "string"},
-                "create_date" : {"type" : "string", "format" : "date-time"},
-                "change_date" : {"type" : "string", "format" : "date-time"},
-                "order_item_number" : {"type" : "string"},
-                "status" : {
-                    "enum" : [
-                        "authorized",
-                        "cancelled",
-                        "complete",
-                        "failed",
-                        "other",
-                        "pending",
-                    ],
-                },
-                "quantity" : {"type" : "integer"},
-                "amount" : {"type" : "number"},
-                "discount_amount" : {"type" : "number"},
-                "product" : ["..."]
-            }
-        }
-
-    }
-}
-```
-
-#### Notes
-* The value of the "product" field within the "items" array is
-an object conforming to the Product Schema.
-* The value of the field "create_date" must be chronologically before the value
-of the field "change_date".
+Cart events are sent whenever a user adds, removes or alters their cart. *Note:* this event is distinct from and order event, which is the event that happens when a cart is purchased.
 
 #### Example
 ```json
 {
-    "change_date": "2013-06-17T15:16:15.000Z",
-    "create_date": "2013-06-17T15:16:10.000Z",
-    "currency": "USD",
-    "customer_id": "john.doe@gmail.com",
     "id": "8797436543019",
-    "items": [
-        {
-            "amount": 99.85,
-            "change_date": "2013-06-17T15:16:11.000Z",
-            "create_date": "2013-06-17T15:16:11.000Z",
-            "discount_amount": 0.0,
-            "id": "8797371007020",
-            "order_item_number": "0",
-            "product": {
-                "brand": "Canon",
-                "catalog": {
-                    "id": "electronicsProductCatalog",
-                    "name": "Electronics Product Catalog",
-                    "version_id": "Online"
-                },
-                "categories": [
-                    {
-                        "id": "8796098461838",
-                        "name": "Digital Compacts"
-                    },
-                    {
-                        "id": "8796099248270",
-                        "name": "Canon"
-                    }
-                ],
-                "change_date": "2013-03-28T19:50:58.000Z",
-                "code": "1934793",
-                "create_date": "2013-03-28T19:46:39.000Z",
-                "id": "8796107014145",
-                "images": [
-                    {
-                        "url": "http://hybris.jirafe.com/medias/sys_master/images/8796224651294/1934793_1719.jpg"
-                    }
-                ],
-                "is_product": true,
-                "is_sku": true,
-                "name": "PowerShot A480",
-                "rating": 5.0,
-                "vendors": [
-                    {
-                        "id": "8796093089750",
-                        "name": "Electro"
-                    }
-                ]
-            },
-            "quantity": 1,
-            "status": "other"
-        }
-    ],
-    "order_number": "00041000",
-    "status": "other",
+    "create_date": "2013-06-17T15:16:10.000Z",
+    "change_date": "2013-06-17T15:16:15.000Z",
     "subtotal": 99.85,
     "total": 99.85,
-    "total_discounts": 0.0,
-    "total_payment_cost": 0.0,
-    "total_shipping": 0.0,
     "total_tax": 4.75
-}
-```
-
-#### Code Samples
-```
-curl -i \
-       -H "Content-Type: application/json” \
-       -H “Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d ‘...’ \
-       http://event.jirafe.com/v1/{site-id}/{grp-id}/cart
-```
-
-Should return:
-```
-200 OK
-```
-
-
-### The Category Endpoint
-http://event.jirafe.com/v1/{site-id}/category [POST]
-
-#### Schema
-```json
-{
-    "title" : "Category Schema",
-    "type" : "object",
-    "required" : [ "id", "name", "change_date", "create_date"],
-    "properties" : {
-        "id" : {"type" : "string"},
-        "name" : {"type" : "string"},
-        "change_date" : {"type" : "string", "format" : "date-time"},
-        "create_date" : {"type" : "string", "format" : "date-time"},
-        "parent_categories" : {"type" : "array", "items" : {
-            "type" : "object",
-            "required" : ["id"],
-            "properties" : {
-                "id" : {"type" : "string"},
-            }
-        }},
-    }
-}
-```
-
-#### Additional Constraints
-* The value of the field "create_date" must be chronologically before the value
-of the field "change_date".
-
-#### Example
-```json
-{
-    "change_date": "2013-03-28T19:44:11.000Z",
-    "create_date": "2013-03-28T19:38:09.000Z",
-    "id": "8796094234766",
-    "name": "Lens system"
-}
-```
-
-#### Code Samples
-```
-curl -i \
-       -H "Content-Type: application/json” \
-       -H “Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d ‘{
-    "change_date": "2013-03-28T19:44:11.000Z",
-    "create_date": "2013-03-28T19:38:09.000Z",
-    "id": "8796094234766",
-    "name": "Lens system"
-}’ \
-       http://event.jirafe.com/v1/{site-id}/{grp-id}/category
-```
-
-Should return:
-```
-200 OK
-```
-
-```
-curl -i \
-       -H "Content-Type: application/json” \
-       -H “Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d ‘{
-    "change_date": "2012-03-28T19:44:11.000Z",
-    "create_date": "2013-03-28T19:38:09.000Z",
-    "id": "8796094234766",
-    "name": "Lens system"
-}’ \
-       http://event.jirafe.com/v1/{site-id}/{grp-id}/category
-```
-
-Should return:
-```
-422 Unprocessable Entity
-```
-Because the value of the "change_date" field is chronologically before the
-value of the "create_date" field.
-
-
-### The Customer Endpoint
-http://event.jirafe.com/v1/{site-id}/customer [POST]
-
-#### Schema
-```json
-{
-    "title" : "Customer Schema",
-    "type" : "object",
-    "required" : [
-        "create_date",
-        "change_date",
-        "id",
-    ],
-    "properties" : {
-        "cookies" : {"type" : "object"},
-        "create_date" : {"type" : "string", "format" : "date-time"},
-        "change_date" : {"type" : "string", "format" : "date-time"},
-        "id" : {"type" : "string"},
-        "email" : {"type" : "string"},
-        "name" : {"type" : "string"},
-        "phone" : {"type" : "string"},
-        "first_name" : {"type" : "string"},
-        "last_name" : {"type" : "string"},
-        "active_flag" : {"type" : "boolean", "default" : true},
-        "company" : {"type" : "string"},
-        "department" : {"type" : "string"},
-        "position" : {"type" : "string"},
-        "marketing_opt_in" : {"type" : "boolean", "default" : false},
-    }
-}
-```
-
-#### Additional Constraints
-* The value of the field "create_date" must not be chronologically
-later than the value of the field "change_date".
-
-#### Example
-```json
-{
-    "active_flag": true,
-    "change_date": "2013-06-17T15:15:53.000Z",
-    "create_date": "2013-06-17T15:15:53.000Z",
-    "email": "john.doe@gmail.com",
-    "first_name": "John",
-    "id": "john.doe@gmail.com",
-    "last_name": "Doe",
-    "name": "John Doe"
-}
-```
-
-#### Code Samples
-```
-curl -i \
-       -H "Content-Type: application/json" \
-       -H "Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d '{
-    "active_flag": true,
-    "change_date": "2013-06-17T15:15:53.000Z",
-    "create_date": "2013-06-17T15:15:53.000Z",
-    "email": "john.doe@gmail.com",
-    "first_name": "John",
-    "id": "john.doe@gmail.com",
-    "last_name": "Doe",
-    "name": "John Doe"
-}' \
-       http://event.jirafe.com/v1/{site-id}/{grp-id}/customer
-```
-
-Should return:
-```
-200 OK
-```
-
-```
-curl -i \
-       -H "Content-Type: application/json" \
-       -H "Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d '{
-    "active_flag": true,
-    "change_date": "2012-06-17T15:15:53.000Z",
-    "create_date": "2013-06-17T15:15:53.000Z",
-    "email": "john.doe@gmail.com",
-    "first_name": "John",
-    "id": "john.doe@gmail.com",
-    "last_name": "Doe",
-    "name": "John Doe"
-}' \
-       http://event.jirafe.com/v1/{site-id}/{grp-id}/customer
-```
-
-Should return:
-```
-422 Unprocessable Entity
-```
-Because the value of the "change_date" field is chronologically before the
-value of the "create_date" field.
-
-
-### The Employee Endpoint
-http://event.jirafe.com/v1/{site-id}/employee [POST]
-
-#### Schema
-```json
-{
-    "title" : "Employee Schema",
-    "type" : "object",
-    "required" : [
-        "create_date",
-        "change_date",
-        "id",
-        "email"
-    ],
-    "properties" : {
-        "create_date" : {"type" : "string", "format" : "date-time"},
-        "change_date" : {"type" : "string", "format" : "date-time"},
-        "id" : {"type" : "string"},
-        "email" : {"type" : "string"},
-        "name" : {"type" : "string"},
-        "phone" : {"type" : "string"},
-        "first_name" : {"type" : "string"},
-        "last_name" : {"type" : "string"},
-        "active_flag" : {"type" : "boolean", "default" : true},
-        "company" : {"type" : "string"},
-        "department" : {"type" : "string"},
-        "position" : {"type" : "string"},
-        "marketing_opt_in" : {"type" : "boolean", "default" : false}
-    }
-}
-```
-
-#### Additional Constraints
-* The value of the field "create_date" must be chronologically before the value
-of the field "change_date".
-
-#### Example
-```json
-{
-    "active_flag": true,
-    "change_date": "2013-03-28T19:38:03.000Z",
-    "create_date": "2013-03-28T19:38:03.000Z",
-    "first_name": "Product",
-    "id": "productmanager",
-    "last_name": "Manager",
-    "name": "Product Manager"
-}
-```
-
-#### Code Samples
-```
-curl -i \
-       -H "Content-Type: application/json" \
-       -H "Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d '{
-    "active_flag": true,
-    "change_date": "2013-03-28T19:38:03.000Z",
-    "create_date": "2013-03-28T19:38:03.000Z",
-    "first_name": "Product",
-    "id": "productmanager",
-    "last_name": "Manager",
-    "name": "Product Manager"
-}' http://event.jirafe.com/v1/{site-id}/{grp-id}/employee
-```
-
-Should return:
-```
-200 OK
-```
-
-```
-curl -i \
-       -H "Content-Type: application/json” \
-       -H “Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d '{'id":"3", 'name":"John Doe", "change_date":"2012-01-07T12:24:09", "create_date":"2012-01-07T13:24:09"}' \
-       http://event.jirafe.com/v1/{site-id}/{grp-id}/customer
-```
-
-Should return:
-```
-422 Unprocessable Entity
-```
-Because the value of the "change_date" field is chronologically before the
-value of the "create_date" field.
-
-
-### The Order Endpoint
-http://event.jirafe.com/v1/{site-id}/order [POST]
-
-#### Schema
-```json
-{
-    "title" : "Order Schema",
-    "type" : "object",
-    "required" : [
-        "id",
-        "order_number",
-        "customer_id",
-        "order_date",
-        "create_date",
-        "change_date",
-        "status",
-        "subtotal",
-        "total",
-        "total_tax",
-        "total_shipping",
-        "total_payment_cost",
-        "total_discounts",
-        "currency",
-    ],
-    "properties" : {
-        "cookies" : {"type" : "object"},
-        "id" : {"type" : "string"},
-        "order_number" : {"type" : "string"},
-        "cart_id" : {"type" : "string"},
-        "customer_id" : {"type" : "string"},
-        "order_date" : {"type" : "string", "format" : "date-time"},
-        "create_date" : {"type" : "string", "format" : "date-time"},
-        "change_date" : {"type" : "string", "format" : "date-time"},
-        "status" : {
-            "enum" : [
-                "authorized",
-                "cancelled",
-                "complete",
-                "failed",
-                "other",
-                "pending",
-                "placed"
-            ],
-        },
-        "subtotal" : {"type" : "number"},
-        "total" : {"type" : "number"},
-        "total_tax" : {"type" : "number"},
-        "total_shipping" : {"type" : "number"},
-        "total_payment_cost" : {"type" : "number"},
-        "total_discounts" : {"type" : "number"},
-        "currency" : {"type" : "string"},
-        "items" : {"type" : "array", "items" : {
-            "type" : "object",
-            "required" : [
-                "id",
-                "create_date",
-                "change_date",
-                "order_item_number",
-                "status",
-                "quantity",
-                "amount",
-                "discount_amount",
-                "product"
-            ],
-            "properties" : {
-                "id" : {"type" : "string"},
-                "create_date" : {"type" : "string", "format" : "date-time"},
-                "change_date" : {"type" : "string", "format" : "date-time"},
-                "order_item_number" : {"type" : "string"},
-                "status" : {
-                    "enum" : [
-                        "authorized",
-                        "cancelled",
-                        "complete",
-                        "failed",
-                        "other",
-                        "pending",
-                        "placed"
-                    ],
-                },
-                "quantity" : {"type" : "integer"},
-                "amount" : {"type" : "number"},
-                "discount_amount" : {"type" : "number"},
-                "product" : ["..."]
-            }
-        }
-    }
-}
-```
-
-#### Notes
-* Where the value of the "product" field is an object conforming to the Product
-Schema.
-* The value of the field "create_date" must be chronologically before the value
-of the field "change_date".
-
-#### Example
-```json
-{
-    "change_date": "2013-06-17T15:34:13.000Z",
-    "create_date": "2013-06-17T15:34:03.000Z",
+    "total_shipping": 0.0,
+    "total_payment_cost": 0.0,
+    "total_discounts": 0.0,
     "currency": "USD",
-    "customer_id": "john.doe@gmail.com",
-    "id": "8796420735021",
+    "cookies": {},
     "items": [
         {
-            "amount": 99.85,
-            "change_date": "2013-06-17T15:34:04.000Z",
-            "create_date": "2013-06-17T15:33:13.000Z",
-            "discount_amount": 0.0,
-            "id": "8796420735022",
-            "order_item_number": "0",
+            "id": "8797371007020",
+            "create_date": "2013-06-17T15:16:11.000Z",
+            "change_date": "2013-06-17T15:16:11.000Z",
+            "cart_item_number": "1",
+            "quantity": 1,
+            "price": 99.85,
+            "discount_price": 0.0,
             "product": {
-                "brand": "Canon",
+                "id": "8796107014145",
+                "create_date": "2013-03-28T19:46:39.000Z",
+                "change_date": "2013-03-28T19:50:58.000Z",
+                "is_product": true,
+                "is_sku": true,
                 "catalog": {
                     "id": "electronicsProductCatalog",
-                    "name": "Electronics Product Catalog",
-                    "version_id": "Online"
+                    "name": "Electronics Product Catalog"
                 },
+                "name": "PowerShot A480",
+                "code": "1934793",
+                "brand": "Canon",
                 "categories": [
                     {
                         "id": "8796098461838",
@@ -1392,179 +204,218 @@ of the field "change_date".
                         "name": "Canon"
                     }
                 ],
-                "change_date": "2013-03-28T19:50:58.000Z",
-                "code": "1934793",
-                "create_date": "2013-03-28T19:46:39.000Z",
-                "id": "8796107014145",
                 "images": [
                     {
-                        "url": "http://hybris.jirafe.com/medias/sys_master/images/8796224651294/1934793_1719.jpg"
-                    }
-                ],
-                "is_product": true,
-                "is_sku": true,
-                "name": "PowerShot A480",
-                "rating": 5.0,
-                "vendors": [
-                    {
-                        "id": "8796093089750",
-                        "name": "Electro"
+                        "url": "http://yourstore.com/images/the_photo.jpg"
                     }
                 ]
-            },
-            "quantity": 1,
-            "status": "pending"
-        }
-    ],
-    "order_date": "2013-06-17T15:34:03.000Z",
-    "order_number": "00041002",
-    "status": "pending",
-    "subtotal": 99.85,
-    "total": 111.84,
-    "total_discounts": 0.0,
-    "total_payment_cost": 0.0,
-    "total_shipping": 11.99,
-    "total_tax": 5.33
-}
-```
-
-#### Code Samples
-```
-curl -i \
-       -H "Content-Type: application/json” \
-       -H “Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d ‘...’ \
-       http://event.jirafe.com/v1/{site-id}/{grp-id}/order
-```
-
-Should return:
-```
-200 OK
-```
-
-
-### The Product Endpoint
-http://event.jirafe.com/v1/{site-id}/product [POST]
-
-#### Schema
-```json
-{
-    "title" : "Product Schema",
-    "type"  : "object",
-    "required" : [
-        "id",
-        "is_product",
-        "is_sku",
-        "code",
-        "create_date",
-        "change_date"
-    ],
-    "properties" : {
-        "id"          : {"type" : "string"},
-        "is_product"  : {"type" : "boolean"},
-        "is_sku"      : {"type" : "boolean"},
-
-        "catalog"     : {
-            "type" : "object",
-            "required" : ["id"],
-            "properties" : {
-                "id" : {"type" : "string"},
-                "version_id" : {"type" : "string"},
-                "name" : {"type" : "string"},
-            }
-        },
-
-        "name"        : {"type" : "string"},
-        "code"        : {"type" : "string"},
-        "ancestors"   : {"type" : "array", "items" : {"type": "string"}},
-
-        "base_product": {
-            "type" : "object",
-            "properties" : {
-                "id" : {"type" : "string"},
-                "code" : {"type" : "string"},
-                "name" : {"type" : "string"},
-            }
-        },
-        "vendors"     : {
-            "type" : "array",
-            "items" : {
-                "type" : "object",
-                "properties" : {
-                    "id" : {"type" : "string"},
-                    "name" : {"type" : "string"},
-                }
-            }
-        },
-
-        "brand"       : {"type" : "string"},
-        "rating"      : {"type" : "number"},
-
-        "create_date" : {"type" : "string", "format" : "date-time"},
-        "change_date" : {"type" : "string", "format" : "date-time"},
-
-        "urls"        : {
-            "type" : "object",
-            "properties" : {
-                "admin" : {"type" : "string", "format" : "uri"},
-                "store" : {"type" : "string", "format" : "uri"},
-            }
-        },
-        "images"      : {
-            "type" : "array",
-            "items" : {
-                "type" : "object",
-                "required" : ["url"],
-                "properties" : {
-                    "url" : {"type" : "string", "format" : "uri"},
-                }
-            }
-        },
-        "categories"  : {
-            "type" : "array",
-            "uniqueItems": True,
-            "items" : {
-                "type" : "object",
-                "required" : ["id", "name"],
-                "properties" : {
-                    "id"   : {"type" : "string"},
-                    "name" : {"type" : "string"},
-                }
-            }
-        },
-        "attributes"  : {
-            "type" : "array",
-            "uniqueItems": True,
-            "items" : {
-                "type" : "object",
-                "required" : ["id", "name", "value"],
-                "properties" : {
-                    "id"    : {"type" : "string"},
-                    "name"  : {"type" : "string"},
-                    "value" : {"type" : "string"},
-                }
             }
         }
+    ],
+    "previous_items": [
+    ],
+    "customer": {
+        "id": "abc123",
+        "create_date": "2013-06-17T15:16:11.000Z",
+        "change_date": "2013-06-17T15:16:11.000Z",
+        "email": "foo@example.com",
+        "first_name": "Jane",
+        "last_name": "Doe"
+    },
+    "visit": {
+        "visit_id": "1234",
+        "visitor_id": "4321",
+        "pageview_id": "5678",
+        "last_pageview_id": "8765"
     }
 }
+
+}
 ```
 
-#### Notes
-* The "cost" field must be a positive value.
-* The "price" field must be a positive value.
-* The value of the field "create_date" must be chronologically before the value
-of the field "change_date".
+### The Category Endpoint
+**URL:** https://event.jirafe.com/v2/{site-id}/category [POST]
+**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/category.json
 
 #### Example
 ```json
 {
-    "brand": "Canon",
+    "id": "8796094234766",
+    "name": "Lens system",
+    "change_date": "2013-03-28T19:44:11.000Z",
+    "create_date": "2013-03-28T19:38:09.000Z"
+}
+```
+
+### The Customer Endpoint
+**URL:** https://event.jirafe.com/v2/{site-id}/customer [POST]
+**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/customer.json
+
+#### Example
+```json
+{
+    "id": "1234abc",
+    "active_flag": true,
+    "change_date": "2013-06-17T15:15:53.000Z",
+    "create_date": "2013-06-17T15:15:53.000Z",
+    "email": "john.doe@gmail.com",
+    "first_name": "John",
+    "last_name": "Doe",
+    "name": "John Doe"
+}
+```
+
+### The Employee Endpoint
+**URL:** https://event.jirafe.com/v2/{site-id}/employee [POST]
+**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/employee.json
+
+#### Example
+```json
+{
+    "id": "532sdfg",
+    "active_flag": true,
+    "change_date": "2013-03-28T19:38:03.000Z",
+    "create_date": "2013-03-28T19:38:03.000Z",
+    "first_name": "Product",
+    "last_name": "Manager",
+    "email": "product_manager@example.com",
+}
+```
+
+### The Order Endpoint
+**URL:** https://event.jirafe.com/v2/{site-id}/order [POST]
+
+The order endpoint accepts three different schemas:
+* The `order-placed` event is sent first with the information connecting the order number with the visit cookies stored by the tracker javascript
+* The `order-accepted` event is sent next with all of the information about the order after it has been authorized and paid for by the customer. Anytime the order iterms change, this event is sent again with items containing the new order and previous_items showing how things were before the order changed
+* The `order-cancelled` event is sent if the entire order is canceled
+
+**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-placed.json
+#### Example
+```json
+{
+    "order_number": "123456789",
+    "cart_id": "123456789",
+    "status": "placed",
+    "customer": {
+        "id": "abc123",
+        "create_date": "2013-06-17T15:16:11.000Z",
+        "change_date": "2013-06-17T15:16:11.000Z",
+        "email": "foo@example.com",
+        "first_name": "Jane",
+        "last_name": "Doe"
+    },
+    "visit": {
+        "visit_id": "1234",
+        "visitor_id": "4321",
+        "pageview_id": "5678",
+        "last_pageview_id": "8765"
+    }
+}
+
+}
+```
+
+**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-accepted.json
+#### Example
+```json
+{
+    "order_number": "8797436543019",
+    "cart_id": "1234asdf",
+    "status": "accepted",
+    "order_date": "2013-06-17T15:16:10.000Z",
+    "create_date": "2013-06-17T15:16:10.000Z",
+    "change_date": "2013-06-17T15:16:15.000Z",
+    "subtotal": 99.85,
+    "total": 99.85,
+    "total_tax": 4.75
+    "total_shipping": 0.0,
+    "total_payment_cost": 0.0,
+    "total_discounts": 0.0,
+    "currency": "USD",
+    "items": [
+        {
+            "id": "8797371007020",
+            "create_date": "2013-06-17T15:16:11.000Z",
+            "change_date": "2013-06-17T15:16:11.000Z",
+            "cart_item_number": "1",
+            "quantity": 1,
+            "price": 99.85,
+            "discount_price": 0.0,
+            "product": {
+                "id": "8796107014145",
+                "create_date": "2013-03-28T19:46:39.000Z",
+                "change_date": "2013-03-28T19:50:58.000Z",
+                "is_product": true,
+                "is_sku": true,
+                "catalog": {
+                    "id": "electronicsProductCatalog",
+                    "name": "Electronics Product Catalog"
+                },
+                "name": "PowerShot A480",
+                "code": "1934793",
+                "brand": "Canon",
+                "categories": [
+                    {
+                        "id": "8796098461838",
+                        "name": "Digital Compacts"
+                    },
+                    {
+                        "id": "8796099248270",
+                        "name": "Canon"
+                    }
+                ],
+                "images": [
+                    {
+                        "url": "http://yourstore.com/images/the_photo.jpg"
+                    }
+                ]
+            }
+        }
+    ],
+    "previous_items": [
+    ],
+    "customer": {
+        "id": "abc123",
+        "create_date": "2013-06-17T15:16:11.000Z",
+        "change_date": "2013-06-17T15:16:11.000Z",
+        "email": "foo@example.com",
+        "first_name": "Jane",
+        "last_name": "Doe"
+    }
+}
+```
+
+**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-cancelled.json
+#### Example
+```json
+{
+    "order_number": "123456789",
+    "status": "cancelled"
+}
+
+}
+```
+
+### The Product Endpoint
+**URL:** https://event.jirafe.com/v2/{site-id}/product [POST]
+**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/product.json
+
+#### Example
+```json
+{
+    "id": "8796107014145",
+    "create_date": "2013-03-28T19:46:39.000Z",
+    "change_date": "2013-03-28T19:50:58.000Z",
+    "is_product": true,
+    "is_sku": true,
     "catalog": {
         "id": "electronicsProductCatalog",
-        "name": "Electronics Product Catalog",
-        "version_id": "Online"
+        "name": "Electronics Product Catalog"
     },
+    "name": "PowerShot A480",
+    "code": "1934793",
+    "brand": "Canon",
     "categories": [
         {
             "id": "8796098461838",
@@ -1575,44 +426,10 @@ of the field "change_date".
             "name": "Canon"
         }
     ],
-    "change_date": "2013-03-28T19:50:58.000Z",
-    "code": "1934793",
-    "create_date": "2013-03-28T19:46:39.000Z",
-    "id": "8796107014145",
     "images": [
         {
-            "url": "http://hybris.jirafe.com/medias/sys_master/images/8796224651294/1934793_1719.jpg"
-        }
-    ],
-    "is_product": true,
-    "is_sku": true,
-    "name": "PowerShot A480",
-    "rating": 5.0,
-    "vendors": [
-        {
-            "id": "8796093089750",
-            "name": "Electro"
+            "url": "http://yourstore.com/images/the_photo.jpg"
         }
     ]
 }
-```
-
-#### Notes
-* The value of the field "create_date" must be chronologically before the value
-of the field "change_date".
-
-
-#### Code Samples
-```
-curl -i \
-       -H "Content-Type: application/json” \
-       -H “Accept: application/json" \
-       -H "Authorization: Bearer 45dc86d2e2fc4342939a2b6791cfcb9b1c4b89a0" \
-       -X PUT -d ‘...’ \
-       http://event.jirafe.com/v1/{site-id}/{grp-id}/product
-```
-
-Should return:
-```
-200 OK
 ```
