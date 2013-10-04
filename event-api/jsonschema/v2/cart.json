@@ -32,7 +32,7 @@
             "type": "array",
             "items": {"$ref": "http://event.jirafe.com/v2/schema/event/cart-item.json"}
         },
-        "changed_items": {
+        "previous_items": {
             "type": "array",
             "items": {"$ref": "http://event.jirafe.com/v2/schema/event/cart-item.json"}
         },

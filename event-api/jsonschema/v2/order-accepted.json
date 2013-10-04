@@ -41,7 +41,7 @@
             "minimum": 1,
             "items": {"$ref": "http://event.jirafe.com/v2/schema/event/order-item.json"}
         },
-        "changed_items": {
+        "previous_items": {
             "type": "array",
             "items": {"$ref": "http://event.jirafe.com/v2/schema/event/order-item.json"}
         }
