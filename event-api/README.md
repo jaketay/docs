@@ -278,7 +278,7 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
     "create_date": "2013-03-28T19:38:03.000Z",
     "first_name": "Product",
     "last_name": "Manager",
-    "email": "product_manager@example.com",
+    "email": "product_manager@example.com"
 }
 ```
 
@@ -312,8 +312,6 @@ The order endpoint accepts three different schemas:
         "last_pageview_id": "8765"
     }
 }
-
-}
 ```
 
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-accepted.json
@@ -328,7 +326,7 @@ The order endpoint accepts three different schemas:
     "change_date": "2013-06-17T15:16:15.000Z",
     "subtotal": 99.85,
     "total": 99.85,
-    "total_tax": 4.75
+    "total_tax": 4.75,
     "total_shipping": 0.0,
     "total_payment_cost": 0.0,
     "total_discounts": 0.0,
@@ -392,8 +390,6 @@ The order endpoint accepts three different schemas:
 {
     "order_number": "123456789",
     "status": "cancelled"
-}
-
 }
 ```
 
