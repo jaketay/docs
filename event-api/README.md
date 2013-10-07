@@ -335,6 +335,7 @@ The order endpoint accepts three different schemas:
             "id": "8797371007020",
             "create_date": "2013-06-17T15:16:11.000Z",
             "change_date": "2013-06-17T15:16:11.000Z",
+            "status": "accepted",
             "cart_item_number": "1",
             "quantity": 1,
             "price": 99.85,
