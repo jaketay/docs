@@ -166,7 +166,7 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
     "change_date": "2013-06-17T15:16:15.000Z",
     "subtotal": 99.85,
     "total": 99.85,
-    "total_tax": 4.75
+    "total_tax": 4.75,
     "total_shipping": 0.0,
     "total_payment_cost": 0.0,
     "total_discounts": 0.0,
