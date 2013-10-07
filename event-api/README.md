@@ -229,8 +229,6 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
         "last_pageview_id": "8765"
     }
 }
-
-}
 ```
 
 ### The Category Endpoint
@@ -297,6 +295,7 @@ The order endpoint accepts three different schemas:
     "order_number": "123456789",
     "cart_id": "123456789",
     "status": "placed",
+    "order_date": "2013-06-17T15:16:10.000Z",
     "customer": {
         "id": "abc123",
         "create_date": "2013-06-17T15:16:11.000Z",
@@ -389,6 +388,7 @@ The order endpoint accepts three different schemas:
 ```json
 {
     "order_number": "123456789",
+    "cancel_date": "2013-06-17T15:16:10.000Z",
     "status": "cancelled"
 }
 ```

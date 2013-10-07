@@ -3,7 +3,9 @@
     "type": "object",
     "required": [
         "order_number",
-        "customer"
+        "customer",
+        "status",
+        "order_date"
     ],
     "properties": {
         "visit": {
@@ -21,6 +23,7 @@
                 "last_pageview_id": {"type": "string"}
             }
         },
+        "order_date": {"type": "string", "format": "date-time"},
         "order_number": {"type": "string"},
         "cart_id": {"type": "string"},
         "customer": {"$ref": "http://event.jirafe.com/v2/schema/event/customer.json"},
