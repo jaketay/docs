@@ -154,6 +154,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
 ### The Cart Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/cart [POST]
+
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/cart.json
 
 Cart events are sent whenever a user adds, removes or alters their cart. *Note:* this event is distinct from and order event, which is the event that happens when a cart is purchased.
@@ -233,6 +234,7 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
 
 ### The Category Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/category [POST]
+
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/category.json
 
 #### Example
@@ -247,6 +249,7 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
 
 ### The Customer Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/customer [POST]
+
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/customer.json
 
 #### Example
@@ -265,6 +268,7 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
 
 ### The Employee Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/employee [POST]
+
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/employee.json
 
 #### Example
@@ -397,6 +401,7 @@ The order endpoint accepts three different schemas:
 
 ### The Product Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/product [POST]
+
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/product.json
 
 #### Example
