@@ -339,6 +339,7 @@ The order endpoint accepts three different schemas:
             "quantity": 1,
             "price": 99.85,
             "discount_price": 0.0,
+            "status": "accepted",
             "product": {
                 "id": "8796107014145",
                 "create_date": "2013-03-28T19:46:39.000Z",
