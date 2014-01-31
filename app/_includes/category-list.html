@@ -1,0 +1,15 @@
+<div class="grid">
+	{% for page in site.pages %}
+		{% if page.type == "parent" %}
+	<div class="grid__cell unit-1-1 unit-1-2--desktop">
+		<a href="{{page.url}}"><div class="box-d">
+			<div class="box-d__left"><img src="{{ page.image }}"></div>
+			<div class="box-d__right">
+			<h2 class="h2-sub">{{ page.title }}</h2>
+			<p class="sub">{{page.description}}</p>
+			</div>
+		</div></a>
+	</div>
+		{% endif %}	
+	{% endfor %}
+</grid>
