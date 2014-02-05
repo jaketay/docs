@@ -1,13 +1,13 @@
 ---
 permalink: /v2/POST/order_endpoint.html
 layout: page
-title: The Order Endpoint
+title: Order Endpoint
 categories: API Documentation
 resource: true
 version: v2
 ---
 
-# The Order Endpoint
+# Order Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/order [POST]
 
 The order endpoint accepts three different schemas:

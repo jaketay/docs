@@ -1,13 +1,13 @@
 ---
 permalink: /v2/POST/cart_endpoint.html
 layout: page
-title: The Cart Endpoint
+title: Cart Endpoint
 categories: API Documentation
 resource: true
 version: v2
 ---
 
-# The Cart Endpoint
+# Cart Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/cart [POST]
 
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/cart.json

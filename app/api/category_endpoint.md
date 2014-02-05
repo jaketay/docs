@@ -1,13 +1,13 @@
 ---
 permalink: /v2/POST/category_endpoint.html
 layout: page
-title: The Category Endpoint
+title: Category Endpoint
 categories: API Documentation
 resource: true
 version: v2
 ---
 
-# The Category Endpoint
+# Category Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/category [POST]
 
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/category.json

@@ -1,13 +1,13 @@
 ---
 permalink: /v2/POST/employee_endpoint.html
 layout: page
-title: The Employee Endpoint
+title: Employee Endpoint
 categories: API Documentation
 resource: true
 version: v2
 ---
 
-### The Employee Endpoint
+### Employee Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/employee [POST]
 
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/employee.json

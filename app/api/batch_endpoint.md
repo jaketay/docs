@@ -1,13 +1,13 @@
 ---
 permalink: /v2/POST/batch_endpoint.html
 layout: page
-title: The Batch Endpoint
+title: Batch Endpoint
 categories: API Documentation
 resource: true
 version: v2
 ---
 
-# The Batch Endpoint
+# Batch Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/batch [POST]
 
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/batch.json

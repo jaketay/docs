@@ -1,13 +1,13 @@
 ---
 permalink: /v2/POST/customer_endpoint.html
 layout: page
-title: The Customer Endpoint
+title: Customer Endpoint
 categories: API Documentation
 resource: true
 version: v2
 ---
 
-# The Customer Endpoint
+# Customer Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/customer [POST]
 
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/customer.json

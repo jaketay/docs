@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Javascript - Optimal Tracking
-categories: Getting Started
+title: Javascript - Optional Tracking
+categories: Plugin Installation
 resource: true
 ---	
 

@@ -1,13 +1,13 @@
 ---
 permalink: /v2/POST/product_endpoint.html
 layout: page
-title: The Product Endpoint
+title: Product Endpoint
 categories: API Documentation
 resource: true
 version: v2
 ---
 
-# The Product Endpoint
+# Product Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/product [POST]
 
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/product.json

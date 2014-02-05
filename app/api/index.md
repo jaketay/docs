@@ -1,15 +1,16 @@
 ---
 permalink: /v2/
 layout: page
-title: Jirafe API v2
+title: API Overview
 categories: API Documentation
 resource: true
 description: How to use our API Events to integrate Jirafe with your app.
 image: /img/docs-icon-ph.png
 type: parent
+version: v2
 ---
 
-# Jirafe API v2 Events
+# API Overview
 In the documentation, some URIs contain the symbol `{site-id}`.
 This symbol should be replaced with your *Site Identifier*, which is available from Jirafe support.
 
