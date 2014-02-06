@@ -1,12 +1,15 @@
 ---
 permalink: /
 layout: page
-title: Installing Jirafe
-categories: Plugin Installation
+title: Installation Overview
+categories: Installing Jirafe
 resource: true
 description: Integrate Jirafe with your eCommerce Platform or Application.
-image: /img/docs-icon-ph.png
+image: /img/docs-installation.png
 type: parent
+index_order: 2
+index_title: Installing Jirafe
+order: 1
 ---
 
 # Installing Jirafe on Your eCommerce Platform

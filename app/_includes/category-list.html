@@ -1,15 +1,27 @@
 <div class="grid">
+	{% for index_order in (1..10) %}
 	{% for page in site.pages %}
+    {% if page.index_order == index_order %}
 		{% if page.type == "parent" %}
 	<div class="grid__cell unit-1-1 unit-1-2--desktop">
-		<a href="{{page.url}}"><div class="box-d">
-			<div class="box-d__left"><img src="{{ page.image }}"></div>
-			<div class="box-d__right">
-			<h2 class="h2-sub">{{ page.title }}</h2>
-			<p class="sub">{{page.description}}</p>
+		<a href="{{page.url}}">
+
+			<div class="box-d">
+				<div class="media">
+					<div class="media-img">
+						<img src="{{ page.image }}"/>
+					</div>					
+					<div class="media-content">
+						<h2 class="h2-sub color-primary">{{ page.index_title }}</h2>
+						<p class="sub">{{page.description}}</p>
+					</div>
+				</div>
 			</div>
-		</div></a>
+		
+		</a>
 	</div>
 		{% endif %}	
+			{% endif %}	
+			{% endfor %}
 	{% endfor %}
-</grid>
+</div>

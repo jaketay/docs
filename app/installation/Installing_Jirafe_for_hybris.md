@@ -1,12 +1,13 @@
 ---
 layout: page
-title: Installing Jirafe for hybris
+title: Jirafe for hybris
 description:
-categories: Plugin Installation
+categories: Installing Jirafe
 resource: true
+order: 2
 ---	
 
-![logo]({{site.baseurl}}/img/jrf-hybris.png)
+![logo](/img/jrf-hybris.png)
 
 
 Introduction

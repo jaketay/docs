@@ -3,6 +3,7 @@ layout: page
 title: Merchandising Setup
 categories: Getting Started
 resource: true
+order: 3
 ---	
 
 #Merchandising Setup

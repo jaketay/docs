@@ -5,6 +5,7 @@ title: Customer Endpoint
 categories: API Documentation
 resource: true
 version: v2
+order: 5
 ---
 
 # Customer Endpoint

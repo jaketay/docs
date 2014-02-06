@@ -202,15 +202,18 @@ pre.terminal code {
   }
   @include bp-medium {
      min-height: 210px;
-     .h2-sub { font-size: 1.4rem; }
+     .h2-sub { 
+     font-size: 1.4rem; }
   }
 }
-.box-d__left { width: 35%; display: inline-block; float: left;}
-.box-d__right { width: 65%; display: inline-block; float: left; padding-left: 1em; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 // page
 
 .content {
   h1:first-of-type {
   margin-top: 0; }
+}
+
+.media-img {
+	padding-bottom: 40%;
 }

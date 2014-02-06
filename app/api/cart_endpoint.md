@@ -5,6 +5,7 @@ title: Cart Endpoint
 categories: API Documentation
 resource: true
 version: v2
+order: 3
 ---
 
 # Cart Endpoint

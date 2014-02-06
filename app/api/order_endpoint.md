@@ -5,6 +5,7 @@ title: Order Endpoint
 categories: API Documentation
 resource: true
 version: v2
+order: 7
 ---
 
 # Order Endpoint

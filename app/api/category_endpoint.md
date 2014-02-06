@@ -5,6 +5,7 @@ title: Category Endpoint
 categories: API Documentation
 resource: true
 version: v2
+order: 4
 ---
 
 # Category Endpoint

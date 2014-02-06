@@ -5,6 +5,7 @@ title: Employee Endpoint
 categories: API Documentation
 resource: true
 version: v2
+order: 6
 ---
 
 ### Employee Endpoint

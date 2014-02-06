@@ -12,28 +12,24 @@
 						<nav id="menu" class="menu">
 							<ul>
 								<li {% if page.url == "/index.html" %}  class="active Selected hide-desktop" {% else %} class="hide-desktop" {% endif %}> <a href="/">Home</a></li>
-								<!-- <li {% if page.url contains "/tour/" %}  class="active Selected" {% else %} {% endif %}>
-									<a href="/tour/">Why Jirafe?</a>
+								<li>
+									<a href="">Documentation</a>
 									<ul>
-										<li><a href="/tour/personas/merchandiser">Merchandisers</a></li>
-										<li><a href="/tour/personas/ecom-manager">eCommerce Managers</a></li>
-										<li><a href="/tour/personas/ops-manager">Operations Managers</a></li>
-										<li><a href="/tour/personas/cs-manager">Customer Service Managers</a></li>
-										<li><a href="/tour/personas/marketer">Marketers</a></li>
-										<li><a href="/tour/personas/ceo">CEOs</a></li>
-										<li><a href="/tour/">Features Overview</a></li>
+											{% for page in site.pages %}
+												{% if page.type == "parent" %}
+												<li><a href="{{page.url}}">{{ page.title }}</a></li>
+												{% endif %}	
+											{% endfor %}
 									</ul>
-								</li> -->
+								</li>
 								<li {% if page.url contains "/resources/" %}  class="active Selected" {% else %}  {% endif %}>
 									<a href="#">Resources</a>
 									<ul>
-										<li><a href="/resources/customers/">Our Customers</a></li>
-										<!-- <li><a href="#">Documentation</a></li> -->
+										<li><a href="http://jirafe.com/resources/customers/">Our Customers</a></li>
 										<li><a href="http://jirafeinc.tumblr.com/" target="_blank">Blog</a></li>
-										<li><a href="mailto:support@jirafe.com">Support</a></li>
 									</ul>
 								</li>
-								<li {% if page.url == "/company/index.html" %}  class="active Selected" {% else %}  {% endif %}><a href="/company/">Company</a></li>
+								<li {% if page.url == "/company/index.html" %}  class="active Selected" {% else %}  {% endif %}><a href="http://jirafe.com/company/">Company</a></li>
 								<li><a href="/board/">Log In</a></li>
 								<li class="sign-up"><a href="https://account.jirafe.com/accounts/register/">Sign Up</a></li>
 							</ul>

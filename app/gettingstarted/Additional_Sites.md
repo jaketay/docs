@@ -4,6 +4,7 @@ title: Adding Sites
 description:
 categories: Getting Started
 resource: true
+order: 4
 ---
 
 #Adding Sites

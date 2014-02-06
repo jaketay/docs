@@ -1,12 +1,15 @@
 ---
 permalink: /
 layout: page
-title: Help & Support
+title: Support
 categories: Help & Support
 resource: true
 description: Find the answers to problems you may be having with Jirafe.
-image: /img/docs-icon-ph.png
+image: /img/docs-support.png
 type: parent
+order: 1
+index_order: 4
+index_title: Help & Support
 ---
 
 # Help & Support

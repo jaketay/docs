@@ -1,8 +1,9 @@
 ---
 layout: page
-title: Javascript - Optional Tracking
-categories: Plugin Installation
+title: Installing Optional Javasctipt Tracking
+categories: Installing Jirafe
 resource: true
+order: 4
 ---	
 
 # Javascript - Optional Tracking

@@ -1,8 +1,9 @@
 ---
 layout: page
-title: Installing Jirafe for Magento
-categories: Plugin Installation
+title: Jirafe for Magento
+categories: Installing Jirafe
 resource: true
+order: 3
 ---	
 
 ![logo]({{ site.baseurl }}/img/jrf-magento.png)

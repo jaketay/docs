@@ -5,9 +5,12 @@ title: API Overview
 categories: API Documentation
 resource: true
 description: How to use our API Events to integrate Jirafe with your app.
-image: /img/docs-icon-ph.png
+image: /img/docs-api.png
 type: parent
 version: v2
+order: 1
+index_order: 3
+index_title: API Documentation
 ---
 
 # API Overview

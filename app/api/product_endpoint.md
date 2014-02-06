@@ -5,6 +5,7 @@ title: Product Endpoint
 categories: API Documentation
 resource: true
 version: v2
+order: 8
 ---
 
 # Product Endpoint

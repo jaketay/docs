@@ -4,6 +4,7 @@ title: Firewall Instructions
 description:
 categories: Getting Started
 resource: true
+order: 2
 ---	
 
 #Firewall Instructions
