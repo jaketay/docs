@@ -14,5 +14,7 @@ index_title: Help & Support
 
 # Help & Support
 
-Check out our FAQ. If you can't find the answer to your question, feel free to contact Support via the form below:
+Check out our [FAQ](/support/faq.html "Frequently Asked Questions"). 
+
+If you can't find the answer to your question, please feel free to contact [Support](mailto:support@jirafe.com "Jirafe Support").
 

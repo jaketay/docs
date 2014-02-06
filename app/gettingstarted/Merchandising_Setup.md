@@ -66,5 +66,3 @@ Product Code/ Style # | Full Category Path |
 3. Send an updated CSV to your Jirafe account manager on a regular basis to keep Jirafe’s reporting in sync with your merchandising categorization as you add new products, change categories, etc.
 
 And you’re done setting up merchandising!  Any questions, reach out to our [Support](mailto:support@jirafe.com "Jirafe Support") group.  We’re always happy to help.
-
-reach out to your account manager.
