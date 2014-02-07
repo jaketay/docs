@@ -11,7 +11,7 @@ order: 6
 ### Employee Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/employee [POST]
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/employee.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/employee.json
 
 #### Example
 ```json

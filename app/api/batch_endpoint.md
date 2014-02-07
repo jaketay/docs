@@ -11,7 +11,7 @@ order: 2
 # Batch Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/batch [POST]
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/batch.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/batch.json
 
 This endpoint allows for up to 10MB of events to be submitted in a single request. The object is formed of arrays of the individual endpoints that would normally be sent.
 

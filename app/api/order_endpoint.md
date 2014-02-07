@@ -19,7 +19,8 @@ The order endpoint accepts three different schemas:
 
 ## Order Placed
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-placed.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/order-placed.json
+
 #### Example
 ```json
 {
@@ -45,7 +46,8 @@ The order endpoint accepts three different schemas:
 ```
 ## Order Accepted
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-accepted.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/order-accepted.json
+
 #### Example
 ```json
 {
@@ -135,7 +137,8 @@ The order endpoint accepts three different schemas:
 
 ## Order Cancelled
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/order-cancelled.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/order-cancelled.json
+
 #### Example
 ```json
 {

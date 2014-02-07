@@ -11,7 +11,7 @@ order: 5
 # Customer Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/customer [POST]
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/customer.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/customer.json
 
 #### Example
 ```json

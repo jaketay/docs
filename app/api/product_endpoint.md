@@ -11,7 +11,7 @@ order: 8
 # Product Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/product [POST]
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/product.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/product.json
 
 #### Example
 ```json

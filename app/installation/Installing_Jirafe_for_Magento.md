@@ -20,9 +20,9 @@ Let’s get started!
 
 
 #Install Process Checklist
-* Sign up for an account with Jirafe, select Jirafe and download a copy of the Jirafe Extension for Magento. If you already have a site with us and need a copy of the extension, please contact [Jirafe support](support@jirafe.com "Jirafe Support").
-* Provide Jirafe with your Merchandising CSV file for product and category upload. Please refer to the [Merchandise CSV](http://www.jirafe.com "Merchandise CSV Documentation") documentation for additional detail.
-* If your server is installed behind a firewall, ensure firewall rules are set up to allow for appropriate outbound traffic from your server.  Your server will need to be able to access the [Jirafe API](http://event.jirafe.com) on Port 443.  For distinct IP addresses required for outbound communication, see [Firewall Instructions](file:/Users/loupaglia/Documents/Documentation/Documentation Markdown/Firewall).
+* Sign up for an account with Jirafe, select Jirafe and download a copy of the Jirafe Extension for Magento. If you already have a site with us and need a copy of the extension, please contact [Jirafe Support](mailto:support@jirafe.com 'Jirafe Support').
+* Provide Jirafe with your Merchandising CSV file for product and category upload. Please refer to the [Merchandising Set-Up](/installation/Merchandising_Setup.html 'Merchandise CSV Documentation') documentation for additional detail.
+* If your server is installed behind a firewall, ensure firewall rules are set up to allow for appropriate outbound traffic from your server.  Your server will need to be able to access the [Jirafe API](http://event.jirafe.com) on Port 443.  For distinct IP addresses required for outbound communication, see [Firewall Instructions](/installation/Firewall.html 'Firewall Instructions').
 * Ensure that cron jobs are enabled in Magento.  Jirafe utilizes cron jobs in Magento to send data to our servers.
 * Ensure that Compilation Mode is disabled.  You should recompile your site and re-enable Compilation Mode after installing Jirafe.
 * Ensure that mb-string is enabled on your PHP server. NOTE: This is a requirement to use Magento’s REST API.
@@ -227,7 +227,7 @@ Jirafe also has built-in platform support for a number of additional event and d
 
 If you have multiple websites within your Magento installation, Jirafe’s settings enable you to track the statistics of each website individually.  Each website in your Magento admin can be enabled or disabled from sending data to Jirafe.  This allows you to track one or many of your sites. 
 
-The first thing you need is unique site credentials for the new site that you want to track.  In order to get a new site id and credential, take a look at [Additional Sites](Additional_Sites.html "Addtional Sites") Once you have your new site information, do the following:
+The first thing you need is unique site credentials for the new site that you want to track.  In order to get a new site id and credential, take a look at [Adding Sites](Additional_Sites.html "Addtional Sites"). Once you have your new site information, do the following:
 
 1.  Log in to your Magento Admin.
 2.  Go to System > Configuration, and click on Jirafe Analytics in the left-hand navigation.

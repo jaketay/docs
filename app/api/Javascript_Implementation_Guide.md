@@ -220,7 +220,10 @@ For some merchants, this is sufficient, makes it easy to get started and require
 + **asrc** (attribution source). 
 
 In your online ads, marketing emails, content links, social media posts, etc., you could be tagging your inbound links:
-**http://www.store.com?ach=email&asch=newsletter&asrc=2014-01-04**
+
+```
+http://www.store.com?ach=email&asch=newsletter&asrc=2014-01-04
+```
 
 **IMPORTANT NOTE:** If your custom attribution is implemented via Google's UTM tracking (utm_source, utm_medium, utm_campaign, etc.), Jirafe's default implementation already reads these parameters and uses them for reporting. You can skip this entire section. 
 

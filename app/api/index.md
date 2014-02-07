@@ -1,5 +1,5 @@
 ---
-permalink: /v2/
+permalink: /v2/api_overview.html
 layout: page
 title: API Overview
 categories: API Documentation
@@ -9,7 +9,7 @@ image: /img/docs-api.png
 type: parent
 version: v2
 order: 1
-index_order: 3
+index_order: 2
 index_title: API Documentation
 ---
 

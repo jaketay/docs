@@ -11,7 +11,7 @@ order: 4
 # Category Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/category [POST]
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/category.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/category.json
 
 #### Example
 ```json

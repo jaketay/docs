@@ -51,17 +51,25 @@ After the initial pageview, the “attribution” property either should not be 
 
 a) We recommend that you call the `jirafe_parseAttribution()` function on every pageview. If you followed the implementation example above, this will happen automatically.
 
+```
 First pageview: <http://www.store.com?ja1=email&ja2=newsletter&ja3=2013-03>
+```
 
 `jirafe_parseAttribution(["ja1","ja2","ja3"])` will set the attribution property to ["email","newsletter","2013-03"]. This property will be sent with the pageview event and from this moment on, the visit will be associated with this attribution. This property will also be saved to the browser cookie and attached to every subsequent event that occurs during the visit.
 
+```
 Second pageview: <http://www.store.com/categories/dresses>
+```
 
 `jirafe_parseAttribution(["ja1","ja2","ja3"])` will set the attribution property to an empty array [ ], since no attribution keys (ja1, ja2, ...) can be found in the URL query string. If the Jirafe beacon sees a missing or empty attribution array, it knows not to reset your attribution to an empty array. All subsequent events will still be decorated with ["email","newsletter","2013-03"].
 
+
+```
 Third pageview: <http://www.store.com/products/red-sundress>
+```
 
 Same as for the second pageview.
+
 
 b) It is very important NOT to choose custom URL attribution parameter keys that you reuse for other purposes on your store. This will cause jirafe_parseAttribution() to reset the attribution property whenever it sees those keys, which will associate subsequent events with attribution values that are nonsensical and related to internal use cases rather than attribution.
 
@@ -72,14 +80,20 @@ d) If you want to implement more complicated custom attribution tracking, for ex
 ##New Custom Attribution Property Begins a New Visit
 In the middle of an existing visit, if Jirafe’s beacon sees a new pageview with a different non-empty attribution string, Jirafe will end the current visit and start a new visit. Here is an example.
 
+```
 Pageview: <http://www.store.com?ja1=email&ja2=newsletter&ja3=2013-03>
+```
 
 A new visit is created with attribution ["email", "newsletter", "2013-03"].
 
+```
 Pageview: <http://www.store.com/categories/dresses>
+```
 
 The first visit continues...attribution remains the same.
 
+```
 Pageview: <http://www.store.com?ja1=sem&ja2=adwords&ja3=canada&ja4=shoes>
+```
 
 The customer has left the store and come back via Adwords. A new attribution array is seen. The Jirafe beacon will end the current visit and start a new visit with attribution ["sem", "adwords", "canada", "shoes"].

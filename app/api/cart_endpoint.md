@@ -11,7 +11,7 @@ order: 3
 # Cart Endpoint
 **URL:** https://event.jirafe.com/v2/{site-id}/cart [POST]
 
-**Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/cart.json
+**Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/cart.json
 
 Cart events are sent whenever a user adds, removes or alters their cart. *Note:* this event is distinct from and order event, which is the event that happens when a cart is purchased.
 
