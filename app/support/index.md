@@ -13,7 +13,7 @@ index_title: Help & Support
 
 # Help & Support
 
-Check out our [FAQ](/support/faq.html "Frequently Asked Questions"). 
+Check out our [FAQ](/support/faq "Frequently Asked Questions"). 
 
 If you can't find the answer to your question, please feel free to contact [Support](mailto:support@jirafe.com "Jirafe Support").
 

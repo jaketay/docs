@@ -20,8 +20,8 @@ Install Process Checklist
 =========================
 The following section outlines the installation checklist that you should follow to ensure you've completed all of teh steps necessary to have a successful installation of the Jirafe extension for hybris:
 
-* Provide Jirafe with your Merchandising CSV file for product and category upload. Please refer to the [Merchandising Set-Up](/installation/Merchandising_Setup.html 'Merchandise CSV Documentation') documentation for additional detail.
-* Ensure firewall rules are set up to allow for appropriate inbound and outbound traffic from Jirafe install for your staging & production environments. Please see [Firewall Instructions](/installation/Firewall.html 'Firewall Instructions')
+* Provide Jirafe with your Merchandising CSV file for product and category upload. Please refer to the [Merchandising Set-Up](/installation/Merchandising_Setup 'Merchandise CSV Documentation') documentation for additional detail.
+* Ensure firewall rules are set up to allow for appropriate inbound and outbound traffic from Jirafe install for your staging & production environments. Please see [Firewall Instructions](/installation/Firewall 'Firewall Instructions')
 * Receive from your Jirafe account representative your site credentials for both your staging and production environments.
 * Install Jirafe Extension in Development and/or Staging build environments depending on your specific environment set-up. Testing should be completed locally by using the event logger and looking at events in the ‘jirafedata’ database table.
 * Review and modify your ‘datamap’ JSON files accurately map to your data model consistent with the data that the Jirafe system requires.
@@ -71,7 +71,7 @@ We assume you already have a version of hybris successsfully installed in your e
 		</ext-template/yacceleratorstorefront/web/webroot/WEB-INF/tags/shared/analytics/jirafe.tag>
 	used for front end storefront integration. 
 	
-__*Note: This is ONLY applicable if you are using one of the default hybris Accelerator store front templates that leverages the jirafe.tag file.  Otherwise, please reference [Using Javascript](/api/Javascript_Implementation_Guide.html 'Using Javascript') to integrate the front end tracking code.*__
+__*Note: This is ONLY applicable if you are using one of the default hybris Accelerator store front templates that leverages the jirafe.tag file.  Otherwise, please reference [Using Javascript](/api/Javascript_Implementation_Guide 'Using Javascript') to integrate the front end tracking code.*__
 
 9. OPTIONAL STEP: If you wish to use customized tags to track additional marketing attribution, feel free to edit the contents of the jirafe.tag file to incorporate the tags that your marketing team is tracking.  Please reference the “Optional Tracking” section below for further detail.
 10. Activate and check cron jobs in the HMC.  See ‘Configuration & Set-up’ section below.
@@ -195,7 +195,7 @@ With ‘push’ being exposed, the Jirafe platform will push new custom end poin
 #Optional Tracking
 Depending on the level of visitor tracking required for your business, Jirafe has built a number of additional event and data attributes to help you track additional elements. 
 
-If you would like to take advantage of these additional tracking capabilities, take a look at [Javascript Optional Tracking](/installation/Javascript_Optional_Tracking.html 'Javascript Optional Traking').
+If you would like to take advantage of these additional tracking capabilities, take a look at [Javascript Optional Tracking](/installation/Javascript_Optional_Tracking 'Javascript Optional Traking').
 
 #Production Ready Checklist
 
