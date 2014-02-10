@@ -1,5 +1,4 @@
 ---
-permalink: /v2/POST/cart_endpoint.html
 layout: page
 title: Cart Endpoint
 categories: API Documentation

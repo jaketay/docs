@@ -1,5 +1,4 @@
 ---
-permalink: /v2/error_states.html
 layout: page
 title: Error States
 categories: API Documentation

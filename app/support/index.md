@@ -1,5 +1,4 @@
 ---
-permalink: /
 layout: page
 title: Support
 categories: Help & Support

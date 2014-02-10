@@ -1,5 +1,4 @@
 ---
-permalink: /v2/POST/product_endpoint.html
 layout: page
 title: Product Endpoint
 categories: API Documentation

@@ -23,7 +23,7 @@ category-list: [Installing Jirafe, API Documentation, Using Jirafe, Help & Suppo
 baseurl: ''
 
 # Dates are not included in permalinks
-permalink: none
+permalink: pretty
 
 # Syntax highlighting
 pygments: true

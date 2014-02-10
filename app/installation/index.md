@@ -1,5 +1,4 @@
 ---
-permalink: /
 layout: page
 title: Installation Overview
 categories: Installing Jirafe

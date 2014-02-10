@@ -1,5 +1,4 @@
 ---
-permalink: /v2/POST/order_endpoint.html
 layout: page
 title: Order Endpoint
 categories: API Documentation

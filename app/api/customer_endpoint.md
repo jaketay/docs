@@ -1,5 +1,4 @@
 ---
-permalink: /v2/POST/customer_endpoint.html
 layout: page
 title: Customer Endpoint
 categories: API Documentation

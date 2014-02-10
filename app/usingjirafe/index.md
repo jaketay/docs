@@ -1,5 +1,4 @@
 ---
-permalink: /
 layout: page
 title: Jirafe Overview
 categories: Using Jirafe

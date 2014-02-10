@@ -1,5 +1,4 @@
 ---
-permalink: /v2/api_overview.html
 layout: page
 title: API Overview
 categories: API Documentation

@@ -1,5 +1,4 @@
 ---
-permalink: /v2/POST/category_endpoint.html
 layout: page
 title: Category Endpoint
 categories: API Documentation

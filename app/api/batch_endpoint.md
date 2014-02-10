@@ -1,5 +1,4 @@
 ---
-permalink: /v2/POST/batch_endpoint.html
 layout: page
 title: Batch Endpoint
 categories: API Documentation

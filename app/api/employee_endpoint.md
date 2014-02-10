@@ -1,5 +1,4 @@
 ---
-permalink: /v2/POST/employee_endpoint.html
 layout: page
 title: Employee Endpoint
 categories: API Documentation
