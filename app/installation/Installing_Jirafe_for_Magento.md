@@ -45,10 +45,7 @@ __*NOTE: You need distinct site ids and credentials for each individual site you
 
 ##Installing with Magento Connect
 
-1. Download the Jirafe for Magento package. (Or receive a copy from your Jirafe representative).
-
-
-__*NOTE: If you use Magento’s Compilation Mode, disable it before installing Jirafe by going to System > Tools > Compilation and clicking “Disable”.  You can run the compilation process and re-enable compilation mode after installing Jirafe.*__
+1. Download the Jirafe for Magento package. (Or receive a copy from your Jirafe representative). <br>__*NOTE: If you use Magento’s Compilation Mode, disable it before installing Jirafe by going to System > Tools > Compilation and clicking “Disable”.  You can run the compilation process and re-enable compilation mode after installing Jirafe.*__
 
 2. Log in to the Magento Connect Manager.
 In the Magento Admin, go to System > Magento Connect > Magento Connect Manager.
@@ -59,61 +56,40 @@ In the Magento Admin, go to System > Magento Connect > Magento Connect Manager.
 	* Turn off ‘maintenance mode’
 	* Choose and upload the Jirafe package
 	
-	![logo]({{ site-baseurl }}/img/pages/Upload_Package.png)
-	
-__*NOTE:  If the Magento Connect Manager fails to refresh the cache after uploading the
-		Jirafe package and you cannot access your Magento Admin, you may need to manually 		clear Magento’s cache.*__ 
-		
-__*This is a known problem with the Magento Connect Manager.  Please consult your systems 		engineer before performing the following commands to clear the cache:*__
+	![logo]({{ site-baseurl }}/img/pages/Upload_Package.png) <br>__*NOTE:  If the Magento Connect Manager fails to refresh the cache after uploading the Jirafe package and you cannot access your Magento Admin, you may need to manually clear Magento’s cache.*__ 
+__*This is a known problem with the Magento Connect Manager.  Please consult your systems engineer before performing the following commands to clear the cache:*__
 			
 			rm -Rf {site root file path}/var/cache
 			rm -Rf {site root file path}/var/session
 
-4.  Return to the Magento Admin and clear the Magento cache
+4. Return to the Magento Admin and clear the Magento cache
 	* Go to System > Cache Management
 	* Click ‘Flush Magento Cache’ and wait for it to confirm that it is flushed  
   
-	![logo]({{ site-baseurl }}/img/pages/Flush_Magento_Cache.png)
-	
+	![logo]({{ site-baseurl }}/img/pages/Flush_Magento_Cache.png)<br>
 	* Click ‘Select All’ in the table
 	* Choose ‘Refresh’ from the drop down on the right, and click ‘Submit’
 	
-	![logo]({{ site-baseurl }}/img/pages/Magento_Cache_Refresh.png)
-	
+	![logo]({{ site-baseurl }}/img/pages/Magento_Cache_Refresh.png)<br>
 5. Log out of the Magento Admin, and then log back in
 
-6. Enter your Jirafe Site Credentials in the Jirafe section of your Magento Configuration for the website you want to track.  
-
-__*NOTE: We provide you with two sets of site credentials: one for your development
-environment and one for your production environment. We suggest you test Jirafe first
-in your development environment with the development site credentials, and then
-install Jirafe in your production environment with the production site credentials. 
-You can also find your credentials in your Jirafe site settings for future reference.*__
-		
-* Go to System > Configuration
-
-* Click ‘Jirafe Analytics’ in the lefthand navigation
-* Choose the website you want to track from the drop down in the lefthand navigation
-	
-	![logo]({{ site-baseurl }}/img/pages/Choose_Site.png)
-	
-* Set the Enable Module drop down to “Yes” to enable Jirafe
-* Enter your site credentials including Site ID, Client ID, Client Secret and OAuth Access Token
-* Click ‘Save Config’
-	
-	![logo]({{ site-baseurl }}/img/pages/Save_Config.png)
-	
-* Repeat step 4: refresh the Magento cache.
-* Sync your historical data with Jirafe.  This will push all of your existing data to Jirafe.  
-	* On the same ‘Jirafe Analytics’ page, go back to the site you set up, and refer to the row for “Historical Data”
-		
-  
-	![logo]({{ site-baseurl }}/img/pages/Historical_Sync.png)
-	
-* If you are ready to synchronize your data from your Magento system with Jirafe, click 
-__*NOTE‘Sync’.  You should get a green notification that confirms that your historical sync has started.*__
-
-__*NOTE: If you have a high volume site, we highly recommend that you wait until off-peak 		hours for your business to sync your data to ensure that you minimize load on the 		server which may impact server operations.*__
+6. Enter your Jirafe Site Credentials in the Jirafe section of your Magento Configuration for the website you want to track. <br> __*NOTE: We provide you with two sets of site credentials: one for your development environment and one for your production environment. We suggest you test Jirafe first in your development environment with the development site credentials, and then install Jirafe in your production environment with the production site credentials. You can also find your credentials in your Jirafe site settings for future reference.*__<br>
+<ul>
+  <li>Go to System > Configuration</li>
+  <li>Click ‘Jirafe Analytics’ in the lefthand navigation</li>
+  <li>Choose the website you want to track from the drop down in the lefthand navigation</li><br>
+	![logo]({{ site-baseurl }}/img/pages/Choose_Site.png)<br>
+  <li>Set the Enable Module drop down to “Yes” to enable Jirafe</li>
+  <li>Enter your site credentials including Site ID, Client ID, Client Secret and OAuth Access Token</li>
+  <li>Click ‘Save Config’</li><br>
+	![logo]({{ site-baseurl }}/img/pages/Save_Config.png)<br>
+</ul>
+7. Repeat step 4: refresh the Magento cache.
+8. Sync your historical data with Jirafe.  This will push all of your existing data to Jirafe.  
+	* On the same ‘Jirafe Analytics’ page, go back to the site you set up, and refer to the row for “Historical Data”<br>
+	![logo]({{ site-baseurl }}/img/pages/Historical_Sync.png)<br>
+If you are ready to synchronize your data from your Magento system with Jirafe, click 
+‘Sync’.  You should get a green notification that confirms that your historical sync has started.<br>__*NOTE: If you have a high volume site, we highly recommend that you wait until off-peak hours for your business to sync your data to ensure that you minimize load on the server which may impact server operations.*__
 		
 That’s it!  You can now log in to Jirafe.com to see analytics in your Real Time Dashboard.  Historical data could take up to a day after the sync to show up accurately in Jirafe.
 
@@ -235,8 +211,8 @@ The first thing you need is unique site credentials for the new site that you wa
 
 
 	```
-	NOTE: Magento has three levels of store management.  Jirafe works at the highest level: 	Websites.  
-	If you do not know which of the options in the drop down are Websites, navigate to System 	> Manage Stores to see a list of your Websites.
+	NOTE: Magento has three levels of store management.  Jirafe works at the highest level: Websites.  
+	If you do not know which of the options in the drop down are Websites, navigate to System > Manage Stores to see a list of your Websites.
 	```
   
 4. Enable tracking for the website. 
