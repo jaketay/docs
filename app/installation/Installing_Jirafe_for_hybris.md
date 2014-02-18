@@ -70,8 +70,7 @@ We assume you already have a version of hybris successsfully installed in your e
 
 		</ext-template/yacceleratorstorefront/web/webroot/WEB-INF/tags/shared/analytics/jirafe.tag>
 	used for front end storefront integration. 
-	
-__*Note: This is ONLY applicable if you are using one of the default hybris Accelerator store front templates that leverages the jirafe.tag file.  Otherwise, please reference [Using Javascript](/api/Javascript_Implementation_Guide 'Using Javascript') to integrate the front end tracking code.*__
+	<br>__*Note: This is ONLY applicable if you are using one of the default hybris Accelerator store front templates that leverages the jirafe.tag file.  Otherwise, please reference [Using Javascript](/api/Javascript_Implementation_Guide 'Using Javascript') to integrate the front end tracking code.*__
 
 9. OPTIONAL STEP: If you wish to use customized tags to track additional marketing attribution, feel free to edit the contents of the jirafe.tag file to incorporate the tags that your marketing team is tracking.  Please reference the “Optional Tracking” section below for further detail.
 10. Activate and check cron jobs in the HMC.  See ‘Configuration & Set-up’ section below.
