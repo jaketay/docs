@@ -11,7 +11,7 @@ set :user, "jirafe-admin"
 set :deploy_to, "/opt/jirafe/docs"
 
 # the ip address of your VPS
-role :app, ['prod-frontend-01-rsiad.int.jirafe.net', 'prod-frontend-02-rsiad.int.jirafe.net']
+role :web, 'prod-frontend-01-rsiad.int.jirafe.net', 'prod-frontend-02-rsiad.int.jirafe.net'
 
 before 'deploy:update', 'deploy:update_jekyll'
 
@@ -26,6 +26,6 @@ namespace :deploy do
     # clear existing _site
     # build site using jekyll
     # remove Capistrano stuff from build
-    %x(rm -rf dist/* && jekyll build)
+    run_locally "grunt build"
   end
 end
