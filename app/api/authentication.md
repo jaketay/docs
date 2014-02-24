@@ -6,7 +6,6 @@ categories: API Documentation
 resource: true
 description: Authenticating with Jirafe API End Points
 image: /img/docs-api.png
-type: parent
 version: v2
 order: 2
 index_order: 2
