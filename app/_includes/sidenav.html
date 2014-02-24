@@ -1,0 +1,32 @@
+<div class="sidebar accordion clearfix">
+  <div class="container accordion-innerwrap">
+    <ul class="sidebar-nav panel-container list-reset">
+    <li {% if page.url == "/index.html" %} class="sidebar-nav-item active" {% else %} class="sidebar-nav-item" {% endif %}>
+        <a href="{{ site.baseurl }}/">Documentation Home</a>
+      </li>
+{% for cat in site.category-list %}
+    <li>
+    <div class="sidebar-nav-item-title{% if page.categories == cat %} active{% endif %}" tabindex="{% cycle '1', '1', '2', '2', '3', '3', '4', '4' %}" id="trigger{% cycle '1', '1', '2', '2', '3', '3', '4', '4' %}">{{ cat }}</div>
+        <ul {% if page.url == "/index.html" %} class="sidebar-nav__list panel-content visuallyhidden" aria-expanded="false"  {% else %} class="sidebar-nav__list panel-content"  {% endif %}>
+    {% for order in (1..10) %}
+    {% for page in site.pages %}
+     {% if page.order == order %}   
+        {% if page.resource == true %}
+            {% for pc in page.categories %}
+                {% if pc == cat %}
+                <li {% if page.active == "page.title" %} class="active-sub" {% endif %}><a href="{{ page.url }}">{{ page.title }}</a></li>
+       {% endif %}
+            {% endfor %}
+        {% endif %}
+      {% endif %}
+    {% endfor %} <!-- page -->
+
+  {% endfor %}
+    </ul>
+    </li>
+{% endfor %}  <!-- cat -->
+
+  </ul>
+
+  </div>
+</div>
