@@ -29,3 +29,11 @@ namespace :deploy do
     run_locally "grunt build"
   end
 end
+
+namespace :nginx do
+  task :restart do
+    sudo "service nginx restart"
+  end
+end
+
+after "deploy:create_symlink", "nginx:restart"
