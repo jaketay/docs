@@ -1,10 +1,12 @@
 ---
+
 layout: page
 title: Using Javascript 
 categories: API Documentation
 resource: true
 version: v1
 order: 9
+
 ---
 
 # Javascript Implementation
@@ -272,16 +274,25 @@ Third pageview: <http://www.store.com/products/red-sundress>
 Same as for the second pageview.
 ```
 
-### Important Notes
-1. Do not use attribution parameters that you reuse for other purposes on your store. For example "p" is often used for page number, i.e. "?p=2". You would not want your attribution to be set to "2" every time someone views the second page of your catalog or search results.
+## Important Notes & Helpful Tips
 
-2. Visits with landing URLs that do not contain your custom URL parameters will fall back on Jirafe's default attribution rules.
+1. The product code is the same product code that you are sending in on the your back-end product objects.
 
-3. If you want to implement more complicated custom attribution tracking, for example some combination of url parameters and custom URL business rules (url parsing, domain matching, etc.), please reach out to your Jirafe Professional Services contact.
+2. The order number in your order success javascript must match the order number in your backend order event.
 
-4. A pageview that sets new custom attribution values will end the current visit and start a new visit.
+3. You must pass the respective page types for each page. See Javascript reference implementation beliw for page types.
 
-## Beacon Javascript reference implementation
+4. The Javascript call generates cookies that you will need to tie to the back end events so that we can tie it together.
+
+5. Do not use attribution parameters that you reuse for other purposes on your store. For example "p" is often used for page number, i.e. "?p=2". You would not want your attribution to be set to "2" every time someone views the second page of your catalog or search results.
+
+6. Visits with landing URLs that do not contain your custom URL parameters will fall back on Jirafe's default attribution rules.
+
+7. If you want to implement more complicated custom attribution tracking, for example some combination of url parameters and custom URL business rules (url parsing, domain matching, etc.), please reach out to your Jirafe Professional Services contact.
+
+8. A pageview that sets new custom attribution values will end the current visit and start a new visit.
+
+## Javascript reference implementation
 Below is a reference example in JSP for the javascript and beacon code. This code block should be placed at the end of your document, just before the closing `</body>` tag.
 
 ```jsp

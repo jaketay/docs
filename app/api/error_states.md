@@ -1,10 +1,12 @@
 ---
+
 layout: page
 title: Error States
 categories: API Documentation
 resource: true
 version: v2
 order: 10
+
 ---
 
 # Error states

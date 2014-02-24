@@ -1,26 +1,32 @@
 ---
+
 layout: page
 title: Order Endpoint
 categories: API Documentation
 resource: true
 version: v2
 order: 7
+
 ---
 
+
 # Order Endpoint
-**URL:** https://event.jirafe.com/v2/{site-id}/order [POST]
 
 The order endpoint accepts three different schemas:
 
 * The `order-placed` event is sent first with the information connecting the order number with the visit cookies stored by the tracker javascript
-* The `order-accepted` event is sent next with all of the information about the order after it has been authorized and paid for by the customer. Anytime the order iterms change, this event is sent again with items containing the new order and previous_items showing how things were before the order changed
+* The `order-accepted` event is sent next with all of the information about the order after it has been authorized and paid for by the customer. Anytime the order items change, this event is sent again with items containing the new order and previous_items showing how things were before the order changed
 * The `order-cancelled` event is sent if the entire order is canceled
+
+**URL:** https://event.jirafe.com/v2/{site-id}/order [POST]
+
 
 ## Order Placed
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/order-placed.json
 
 #### Example
+
 ```json
 {
     "order_number": "123456789",
@@ -43,11 +49,13 @@ The order endpoint accepts three different schemas:
     }
 }
 ```
+
 ## Order Accepted
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/order-accepted.json
 
-#### Example
+### Example
+
 ```json
 {
     "order_number": "8797436543019",
@@ -138,11 +146,67 @@ The order endpoint accepts three different schemas:
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/order-cancelled.json
 
-#### Example
+### Example
+
 ```json
 {
     "order_number": "123456789",
     "cancel_date": "2013-06-17T15:16:10.000Z",
     "status": "cancelled"
+}
+```
+
+## Orders - Things to Consider
+
+The Jirafe order object is flexible to deal with the capabilities of your commerce system.  The different end points can be used to account for a variety of order situations and the best that match your system.  In most cases, there will only be one order with the respective items in that order. This is outlined in the Step 1 below.  
+
+* If your commerce system allows the user to be able to edit or add to an order after it has been placed, you will need to initiate additional order events (as depicted in Steps 2 and 3 below) and send along the previous state of the order.  
+* For the ```order accepted``` event, it is important to push both current cart items as well as previous cart items to Jirafe so that Jirafe can maintain an accurate representation of the state of a cart at any point in time during a user visit.  See **Orders Accepted** example below.
+* Be sure to add the visit information from the front end cookie to the back end ```order placed``` event so they can be tied together.  See **Visits** example below.
+* If you are pushing historical data to Jirafe, be sure to push all of your historical order data to us. The [Batch Endpoint](/api/batch_endpoint 'Batch Endpoint') is ideal for this to do it efficiently.
+
+
+### Orders Accepted Example:
+
+* Step 1:  Add one item to order. (eg add 1 pair of socks)
+	
+	
+	```
+	items:[
+		{prod:'socks',qty:1}
+	]
+	```
+* Step 2: Add two more items to order. (eg add 2 pairs of shoes)
+	
+	```
+	items:[
+		{prod:'socks',qty:1},
+		{prod:'shoes',qty:2}
+	],
+	previous_items[
+		{prod:'socks',qty:1}
+	]
+	```
+* Step 3: Remove items from order. (eg remove 1 pair of socks and 1 pair of shoes)
+	
+	```
+	items:[
+		{prod:'shoes',qty:1}
+	],
+	previous_items[
+		{prod:'socks',qty:1},
+		{prod:'shoes',qty:2}
+	]
+	```
+	
+##Visits Example:
+In order to connect front-end user behavior to back-end order data, the Jirafe javascript sets cookies that need to be accessed and passed along with the back end order placed events.  The below schema outlined the json object with each respective value taken from the cookie generated from the javascript.
+
+```
+visit: {
+    "visit_id": jirafe_vid',
+    "visitor_id": 'jirafe_vis',
+    "pageview_id": 'jirafe_pvid',
+    "last_pageview_id": 'jirafe_lpvid'
 }
 ```

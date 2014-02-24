@@ -1,18 +1,22 @@
 ---
+
 layout: page
 title: Cart Endpoint
 categories: API Documentation
 resource: true
 version: v2
 order: 3
+
 ---
 
 # Cart Endpoint
+
+Cart events are sent whenever a user adds, removes or alters their cart. *Note:* this event is distinct from and order event, which is the event that happens when a cart is purchased.
+
 **URL:** https://event.jirafe.com/v2/{site-id}/cart [POST]
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/cart.json
 
-Cart events are sent whenever a user adds, removes or alters their cart. *Note:* this event is distinct from and order event, which is the event that happens when a cart is purchased.
 
 #### Example
 ```json
@@ -84,5 +88,56 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
         "pageview_id": "5678",
         "last_pageview_id": "8765"
     }
+}
+```
+
+## Carts - Things to Consider
+
+* For cart events, it is important to push both current cart items as well as previous cart items to Jirafe so that Jirafe can maintain an accurate representation of the state of a cart at any point in time during a user visit.  See **Cart Items** example below.
+* Be sure to add the visit information from the front end cookie to the back end cart event so they can be tied together.  See **Visits** example below.
+* If you are pushing historical data to Jirafe, we recommend not pushing cart data as carts are only analyzed on a going forward basis.
+
+
+### Cart Items Example:
+
+* Step 1:  Add one item to cart. (eg add 1 pair of socks)
+	
+	```
+	items:[
+		{prod:'socks',qty:1}
+	]
+	```
+* Step 2: Add two more items to cart. (eg add 2 pairs of shoes)
+	
+	```
+	items:[
+		{prod:'socks',qty:1},
+		{prod:'shoes',qty:2}
+	],
+	previous_items[
+		{prod:'socks',qty:1}
+	]
+	```
+* Step 3: Remove items from cart. (eg remove 1 pair of socks and 1 pair of shoes)
+	
+	```
+	items:[
+		{prod:'shoes',qty:1}
+	],
+	previous_items[
+		{prod:'socks',qty:1},
+		{prod:'shoes',qty:2}
+	]
+	```
+	
+##Visits Example:
+In order to connect front-end user behavior to back-end cart data, the Jirafe javascript sets cookies that need to be accessed and passed along with the back end cart events.  The below schema outlined the json object with each respective value taken from the cookie generated from the javascript.
+
+```
+visit: {
+    "visit_id": jirafe_vid',
+    "visitor_id": 'jirafe_vis',
+    "pageview_id": 'jirafe_pvid',
+    "last_pageview_id": 'jirafe_lpvid'
 }
 ```
