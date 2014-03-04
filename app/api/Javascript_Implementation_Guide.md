@@ -39,19 +39,14 @@ Place the code in the **head** element of your HTML. Jirafe's Javascript library
 ```
 (function(){
     var d=document,g=d.createElement('script'),s=d.getElementsByTagName('script')[0];
-    g.type='text/javascript';g.defer=g.async=true;g.src=d.location.protocol+'//${jirafeApiUrl}';
+    g.type='text/javascript';g.defer=g.async=true;g.src=d.location.protocol+'//beacon.jirafe.com/jirafe_api.js';
     s.parentNode.insertBefore(g,s);
 })();
 var jirafe_site_id = "${jirafeSiteId}";
 var jirafe_org_id = "";
 ```
 
-These values will be provided to you by your Jirafe implementation support contact:
-
-+ The **${jirafeApiUrl}** variable should be set with the Jirafe Javascript API URL.
-+ The **${jirafeSiteId}** variable should be set with your Site ID.
-
-The **jirafe_org_id** can be left as an empty string as shown.
+The **${jirafeSiteId}** variable should be set with your **jirafe_site_id**. The **jirafe_org_id** can be left as an empty string as shown.
 
 ## Pageview Tracking
 Enable pageview tracking by defining the **jirafe_deferred** function. Place this code in the **head** element of your HTML.
