@@ -4,8 +4,9 @@ layout: page
 title: Cart Endpoint
 categories: API Documentation
 resource: true
+description: Sending cart data to Jirafe API
 version: v2
-order: 3
+order: 4
 
 ---
 

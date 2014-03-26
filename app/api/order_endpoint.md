@@ -4,8 +4,9 @@ layout: page
 title: Order Endpoint
 categories: API Documentation
 resource: true
+description: Sending order data to Jirafe API
 version: v2
-order: 7
+order: 8
 
 ---
 

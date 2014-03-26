@@ -4,12 +4,13 @@ layout: page
 title: Error States
 categories: API Documentation
 resource: true
+description: Jirafe API Error States
 version: v2
-order: 10
+order: 11
 
 ---
 
-# Error states
+# Error States
 
 On error a json response will be provided with `success: false`, an `error_type`, and an http response code. Below is a list of known response codes and error types:
 

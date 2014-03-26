@@ -4,8 +4,9 @@ layout: page
 title: Category Endpoint
 categories: API Documentation
 resource: true
+description: Sending Category Data to Jirafe API
 version: v2
-order: 4
+order: 5
 
 ---
 
