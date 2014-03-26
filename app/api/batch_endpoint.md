@@ -4,8 +4,9 @@ layout: page
 title: Batch Endpoint
 categories: API Documentation
 resource: true
+description: Sending data to Jirafe API in batch
 version: v2
-order: 2
+order: 3
 
 ---
 

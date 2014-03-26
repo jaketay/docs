@@ -4,8 +4,9 @@ layout: page
 title: Product Endpoint
 categories: API Documentation
 resource: true
+description: Sending product data to Jirafe API
 version: v2
-order: 8
+order: 9
 
 ---
 

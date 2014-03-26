@@ -4,8 +4,9 @@ layout: page
 title: Using Javascript 
 categories: API Documentation
 resource: true
-version: v1
-order: 9
+description: Sending javascript events to Jirafe API
+version: v2
+order: 12
 
 ---
 

@@ -4,8 +4,9 @@ layout: page
 title: Customer Endpoint
 categories: API Documentation
 resource: true
+description: Sending Customer Data to Jirafe API
 version: v2
-order: 5
+order: 6
 
 ---
 
