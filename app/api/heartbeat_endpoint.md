@@ -37,7 +37,7 @@ https://event.jirafe.com/v2/{site-id}/heartbeat [POST]
 
 site_id - This is the site id for your Jirafe store.  It is unique to each merchant site.
 
-instance_id - An ID unique per server instance when used for a downloaded on-premise solution. In the case of a single server or a SaaS environment, hardcode as "1" as there is no server within a cluster to be itemized.
+instance_id - An ID unique per server instance running Jirafe as part of your solution. In Linux, for example, we recommend using uname.  
 
 is_enabled - Bool as to whether or not the plugin is enabled
 
