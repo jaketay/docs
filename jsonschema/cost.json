@@ -1,0 +1,16 @@
+{
+  "title": "Product Cost Schema",
+  "type": "object",
+  "required": [
+    "product_code",
+    "product_cost"
+  ],
+  "properties": {
+    "product_code": {
+      "type": "string"
+    },
+    "product_cost": {
+      "type": "number"
+    }
+  }
+}
