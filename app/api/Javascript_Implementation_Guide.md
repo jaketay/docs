@@ -301,7 +301,7 @@ Below is a reference example in JSP for the javascript and beacon code. This cod
 /* Jirafe */
 (function(){
     var d=document,g=d.createElement('script'),s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript';g.defer=g.async=true;g.src=d.location.protocol+'//${jirafeApiUrl}';
+        g.type='text/javascript';g.defer=g.async=true;g.src=d.location.protocol+'//beacon.jirafe.com/jirafe_api.js';
         s.parentNode.insertBefore(g,s);
 })();
 var jirafe_site_id = "${jirafeSiteId}";
