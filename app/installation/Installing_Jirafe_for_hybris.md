@@ -18,17 +18,17 @@ Let’s get started!
 
 Install Process Checklist
 =========================
-The following section outlines the installation checklist that you should follow to ensure you've completed all of teh steps necessary to have a successful installation of the Jirafe extension for hybris:
+The following section outlines the installation checklist that you should follow to ensure you've completed all of the steps necessary to have a successful installation of the Jirafe extension for hybris:
 
 * Provide Jirafe with your Merchandising CSV file for product and category upload. Please refer to the [Merchandising Set-Up](/installation/Merchandising_Setup 'Merchandise CSV Documentation') documentation for additional detail.
-* Ensure firewall rules are set up to allow for appropriate inbound and outbound traffic from Jirafe install for your staging & production environments. Please see [Firewall Instructions](/installation/Firewall 'Firewall Instructions')
+* Ensure firewall rules are set up to allow for appropriate outbound traffic from Jirafe install for your staging & production environments. Please see [Firewall Instructions](/installation/Firewall 'Firewall Instructions')
 * Receive from your Jirafe account representative your site credentials for both your staging and production environments.
-* Install Jirafe Extension in Development and/or Staging build environments depending on your specific environment set-up. Testing should be completed locally by using the event logger and looking at events in the ‘jirafedata’ database table.
-* Review and modify your ‘datamap’ JSON files accurately map to your data model consistent with the data that the Jirafe system requires.
+* Install Jirafe Extension in Development and/or Staging build environments depending on your specific environment set-up. Testing should be completed locally by using the datamap editor on sample existing data and logging new events. Queued events may be examined, modified, and deleted in HMC.
+* Review and modify your ‘datamap’ JSON files to accurately map to your data model consistent with the data that the Jirafe system requires. Use the data maps editor in HMC to develop and test your maps.
 * Test in your Staging Environment. (pre-production environment equivalent)
-	* Test by looking at the local ‘jirafedata’ table.
+	* Test by looking at the local data staging table.
 	* Using your staging credentials, update your local.properties file in your staging environment which will allow data to be sent to the Jirafe platform and into your test site.
-	* Work with your Jirafe account representative to \verify is correctly being sent
+	* Work with your Jirafe account representative to verify that data is correctly being sent
 	 and collected in your test site.
 	* Finally, schedule a “historical data fetch” to test historical retrieval.
 * Install Jirafe Extension in your production environment and follow a similar process used in staging.
@@ -36,12 +36,12 @@ The following section outlines the installation checklist that you should follow
 	```
 NOTE:  Only do so once your production environment is ready and any production testing that may be taking place is complete.  This will ensure garbage data is not collected.  **Data cannot be removed once sent into the Jirafe production platform.**
 	```
-	* Test by looking at the local ‘jirafedata’ table.
+	* Test by looking at the local data staging table.
 	* Using your production credentials, update your local.properties file.
 	* Work with your Jirafe account representative to verify data is correctly begin sent and collected in your test site.
 	
 	```
-NOTE:  Jirafe Extension should remain in “disabled” state in order to your production environment is stable. Only activate when ready and extraneous data is removed from the ‘jirafedata’ table.
+NOTE:  Jirafe Extension should remain in “disabled” state in order to your production environment is stable. Only activate when ready and extraneous data is removed from the data staging table, ‘jirafedata’.
 	```
 * Schedule a “historical data fetch” to complete a full pull of your historical data.
 
@@ -59,22 +59,26 @@ We assume you already have a version of hybris successsfully installed in your e
 **Do not confuse this with ceaIdx_31347 - that's the new version and will be created automatically when you do an update.**
 	
 	 
-1. Add the path to jirafeextension into your localextensions.xml (in the hybris config folder):
+1. For hybris 4 installations only, you must remove a line from jirafeextension/extensioninfo.xml:
+
+                <requires-extension name="printhmc" />
+2. Add the path to jirafeextension into your localextensions.xml (in the hybris config folder):
 	
-		<extension dir=".../jirafeextension />
-2. On CLI, integrate Jirafe extension in hybris runtime, within HYBRIS_HOME/bin/platform, run source ./setantenv.sh and 'ant clean all'.
-3. Bring up localhost (<http://localhost:9001>) and initialize/update the hybris master system. Make sure jirafeextension is checked as an activated extension, and take care to update rather than initialize if you have existing Hybris data. You will also need to restart.
-4. Access the HMC (hybris Management Console) to check the Jirafe setup in your browser with a URL like http://localhost:9001/hmc/hybris (or whatever is the URL instead of localhost:9001 to access your local hybris).
-5. Check that Jirafe is working in your Web browser. Go to <http://localhost:9001/jirafeextension/>. You will login with your userid ‘jirafeuser’. Be sure that you set a password for this user in HMC and enable the user.
-8. The installation will automatically inject tracking code into the frone end of your store front by leverage the jirafe.tag file.  The installation will replace the one that comes standard with the latest and greatest located at:
+		<extension dir=".../jirafeextension" />
+		<extension dir=".../jirafereportcockpit" />
+3. On CLI, integrate Jirafe extension in hybris runtime, within HYBRIS_HOME/bin/platform, run 'source ./setantenv.sh' and 'ant clean all'.
+4. Bring up localhost (<http://localhost:9001>) and initialize/update the hybris master system. Make sure jirafeextension and jirafereportcockpit are checked as activated extensions, and take care to update rather than initialize if you have existing Hybris data. You will also need to restart.
+5. Access the HMC (hybris Management Console) to check the Jirafe setup in your browser with a URL like http://localhost:9001/hmc/hybris (or whatever is the URL instead of localhost:9001 to access your local hybris).
+6. Check that Jirafe is working in your Web browser. Go to <http://localhost:9001/jirafeextension/>.
+7. The installation will automatically inject tracking code into the front end of your store front by leverage the jirafe.tag file.  The installation will replace the one that comes standard with the latest and greatest located at:
 
 		</ext-template/yacceleratorstorefront/web/webroot/WEB-INF/tags/shared/analytics/jirafe.tag>
 	used for front end storefront integration. 
 	<br>__*Note: This is ONLY applicable if you are using one of the default hybris Accelerator store front templates that leverages the jirafe.tag file.  Otherwise, please reference [Using Javascript](/api/Javascript_Implementation_Guide 'Using Javascript') to integrate the front end tracking code.*__
 
-9. OPTIONAL STEP: If you wish to use customized tags to track additional marketing attribution, feel free to edit the contents of the jirafe.tag file to incorporate the tags that your marketing team is tracking.  Please reference the “Optional Tracking” section below for further detail.
-10. Activate and check cron jobs in the HMC.  See ‘Configuration & Set-up’ section below.
-11. Once you’ve completed your installation process and Jirafe has notified you that it no longer requires remote access to retrieve historical data, for higher level of security, we recommend that you disable the userid ‘jirafeuser’ in your HMC.  
+8. OPTIONAL STEP: If you wish to use customized tags to track additional marketing attribution, feel free to edit the contents of the jirafe.tag file to incorporate the tags that your marketing team is tracking.  Please reference the “Optional Tracking” section below for further detail.
+9. Activate and check cron jobs in the HMC.  See ‘Configuration & Set-up’ section below.
+10. Once you’ve completed your installation process and Jirafe has notified you that it no longer requires remote access to retrieve historical data, for higher level of security, we recommend that you disable the userid ‘jirafeuser’ in your HMC.  
 
 **IMPORTANT NOTE:**  _Do not delete, only disable, as you may need to re-enable if there is ever a case in which you require Jirafe to re-pull data or push updates._
 	
@@ -83,8 +87,9 @@ Uninstall Instructions
 ----------------------
 If you decide to uninstall Jirafe, follow these instructions:
 
-1. Remove reference to jirafeextension in ${hybris}/config/localextensions.xml
-2. Go to /opt/hybris/platform/bin and run: source ./setantenv.sh; ant clean all
+1. Go to /opt/hybris/platform/bin and run: source ./setantenv.sh; ant clean
+2. Remove references to jirafeextension and jirafereportcockpit in ${hybris}/config/localextensions.xml
+3. Go to /opt/hybris/platform/bin and run: source ./setantenv.sh; ant all
 3. Run update on hac 
 4. Restart hybris 
 5. Remove Jirafe Extension (optional) 
@@ -102,11 +107,10 @@ Jirafe will issue "test" site tokens and "production" site tokens.  Test data an
 
 ```
 # Basic configuration
-# Jirafe Tag Site ID (one line per site in a multi-site environment)
 
-jirafe.site.id=
-jirafe.site.id.electronics.local=
-jirafe.site.id.apparel-uk.local=
+# Jirafe Tag Site ID (one line per site in a multi-site environment)
+jirafe.site.id.electronics=
+jirafe.site.id.apparel-uk=
 
 # Jirafe Beacon Event API
 jirafe.api.url=
@@ -125,7 +129,7 @@ jirafe.outboundConnectionConfig.auth_server_url=
 # media.apparel-uk.http=
 ```
 
-IMPORTANT NOTE:  In the development stages, we recommend that you test locally and verify data is correctly being written to the jirafedata table on the hybris server.
+IMPORTANT NOTE:  In the development stages, we recommend that you test locally and verify data is correctly being written to the data staging table on the hybris server.
 
 ##Activating Cron Jobs
 Once you have installed Jirafe and are ready to start sending us data, there are four cron jobs to activate in the hybris Merchant Cockpit:
@@ -138,6 +142,24 @@ Once you have installed Jirafe and are ready to start sending us data, there are
 ###Data Sync Cron Job
 The data sync cron job setting is designed to give you the flexibility to throttle how quickly data is sent to Jirafe, and as a consequence, it will impact how fast Jirafe receives and displays data for your users.  It is important to make sure it runs often so your end users can have data that is timely and up-to-date.  For this reason, we suggest setting it to run every five minutes.
 
+###Validate setup
+Log into HMC and confirm that you see a new section, Jirafe
+Analytics. The System Status page provides an overview of key
+configuration and processes. Connection status should show "ok" for
+all sites that will be monitored by Jirafe - if not, check the log
+file for more information - most likely bad credentials or firewall
+issues.
+
+Navigate to the data maps section and try each of the maps. Ensure that there are no errors and that the output looks valid and complete. Ensure that the filter results are true for data that should be sent to Jirafe (online, approved, calculated, ...) and false otherwise.
+
+Note that AbstractOrderEntry and Address maps are special cases. They are not used directly but only used by the other maps. Their filters should always return false.
+
+In another browser window, navigate to your site and add a product to
+the cart and check out. Refresh the HMC status page and confirm that data
+has been captured - it'll be listed under Synchronization Status. Wait
+a few minutes for the data sync job to complete. Confirm that the
+status of all captured data has gone to ACCEPTED. If there are errors, have a look at the data staging table for the relevant site and type. The errors column will explain which fields caused the errors. You may need to customize the data mappings to match any customizations you're made to your store. The data maps section provides an editor from which you can edit and test these customizations.
+
 ###Heartbeat Configuration
 The Jirafe Heartbeat is simply a health check. If Jirafe does not receive a heartbeat within a certain interval based on user activity then a member of our services team will reach out to a client contact to let them know that they are no longer sending data to Jirafe.
 
@@ -149,6 +171,8 @@ The valid status codes are as follows: 
 * ACCEPTED = Jirafe has received and consumed the event. (In general, you always want these objects to be cleaned.)
 * REJECTED = Object is malformed. These are removed by deafult.
 * NOT_AUTHORIZED = Object was sent without proper authorization. The Jirafe Plugin will retry these events, so by default this status code is NOT cleaned. 
+
+The system status page includes a table with a snapshot summary of the data staging table.
 
 Different statuses are useful at different stages of integration. In development, the cron job should not be run or should be set to clean up no statuses.
 
@@ -212,3 +236,28 @@ You are done installing Jirafe!
 
 Any questions, reach out to our [Support](mailto:support@jirafe.com "Jirafe Support") group.  We’re always happy to help.
 
+#Troubleshooting
+
+Troubleshooting:
+
+1. If carts are not being captured, go into the Data maps editor.
+Select the cart map and enter the PK of a recent cart (the most
+recent cart should already be selected for you but you can use the
+selector to choose another one). Check the filter result. If it's
+not true, the cart will be ignored - you may have to adjust the
+filter to suit your workflow. You can try different expressions and
+hit "Run map" to test. Similarly for the map itself. Ensure that no
+errors are reported. Ensure that __sites__ contains a site we're
+monitoring.
+2. The default filter for orders will only send us COMPLETED orders
+(PAYMENT_CAPTURED for Hybris 4). This will often need to be adjusted
+to match your order processing workflow. Note that this status
+appears in both the order filter and the order map.
+3. If data is being captured but the status after data sync shows
+REJECTED, go to the data staging table. Any validation errors will
+be listed in the errors column. You may edit or delete staged data
+from this editor. You can also use the data maps editor to update
+the map to support any data customizations you may have performed
+for your site.
+4. Keep in mind that additional errors and logging may be found in the
+console log.
