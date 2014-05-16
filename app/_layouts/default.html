@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{{ page.title }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+        <!-- build:css({app,.tmp}) /css/main.css -->
+        <!-- Syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/screen.css">
+        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/accordion.css">
+
+        <!-- endbuild -->
+
+    </head>
+    <body>
+
+        <div class="main">
+          {% include navigation.html %}
+          <div class="site-content">
+            <div class="sc__lead clr-primary">
+            <div class="sc__lead-mid">
+              <h1>{{page.title}}</h1>
+              <p>{{page.description}}</p>
+            </div>
+          </div>
+          <div class="docs">
+              {{ content }}
+          </div>
+
+          </div>
+        </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>   
+    <!-- build:js(app) /js/scripts.js -->
+    <script src="/js/main.js"></script>
+    <!-- endbuild -->
+    <script>
+      $(document).ready(function() {
+    // Collapsible Menu
+    function accordion(trigger) {
+        //variables
+        var $button = $(trigger),//trigger firing the event
+            visible = true;//flag for wayfinding
+
+            $button.hover().css({'cursor': 'pointer'});
+
+        //event
+        $button.click(function() {
+            //conditional check
+            if ( ! visible ) {
+                $button.removeClass('active');
+                $('.panel-title .icon').html('&oplus;');
+
+
+                $(this).next().slideUp('slow',function() {
+                    $(this).addClass('visuallyhidden').slideDown(0);
+                    $('.panel-content').attr( 'aria-expanded','false' );
+                });
+            }else {
+                $button.addClass('active');
+                $('.panel-title.active .icon').html('&otimes;');
+
+                $(this).next().slideUp(0,function() {
+                    $('.panel-content').attr( 'aria-expanded','true' );
+                    $(this).removeClass('visuallyhidden').slideDown('slow');
+                });
+            }
+
+            //flag dude
+            visible = !visible;
+            return false
+        });
+    }
+
+    //call to widget trigger1
+    accordion('#trigger1');
+    //call to widget trigger2
+    accordion('#trigger2');
+    //call to widget trigger3
+    accordion('#trigger3');
+    //call to widget trigger4
+    accordion('#trigger4');    
+
+});//end document.ready()
+    </script>
+		{% include hubspot.html %}
+		{% include googleanalytics.html %}
+    </body>
+</html>
