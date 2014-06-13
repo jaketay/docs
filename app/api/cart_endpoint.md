@@ -18,6 +18,8 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/cart.json
 
+**Interactive API Tester:** http://docs.jirafe.com/api/event
+
 
 #### Example
 ```json
@@ -102,14 +104,14 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
 ### Cart Items Example:
 
 * Step 1:  Add one item to cart. (eg add 1 pair of socks)
-	
+
 	```
 	items:[
 		{prod:'socks',qty:1}
 	]
 	```
 * Step 2: Add two more items to cart. (eg add 2 pairs of shoes)
-	
+
 	```
 	items:[
 		{prod:'socks',qty:1},
@@ -120,7 +122,7 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
 	]
 	```
 * Step 3: Remove items from cart. (eg remove 1 pair of socks and 1 pair of shoes)
-	
+
 	```
 	items:[
 		{prod:'shoes',qty:1}
@@ -130,7 +132,7 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
 		{prod:'shoes',qty:2}
 	]
 	```
-	
+
 ##Visits Example:
 In order to connect front-end user behavior to back-end cart data, the Jirafe javascript sets cookies that need to be accessed and passed along with the back end cart events.  The below schema outlined the json object with each respective value taken from the cookie generated from the javascript.
 

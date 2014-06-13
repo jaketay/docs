@@ -21,6 +21,7 @@ The order endpoint accepts three different schemas:
 
 **URL:** https://event.jirafe.com/v2/{site-id}/order [POST]
 
+**Interactive API Tester:** http://docs.jirafe.com/api/event
 
 ## Order Placed
 
@@ -159,9 +160,9 @@ The order endpoint accepts three different schemas:
 
 ## Orders - Things to Consider
 
-The Jirafe order object is flexible to deal with the capabilities of your commerce system.  The different end points can be used to account for a variety of order situations and the best that match your system.  In most cases, there will only be one order with the respective items in that order. This is outlined in the Step 1 below.  
+The Jirafe order object is flexible to deal with the capabilities of your commerce system.  The different end points can be used to account for a variety of order situations and the best that match your system.  In most cases, there will only be one order with the respective items in that order. This is outlined in the Step 1 below.
 
-* If your commerce system allows the user to be able to edit or add to an order after it has been placed, you will need to initiate additional order events (as depicted in Steps 2 and 3 below) and send along the previous state of the order.  
+* If your commerce system allows the user to be able to edit or add to an order after it has been placed, you will need to initiate additional order events (as depicted in Steps 2 and 3 below) and send along the previous state of the order.
 * For the ```order accepted``` event, it is important to push both current cart items as well as previous cart items to Jirafe so that Jirafe can maintain an accurate representation of the state of a cart at any point in time during a user visit.  See **Orders Accepted** example below.
 * Be sure to add the visit information from the front end cookie to the back end ```order placed``` event so they can be tied together.  See **Visits** example below.
 * If you are pushing historical data to Jirafe, be sure to push all of your historical order data to us. The [Batch Endpoint](/api/batch_endpoint 'Batch Endpoint') is ideal for this to do it efficiently.
@@ -170,15 +171,15 @@ The Jirafe order object is flexible to deal with the capabilities of your commer
 ### Orders Accepted Example:
 
 * Step 1:  Add one item to order. (eg add 1 pair of socks)
-	
-	
+
+
 	```
 	items:[
 		{prod:'socks',qty:1}
 	]
 	```
 * Step 2: Add two more items to order. (eg add 2 pairs of shoes)
-	
+
 	```
 	items:[
 		{prod:'socks',qty:1},
@@ -189,7 +190,7 @@ The Jirafe order object is flexible to deal with the capabilities of your commer
 	]
 	```
 * Step 3: Remove items from order. (eg remove 1 pair of socks and 1 pair of shoes)
-	
+
 	```
 	items:[
 		{prod:'shoes',qty:1}
@@ -199,7 +200,7 @@ The Jirafe order object is flexible to deal with the capabilities of your commer
 		{prod:'shoes',qty:2}
 	]
 	```
-	
+
 ##Visits Example:
 In order to connect front-end user behavior to back-end order data, the Jirafe javascript sets cookies that need to be accessed and passed along with the back end order placed events.  The below schema outlined the json object with each respective value taken from the cookie generated from the javascript.
 

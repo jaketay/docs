@@ -25,10 +25,6 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/_scss/**/*.{scss,sass}'],
         tasks: ['compass:server']
       },
-      autoprefixer: {
-        files: ['<%= yeoman.app %>/css/**/*.css'],
-        tasks: ['copy:stageCss', 'autoprefixer:server']
-      },
       jekyll: {
         files: [
           '<%= yeoman.app %>/**/*.{html,yml,md,mkd,markdown}',

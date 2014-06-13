@@ -42,10 +42,11 @@
     border-bottom: 1px solid #8f9aa0;
 }
 .panel-content li {
-    padding: .5em 1em;
+    padding: .5em 0;
 }
 .panel-content li a {
 	    color: rgba(255,255,255, 0.8);
+        font-size: 1rem;
 }
 .panel-content li a:hover {
     color: #fff;

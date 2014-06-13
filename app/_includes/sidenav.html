@@ -10,19 +10,23 @@
         <ul {% if page.url == "/index.html" %} class="sidebar-nav__list panel-content visuallyhidden" aria-expanded="false"  {% else %} class="sidebar-nav__list panel-content"  {% endif %}>
     {% for order in (1..12) %}
     {% for page in site.pages %}
-     {% if page.order == order %}   
+      {% if page.order == order %}
         {% if page.resource == true %}
             {% for pc in page.categories %}
                 {% if pc == cat %}
                 <li {% if page.active == "page.title" %} class="active-sub" {% endif %}><a href="{{ page.url }}">{{ page.title }}</a></li>
-       {% endif %}
+
+        {% endif %}
             {% endfor %}
         {% endif %}
       {% endif %}
     {% endfor %} <!-- page -->
 
-  {% endfor %}
-    </ul>
+    {% endfor %}
+    {% if cat == "Using Jirafe" %}
+        <li><a href="/api/swagger/">Interactive API Tester</a></li>
+    {% endif %}
+      </ul>
     </li>
 {% endfor %}  <!-- cat -->
 

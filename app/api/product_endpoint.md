@@ -18,6 +18,8 @@ For every product event, such as add, edit and delete, a product event should be
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/product.json
 
+**Interactive API Tester:** http://docs.jirafe.com/api/event
+
 ### Example
 
 ```json
