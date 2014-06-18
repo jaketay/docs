@@ -21,7 +21,7 @@ The order endpoint accepts three different schemas:
 
 **URL:** https://event.jirafe.com/v2/{site-id}/order [POST]
 
-**Interactive API Tester:** http://docs.jirafe.com/api/event
+**Interactive API Tester:** http://docs.jirafe.com/api/event/#!/order
 
 ## Order Placed
 

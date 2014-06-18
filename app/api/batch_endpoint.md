@@ -15,7 +15,7 @@ order: 3
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/batch.json
 
-**Interactive API Tester:** http://docs.jirafe.com/api/event
+**Interactive API Tester:** http://docs.jirafe.com/api/event/#!/batch
 
 This endpoint allows for up to 10MB of events to be submitted in a single request. The object is formed of arrays of the individual endpoints that would normally be sent.
 
