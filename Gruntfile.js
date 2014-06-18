@@ -25,10 +25,6 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/_scss/**/*.{scss,sass}'],
         tasks: ['compass:server']
       },
-      autoprefixer: {
-        files: ['<%= yeoman.app %>/css/**/*.css'],
-        tasks: ['copy:stageCss', 'autoprefixer:server']
-      },
       jekyll: {
         files: [
           '<%= yeoman.app %>/**/*.{html,yml,md,mkd,markdown}',
@@ -156,7 +152,7 @@ module.exports = function (grunt) {
       options: {
         dest: '<%= yeoman.dist %>'
       },
-      html: '<%= yeoman.dist %>/index.html'
+      html: ['<%= yeoman.dist %>/index.html', '<%= yeoman.dist %>/api/event/index.html']
     },
     usemin: {
       options: {

@@ -15,6 +15,8 @@ order: 5
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/category.json
 
+**Interactive API Tester:** http://docs.jirafe.com/api/event
+
 #### Example
 ```json
 {
