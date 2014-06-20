@@ -18,7 +18,7 @@ Cart events are sent whenever a user adds, removes or alters their cart. *Note:*
 
 **Schema:** https://github.com/jirafe/docs/blob/master/jsonschema/v2/cart.json
 
-**Interactive API Tester:** http://docs.jirafe.com/api/event
+**Interactive API Tester:** http://docs.jirafe.com/api/event/#!/cart
 
 
 #### Example
