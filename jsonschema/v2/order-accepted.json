@@ -31,6 +31,15 @@
                 "accepted"
             ]
         },
+        "channel": {
+            "enum": [
+                "online",
+                "retail",
+                "wholesale",
+                "pr"
+            ]
+        },
+        "subchannel": {"type": "string"},
         "subtotal": {"type": "number"},
         "total": {"type": "number"},
         "total_tax": {"type": "number"},
