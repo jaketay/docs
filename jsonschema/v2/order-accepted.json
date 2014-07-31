@@ -34,9 +34,8 @@
         "channel": {
             "enum": [
                 "online",
-                "retail",
+                "pos",
                 "wholesale",
-                "pr"
             ]
         },
         "subchannel": {"type": "string"},
