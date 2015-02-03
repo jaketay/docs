@@ -1,0 +1,14 @@
+{
+    "title": "Product Inventory Schema",
+    "type": "object",
+    "required": [
+        "timestamp",
+        "product_code",
+        "inventory_level"
+    ],
+    "properties": {
+        "timestamp": {"type": "string", "format": "date-time"},
+        "product_code": {"type": "string"},
+        "inventory_level": {"type": "integer"}
+    }
+}
