@@ -6,7 +6,7 @@ categories: API Documentation
 resource: true
 description: Sending inventory data to Jirafe API
 version: v2
-order: 11
+order: 12
 
 ---
 
