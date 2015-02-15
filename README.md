@@ -169,7 +169,7 @@ The Jirafe Events API exposes the following URI endpoints:
 
 **Schema:** https://github.com/jirafe/docs/blob/master/event-api/jsonschema/v2/cart.json
 
-Cart events are sent whenever a user adds, removes or alters their cart. *Note:* this event is distinct from and order event, which is the event that happens when a cart is purchased.
+Cart events are sent whenever a user adds, removes or alters their cart. *Note:* this event is distinct from an order event, which is the event that happens when a cart is purchased.
 
 #### Example
 ```json
