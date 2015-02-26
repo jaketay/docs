@@ -8,7 +8,7 @@
     <li>
     <div class="sidebar-nav-item-title{% if page.categories == cat %} active{% endif %}" tabindex="{% cycle '1', '1', '2', '2', '3', '3', '4', '4' %}" id="trigger{% cycle '1', '1', '2', '2', '3', '3', '4', '4' %}">{{ cat }}</div>
         <ul {% if page.url == "/index.html" %} class="sidebar-nav__list panel-content visuallyhidden" aria-expanded="false"  {% else %} class="sidebar-nav__list panel-content"  {% endif %}>
-    {% for order in (1..12) %}
+    {% for order in (1..13) %}
     {% for page in site.pages %}
       {% if page.order == order %}
         {% if page.resource == true %}
