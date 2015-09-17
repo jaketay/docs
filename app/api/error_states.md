@@ -6,7 +6,7 @@ categories: API Documentation
 resource: true
 description: Jirafe API Error States
 version: v2
-order: 11
+order: 13
 
 ---
 
