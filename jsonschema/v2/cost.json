@@ -1,18 +1,16 @@
 {
-    "title": "Product Inventory Schema",
+    "title": "Product Cost Schema",
     "type": "object",
     "required": [
         "change_date",
         "effective_date",
         "sku_code",
-        "inventory_level"
+        "sku_cost"
     ],
     "properties": {
         "change_date": {"type": "string", "format": "date-time"},
         "effective_date": {"type": "string", "format": "date"},
         "sku_code": {"type": "string", "minLength": 1},
-        "inventory_level": {"type": "integer"},
-        "low_stock_alert": {"type": "integer"},
-        "inventory_alerts": {"type": "boolean"}
+        "sku_cost": {"type": "number"}
     }
 }
