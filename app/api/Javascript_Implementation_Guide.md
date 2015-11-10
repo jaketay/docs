@@ -6,7 +6,7 @@ categories: API Documentation
 resource: true
 description: Sending javascript events to Jirafe API
 version: v2
-order: 13
+order: 14
 
 ---
 

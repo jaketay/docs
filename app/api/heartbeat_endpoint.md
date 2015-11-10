@@ -6,7 +6,7 @@ categories: API Documentation
 resource: true
 description: Sending application heartbeat pings to Jirafe API
 version: v2
-order: 10
+order: 12
 
 ---
 

@@ -11,7 +11,7 @@ set :user, "jirafe-admin"
 set :deploy_to, "/opt/jirafe/docs"
 
 # the ip address of your VPS
-role :web, 'prod-frontend-01-rsiad.int.jirafe.net', 'prod-frontend-02-rsiad.int.jirafe.net'
+role :web, 'prod-frontend-01-rsiad.int.jirafe.net', 'prod-frontend-02-rsiad.int.jirafe.net', 'prod-frontend-03-rsiad.int.jirafe.net'
 
 before 'deploy:update', 'deploy:update_jekyll'
 
